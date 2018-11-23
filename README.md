@@ -1,6 +1,4 @@
 # api-spock-framework
-A brilliant groovy spock framework!
-
 
 Tools used:
 - Groovy -> programming language
