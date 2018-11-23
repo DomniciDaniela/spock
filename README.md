@@ -2,7 +2,7 @@
 
 Tools used:
 - Groovy -> programming language
-- Spock -> testing tool
+- Spock -> testing framework
 - Maven -> project management and building tool
 
 # Spock with Groovy + Maven (advantages/disadvantages)
