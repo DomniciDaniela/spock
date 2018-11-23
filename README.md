@@ -37,10 +37,14 @@ def "EligibilityRules Mock - all requested values"() {
     assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.ADD_MOTORING_CONVICTION_ALLOWED) != null
 }
 ```
-where: 
+Structure & builders: 
+
 TestDataUtils -> Groovy class used to define constants 
+
 Utils -> Groovy class which contains helper methods to avoid code duplication
+
 JSONBuilder -> Groovy builder for creating JSON payloads.
+
 HTTPBuilder -> Groovy builder for creating REST requests.
 
 The framework supports to run the scripts on different environments (dev/test)
