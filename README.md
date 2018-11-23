@@ -46,5 +46,5 @@ HTTPBuilder -> Groovy builder for creating REST requests.
 The framework supports to run the scripts on different environments (dev/test)
 
 # How to run the maven tests from command line: 
-- mvn clean test -Dbranch=deve (runs the tests on dev environment)
+- mvn clean test -Dbranch=deve13 (runs the tests on dev environment)
 - mvn clean test (runs the tests on the default profile - test environment)
