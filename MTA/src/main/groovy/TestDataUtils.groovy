@@ -14,6 +14,8 @@ class TestDataUtils {
         static final String INITIALISE_ENDPOINT = "api-jva-motor-mta/v1/quotes/initialise"
         static final String MTA_RULES_ENDPOINT = "api-jva-motor-mta-eligibility/v1/rules/motormtaeligibility/check"
         static final String MTA_MOCK_MOCK_ENDPOINT = "api-jva-motor-mta-eligibility-mock/v1/rules/motormtaeligibility/check"
+        static final String PAYMENT_TRANSACTIONS_ENDPOINT = "api-jva-payment-transactions/v1/policies/"
+        static final String PAYMENT_TRANSACTIONS_ENDPOINT_PATH = "/paymentTransactions/detail?policyVersionNumber="
     }
 
     class JSONObjects {
@@ -55,12 +57,12 @@ class TestDataUtils {
 
     class TransactionTypes{
         static final String[] ALL = ["all"]
-        static final String[] ALL_COV = ["all", "cov"]
-        static final String[] ALL_TYPES = ["cov", "atd", "apad", "COR", "aoc"]
-        static final String[] COV = ["cov"]
+        static final String[] ALL_COV = ["all", "changeOfVehicle"]
+        static final String[] ALL_TYPES = ["changeOfVehicle", "addTempAddDriver", "addPermAddDriver", "changeOfRegistration", "addMotoringConviction"]
+        static final String[] COV = ["changeOfVehicle"]
         static final String[] NONE = ["none"]
         static final String[] NONE_ALL = ["none", "all"]
-        static final String[] NONE_COV = ["none", "cov"]
+        static final String[] NONE_COV = ["none", "changeOfVehicle "]
         static final String STRING = "string"
         static final String[] TESTING = ["testing"]
     }

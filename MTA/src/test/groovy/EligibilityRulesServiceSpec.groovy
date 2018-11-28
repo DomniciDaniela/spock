@@ -3,6 +3,7 @@ import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
+import spock.lang.Ignore
 import spock.lang.Specification
 
 
@@ -12,7 +13,7 @@ class EligibilityRulesServiceSpec extends Specification {
     String apiKey = Utils.apiKey
     HttpResponseDecorator response
 
-    def "EligibilityRules Mock - all requested values"() {
+    def "EligibilityRules - all requested values"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -27,11 +28,10 @@ class EligibilityRulesServiceSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             String motorMtaEligibility = response.data.results[0].motorMtaEligibility.toString()
-            def eligibilityRules = new EligibilityRulesMockServiceSpec()
-            eligibilityRules.mtaBodyValidation(motorMtaEligibility)
+            mtaBodyValidation(motorMtaEligibility)
     }
 
-    def "EligibilityRules Mock - policy number only - integer"() {
+    def "EligibilityRules - policy number only - integer"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO.toInteger()
@@ -44,11 +44,10 @@ class EligibilityRulesServiceSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             String motorMtaEligibility = response.data.results[0].motorMtaEligibility.toString()
-            def eligibilityRules = new EligibilityRulesMockServiceSpec()
-            eligibilityRules.mtaBodyValidation(motorMtaEligibility)
+            mtaBodyValidation(motorMtaEligibility)
     }
 
-    def "EligibilityRules Mock - policy number only"() {
+    def "EligibilityRules - policy number only"() {
         given: "User provided motormtaeligibility/check rule using following schema "
         def payload = new JsonBuilder(
                 policyNo: TestDataUtils.Policy.POLICY_NO
@@ -62,11 +61,10 @@ class EligibilityRulesServiceSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             String motorMtaEligibility = response.data.results[0].motorMtaEligibility.toString()
-            def eligibilityRules = new EligibilityRulesMockServiceSpec()
-            eligibilityRules.mtaBodyValidation(motorMtaEligibility)
+            mtaBodyValidation(motorMtaEligibility)
     }
 
-    def "EligibilityRules Mock - version missing"() {
+    def "EligibilityRules - version missing"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -80,11 +78,10 @@ class EligibilityRulesServiceSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             String motorMtaEligibility = response.data.results[0].motorMtaEligibility.toString()
-            def eligibilityRules = new EligibilityRulesMockServiceSpec()
-            eligibilityRules.mtaBodyValidation(motorMtaEligibility)
+            mtaBodyValidation(motorMtaEligibility)
     }
 
-    def "EligibilityRules Mock - transaction missing"() {
+    def "EligibilityRules - transaction missing"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -98,11 +95,10 @@ class EligibilityRulesServiceSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             String motorMtaEligibility = response.data.results[0].motorMtaEligibility.toString()
-            def eligibilityRules = new EligibilityRulesMockServiceSpec()
-            eligibilityRules.mtaBodyValidation(motorMtaEligibility)
+            mtaBodyValidation(motorMtaEligibility)
     }
 
-    def "EligibilityRules Mock - transaction all"() {
+    def "EligibilityRules - transaction all"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -120,7 +116,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - transaction none"() {
+    def "EligibilityRules - transaction none"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -138,7 +134,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - transaction all - cov"() {
+    def "EligibilityRules - transaction all - cov"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -156,7 +152,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - transaction none - cov"() {
+    def "EligibilityRules - transaction none - cov"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -174,7 +170,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - transaction none - all"() {
+    def "EligibilityRules - transaction none - all"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -192,7 +188,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - empty request"() {
+    def "EligibilityRules - empty request"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder("":"").toString()
         when: "POST schema on the /check endpoint"
@@ -206,7 +202,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - policy number missing"() {
+    def "EligibilityRules - policy number missing"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     version:  TestDataUtils.Version.LATEST,
@@ -224,7 +220,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - policy number invalid"() {
+    def "EligibilityRules - policy number invalid"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_INVALID,
@@ -242,7 +238,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - transaction invalid"() {
+    def "EligibilityRules - transaction invalid"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -260,7 +256,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - transaction - string"() {
+    def "EligibilityRules - transaction - string"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -278,7 +274,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - policy number - empty string"() {
+    def "EligibilityRules - policy number - empty string"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: "",
@@ -296,7 +292,7 @@ class EligibilityRulesServiceSpec extends Specification {
             errorValidation_status400(body)
     }
 
-    def "EligibilityRules Mock - policy number - more 10 digits"() {
+    def "EligibilityRules - policy number - more 10 digits"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO + "234356789878",
@@ -315,7 +311,7 @@ class EligibilityRulesServiceSpec extends Specification {
     }
 
 
-    def "EligibilityRules Mock - policy number - old endpoint "() {
+    def "EligibilityRules - policy number - old endpoint "() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -330,13 +326,14 @@ class EligibilityRulesServiceSpec extends Specification {
             assert response.status == 503
     }
 
-    def "EligibilityRules Mock - version - LATEST"() {
+    def "EligibilityRules - version - LATEST"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
                     version:  TestDataUtils.Version.LATEST,
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.COV
             ).toString()
+        println(payload)
         when: "POST schema on the /check endpoint"
             Utils utils = new Utils()
             response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
@@ -345,11 +342,10 @@ class EligibilityRulesServiceSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             String motorMtaEligibility = response.data.results[0].motorMtaEligibility.toString()
-            def eligibilityRules = new EligibilityRulesMockServiceSpec()
-            eligibilityRules.mtaBodyValidation(motorMtaEligibility)
+            mtaBodyValidation(motorMtaEligibility)
     }
 
-    def "EligibilityRules Mock - version - valid sequence number"() {
+    def "EligibilityRules - version - valid sequence number"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO_MULTIPLE_VERSION,
@@ -364,11 +360,10 @@ class EligibilityRulesServiceSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             String motorMtaEligibility = response.data.results[0].motorMtaEligibility.toString()
-            def eligibilityRules = new EligibilityRulesMockServiceSpec()
-            eligibilityRules.mtaBodyValidation(motorMtaEligibility)
+            mtaBodyValidation(motorMtaEligibility)
     }
 
-    def "EligibilityRules Mock - version - invalid sequence number"() {
+    def "EligibilityRules - version - invalid sequence number"() {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder(
                     policyNo: TestDataUtils.Policy.POLICY_NO,
@@ -394,5 +389,14 @@ class EligibilityRulesServiceSpec extends Specification {
         assert body.get(TestDataUtils.JSONObjects.CODE) == TestDataUtils.Code.MMTAE_004
         assert body.get(TestDataUtils.JSONObjects.DESCRIPTION) == TestDataUtils.Description.BAD_REQUEST
         assert body.get(TestDataUtils.JSONObjects.MESSAGE) != null
+    }
+
+    void mtaBodyValidation(motorMtaEligibility) {
+        assert motorMtaEligibility != null
+        assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) != null
+        assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.ADD_TEMP_DRIVER_ALLOWED) != null
+        assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.ADD_PERM_DRIVER_ALLOWED) != null
+        assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.CHANGE_OF_REGISTRATION_ALLOWED) != null
+        assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.ADD_MOTORING_CONVICTION_ALLOWED) != null
     }
 }
