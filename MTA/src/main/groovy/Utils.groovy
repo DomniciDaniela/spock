@@ -72,4 +72,15 @@ class Utils {
             return null
         }
     }
+
+    def createGETRequest(String endpoint, String apiKey) {
+        try {
+            RESTClient restClient = new RESTClient(endpoint)
+            restClient.get(
+                    headers: ["apiKey": apiKey]
+            )
+        } catch (HttpResponseException e) {
+            e.response
+        }
+    }
 }
