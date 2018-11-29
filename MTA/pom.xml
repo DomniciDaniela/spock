@@ -99,7 +99,7 @@
                     <systemPropertyVariables>
                         <branch>${branch}</branch>
                     </systemPropertyVariables>
-
+                    <testFailureIgnore>true</testFailureIgnore>
                     <parallel>all</parallel>
                     <useUnlimitedThreads>true</useUnlimitedThreads>
                     <forkCount>6</forkCount>

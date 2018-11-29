@@ -3,6 +3,8 @@ import groovyx.net.http.RESTClient
 
 class Utils {
 
+    public String MTA_RULES_ENDPOINT = environment + TestDataUtils.Endpoint.MTA_RULES_ENDPOINT
+
     def createPOSTRequest(String endpoint, String apiKey, String body) {
         try {
             RESTClient restClient = new RESTClient(endpoint)
@@ -44,25 +46,6 @@ class Utils {
 
                 case "tste13":
                     return "qpkr79rwksuawcw5bqvhekvj8l3pml43"
-
-                default:
-                    System.out.println("Invalid key" + environment)
-            }
-            return environment
-        } catch (Exception e) {
-            return null
-        }
-    }
-    
-     static String getMockedApiKey() {
-        String environment = System.getProperty("branch")
-        try {
-            switch (environment) {
-                case "deve13":
-                    return "1er3ink809m7fmzjc7m2ub3t62sm5c6n"
-
-                case "tste13":
-                    return "u6s08jm6m88deh2uy5ohv59drl5aen55"
 
                 default:
                     System.out.println("Invalid key" + environment)
