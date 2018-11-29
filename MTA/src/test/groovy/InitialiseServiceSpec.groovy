@@ -1,5 +1,6 @@
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
+import org.json.JSONObject
 import spock.lang.Specification
 
 
@@ -89,7 +90,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.data.apiVersion != null
             assert response.data.infos == null
             assert response.data.results == null
-            String errors = response.data.errors[0].toString()
+            JSONObject errors = response.data.errors[0]
             errorsBodyValidation(errors)
     }
 
@@ -108,7 +109,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.data.apiVersion != null
             assert response.data.infos == null
             assert response.data.results == null
-            String errors = response.data.errors[0].toString()
+            JSONObject errors = response.data.errors[0]
             errorsBodyValidation(errors)
     }
 
@@ -161,7 +162,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.data.infos == null
             assert response.data.results == null
 
-            String errors = response.data.errors[0].toString()
+            JSONObject errors = response.data.errors[0]
             errorsBodyValidation(errors)
     }
 
@@ -187,7 +188,7 @@ class InitialiseServiceSpec extends Specification {
     }
 
     void errorsBodyValidation(errors) {
-        assert errors.contains(TestDataUtils.JSONObjects.CODE) != null
-        assert errors.contains(TestDataUtils.JSONObjects.MESSAGE) != null
+        assert errors.get(TestDataUtils.JSONObjects.CODE) != null
+        assert errors.get(TestDataUtils.JSONObjects.MESSAGE) != null
     }
 }
