@@ -1,6 +1,4 @@
 import groovy.json.JsonBuilder
-import groovy.json.JsonOutput
-import groovy.json.JsonSlurper
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
 import spock.lang.Specification
@@ -11,17 +9,38 @@ class PolicyInRenewalCycle extends Specification {
     String apiKey = Utils.apiKey
     HttpResponseDecorator response
 
+    String POLICY_NO_TIA_TRUE = "31714184"
+    String VERSION_NO_TIA_TRUE = "76626286"
+    String POLICY_NO_TIA_FALSE = "65269440"
+    String VERSION_NO_TIA_FALSE = "131886675"
 
-    // https://myesure.atlassian.net/browse/MTAQ-264
-     // ‌Customer can do an MTA (change of vehicle) successfully when business value for eligibility rule
-    //(Policy is in the renewal cycle) says allow
-    // and TIA value is True for Policy is in the renewal cycle
-    // outstandingBalanceOwedOnPolicy : N
-    def "Scenario 1"() {
-        given: "User provided mta/check rule using the following  motor policy which is in the renewal cycle"
+    def "Policy in renewal cycle - allow - TIA - true"() {
+        given: " ‌Customer can do an MTA (change of vehicle) successfully" +
+                "when business value for eligibility rule(Policy is in the renewal cycle) says allow" +
+                "and TIA value is True for Policy is in the renewal cycle"
             def payload = new JsonBuilder(
-                    policyNo: "31714184",
-                    version: "76626286"
+                    policyNo: POLICY_NO_TIA_TRUE,
+                    version: VERSION_NO_TIA_TRUE
+            ).toString()
+        when: "POST schema on the /check endpoint"
+            Utils utils = new Utils()
+            response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+        then: "Response code validation"
+             assert response.status == 200
+        then: "Response body validation"
+            assert response.data.apiVersion != null
+            JSONObject responseBody = response.data.results[0].motorMtaEligibility
+            TestValidation validation = new TestValidation()
+            validation.responseBodyValidation_changeOfVehicleAllowed(responseBody)
+    }
+
+    def "Policy in renewal cycle - allow - TIA - false"() {
+        given: " ‌Customer can do an MTA (change of vehicle) successfully" +
+                "when business value for eligibility rule(Policy is in the renewal cycle) says allow" +
+                "and TIA value is FALSE for Policy is in the renewal cycle"
+            def payload = new JsonBuilder(
+                    policyNo: POLICY_NO_TIA_FALSE,
+                    version: VERSION_NO_TIA_FALSE
             ).toString()
         when: "POST schema on the /check endpoint"
             Utils utils = new Utils()
@@ -30,71 +49,48 @@ class PolicyInRenewalCycle extends Specification {
             assert response.status == 200
         then: "Response body validation"
             assert response.data.apiVersion != null
-            String body = JsonOutput.toJson(response.data.results[0].motorMtaEligibility)
-            JSONObject responseBody = new JsonSlurper().parseText(body)
-
-            assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) == true
-            assert responseBody.get(TestDataUtils.JSONObjects.ADD_TEMP_DRIVER_ALLOWED) == true
-            assert responseBody.get(TestDataUtils.JSONObjects.ADD_PERM_DRIVER_ALLOWED) == true
-            assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_REGISTRATION_ALLOWED) == true
-            assert responseBody.get(TestDataUtils.JSONObjects.ADD_MOTORING_CONVICTION_ALLOWED) == true
+            JSONObject responseBody = response.data.results[0].motorMtaEligibility
+            TestValidation validation = new TestValidation()
+            validation.responseBodyValidation_changeOfVehicleAllowed(responseBody)
     }
 
-    // ‌Customer can do an MTA (change of vehicle) successfully when business value for eligibility rule
-    //(Policy is in the renewal cycle) says allow
-    // and TIA value is false for Policy is in the renewal cycle
-    // outstandingBalanceOwedOnPolicy : N
-     def "Scenario 2"() {
-        given: "User provided mta/check rule using the following  motor policy which is in the renewal cycle"
-        def payload = new JsonBuilder(
-                policyNo: "65269440",
-                version: "131886675"
-        ).toString()
+    def "Policy in renewal cycle - disallow - TIA - false"() {
+        given: " ‌Customer can do an MTA (change of vehicle) successfully" +
+                "when business value for eligibility rule(Policy is in the renewal cycle) says do not allow" +
+                "and TIA value is FALSE for Policy is in the renewal cycle"
+            def payload = new JsonBuilder(
+                    policyNo: POLICY_NO_TIA_FALSE,
+                    version: VERSION_NO_TIA_FALSE
+            ).toString()
         when: "POST schema on the /check endpoint"
-        Utils utils = new Utils()
-        response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+            Utils utils = new Utils()
+            response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
         then: "Response code validation"
-        assert response.status == 200
+            assert response.status == 200
         then: "Response body validation"
-        assert response.data.apiVersion != null
-        String body = JsonOutput.toJson(response.data.results[0].motorMtaEligibility)
-        JSONObject responseBody = new JsonSlurper().parseText(body)
-
-        assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) == true
-        assert responseBody.get(TestDataUtils.JSONObjects.ADD_TEMP_DRIVER_ALLOWED) == true
-        assert responseBody.get(TestDataUtils.JSONObjects.ADD_PERM_DRIVER_ALLOWED) == true
-        assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_REGISTRATION_ALLOWED) == true
-        assert responseBody.get(TestDataUtils.JSONObjects.ADD_MOTORING_CONVICTION_ALLOWED) == true
+            assert response.data.apiVersion != null
+            JSONObject responseBody = response.data.results[0].motorMtaEligibility
+            TestValidation validation = new TestValidation()
+            validation.responseBodyValidation_changeOfVehicleAllowed(responseBody)
     }
 
-    // https://myesure.atlassian.net/browse/MTAQ-264
-    // ‌Customer can do an MTA (change of vehicle) successfully when business value for eligibility rule
-    //Policy is in the renewal cycle says do not allow
-    // and TIA value is True for Policy is in the renewal cycle
-    // Query: select * from policy where expiry_code = 9 and newest = 'Y' and CENTER_CODE = 'EM';
-    // outstandingBalanceOwedOnPolicy : N
-    def "Scenario 3"() {
-        given: "User provided mta/check rule using the following  motor policy which is in the renewal cycle"
-        def payload = new JsonBuilder(
-                policyNo: "65269440",
-                version: "131886675"
-        ).toString()
+    def "Policy in renewal cycle - disallow - TIA - true"() {
+        given: " ‌Customer can do an MTA (change of vehicle) successfully" +
+                "when business value for eligibility rule(Policy is in the renewal cycle) says do not allow" +
+                "and TIA value is true for Policy is in the renewal cycle"
+            def payload = new JsonBuilder(
+                    policyNo: POLICY_NO_TIA_TRUE,
+                    version: VERSION_NO_TIA_TRUE
+            ).toString()
         when: "POST schema on the /check endpoint"
-        Utils utils = new Utils()
-        response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+            Utils utils = new Utils()
+            response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
         then: "Response code validation"
-        assert response.status == 200
+            assert response.status == 200
         then: "Response body validation"
-        assert response.data.apiVersion != null
-        String body = JsonOutput.toJson(response.data.results[0].motorMtaEligibility)
-        JSONObject responseBody = new JsonSlurper().parseText(body)
-
-        assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) == true
-        assert responseBody.get(TestDataUtils.JSONObjects.ADD_TEMP_DRIVER_ALLOWED) == true
-        assert responseBody.get(TestDataUtils.JSONObjects.ADD_PERM_DRIVER_ALLOWED) == true
-        assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_REGISTRATION_ALLOWED) == true
-        assert responseBody.get(TestDataUtils.JSONObjects.ADD_MOTORING_CONVICTION_ALLOWED) == true
+            assert response.data.apiVersion != null
+            JSONObject responseBody = response.data.results[0].motorMtaEligibility
+            TestValidation validation = new TestValidation()
+            validation.responseBodyValidation_changeOfVehicleNotAllowed(responseBody)
     }
-
-
 }

@@ -1,5 +1,3 @@
-import groovy.json.JsonOutput
-import groovy.json.JsonSlurper
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONArray
 import org.json.JSONObject
@@ -20,8 +18,7 @@ class PaymentTransactionServiceSpec extends Specification{
             assert response.status == 200
         then: "Response body validation"
             assert response.data.apiVersion != null
-            String body = JsonOutput.toJson(response.data.results[0])
-            JSONObject responseBody = new JsonSlurper().parseText(body)
+            JSONObject responseBody = response.data.results[0]
 
             assert responseBody.get("policyNo") != null
             assert responseBody.get("policySequenceNo") != null
@@ -58,16 +55,15 @@ class PaymentTransactionServiceSpec extends Specification{
 
     def "Payment Transaction Service - invalid sequence number"() {
         when: "Get payment detail"
-        Utils utils = new Utils()
-        response = utils.createGETRequest(ENDPOINT + "474984952", apiKey)
+            Utils utils = new Utils()
+            response = utils.createGETRequest(ENDPOINT + "474984952", apiKey)
         then: "Response code validation"
-        assert response.status == 404
+            assert response.status == 404
         then: "Response body validation"
-        assert response.data.apiVersion != null
-        String body = JsonOutput.toJson(response.data.errors[0])
-        JSONObject responseBody = new JsonSlurper().parseText(body)
-        assert responseBody.get(TestDataUtils.JSONObjects.CODE) != null
-        assert responseBody.get(TestDataUtils.JSONObjects.MESSAGE) != null
+            assert response.data.apiVersion != null
+            JSONObject responseBody = response.data.errors[0]
+            assert responseBody.get(TestDataUtils.JSONObjects.CODE) != null
+            assert responseBody.get(TestDataUtils.JSONObjects.MESSAGE) != null
     }
 
     def "Payment Transaction Service - EsureHome policyNo"() {
@@ -80,8 +76,7 @@ class PaymentTransactionServiceSpec extends Specification{
         assert response.status == 200
         then: "Response body validation"
         assert response.data.apiVersion != null
-        String body = JsonOutput.toJson(response.data.results[0])
-        JSONObject responseBody = new JsonSlurper().parseText(body)
+        JSONObject responseBody = response.data.results[0]
 
         assert responseBody.get("policyNo") != null
         assert responseBody.get("policySequenceNo") != null
