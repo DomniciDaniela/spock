@@ -1,13 +1,10 @@
 import groovy.json.JsonBuilder
-import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
 import spock.lang.Specification
 
-class TemporarySubstitutionVehicle extends Specification {
+class TemporarySubstitutionVehicleSpec extends Specification {
 
-    String ENDPOINT = Utils.environment + TestDataUtils.Endpoint.MTA_RULES_ENDPOINT
-    String apiKey = Utils.apiKey
-    HttpResponseDecorator response
+    Utils utils = new Utils()
 
     String POLICY_NO_TIA_TRUE = "65271892"
     String VERSION_NO_TIA_TRUE = "134841944"
@@ -23,8 +20,7 @@ class TemporarySubstitutionVehicle extends Specification {
                     version: VERSION_NO_TIA_TRUE
             ).toString()
         when: "POST schema on the /check endpoint"
-            Utils utils = new Utils()
-            response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -43,15 +39,14 @@ class TemporarySubstitutionVehicle extends Specification {
                 version: VERSION_NO_TIA_FALSE
         ).toString()
         when: "POST schema on the /check endpoint"
-        Utils utils = new Utils()
-        response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
         then: "Response code validation"
-        assert response.status == 200
+            assert response.status == 200
         then: "Response body validation"
-        assert response.data.apiVersion != null
-        JSONObject responseBody = response.data.results[0].motorMtaEligibility
-        TestValidation validation = new TestValidation()
-        validation.responseBodyValidation_changeOfVehicleAllowed(responseBody)
+            assert response.data.apiVersion != null
+            JSONObject responseBody = response.data.results[0].motorMtaEligibility
+            TestValidation validation = new TestValidation()
+            validation.responseBodyValidation_changeOfVehicleAllowed(responseBody)
     }
 
     def "Temporary Substitution Vehicle - disallow - TIA - false"() {
@@ -63,8 +58,7 @@ class TemporarySubstitutionVehicle extends Specification {
                     version: VERSION_NO_TIA_FALSE
             ).toString()
         when: "POST schema on the /check endpoint"
-            Utils utils = new Utils()
-            response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
         then: "Response code validation"
              assert response.status == 200
         then: "Response body validation"
@@ -83,8 +77,7 @@ class TemporarySubstitutionVehicle extends Specification {
                     version: VERSION_NO_TIA_TRUE
             ).toString()
         when: "POST schema on the /check endpoint"
-            Utils utils = new Utils()
-            response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
