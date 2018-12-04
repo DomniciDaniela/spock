@@ -6,10 +6,10 @@ class PolicyInRenewalCycleSpec extends Specification {
 
     Utils utils = new Utils()
 
-    String POLICY_NO_TIA_TRUE = "31714184"
-    String VERSION_NO_TIA_TRUE = "76626286"
-    String POLICY_NO_TIA_FALSE = "65269440"
-    String VERSION_NO_TIA_FALSE = "131886675"
+    String POLICY_NO_TIA_TRUE = "5000885029"
+    String VERSION_NO_TIA_TRUE = "134971071"
+    String POLICY_NO_TIA_FALSE = "47641920"
+    String VERSION_NO_TIA_FALSE = "135015466"
 
     def "Policy in renewal cycle - allow - TIA - true"() {
         given: " ‌Customer can do an MTA (change of vehicle) successfully" +
