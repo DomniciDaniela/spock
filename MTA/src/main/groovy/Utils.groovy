@@ -3,7 +3,7 @@ import groovyx.net.http.RESTClient
 
 class Utils {
 
-    public String MTA_RULES_ENDPOINT = environment + TestDataUtils.Endpoint.MTA_RULES_ENDPOINT
+    public static String MTA_RULES_ENDPOINT = environment + TestDataUtils.Endpoint.MTA_RULES_ENDPOINT
 
     def createPOSTRequest(String endpoint, String apiKey, String body) {
         try {
