@@ -6,8 +6,8 @@ class PolicyInForceLessThanADaySpec extends Specification {
 
     Utils utils = new Utils()
 
-    String POLICY_NO_TIA_TRUE = "71998785"
-    String VERSION_NO_TIA_TRUE = "134842001"
+    String POLICY_NO_TIA_TRUE = "72081303"
+    String VERSION_NO_TIA_TRUE = "135015447"
     String POLICY_NO_TIA_FALSE = "35143314"
     String VERSION_NO_TIA_FALSE = "132064389"
 

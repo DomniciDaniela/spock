@@ -69,7 +69,7 @@ class PolicyInRenewalCycleSpec extends Specification {
     }
 
     def "Policy in renewal cycle - disallow - TIA - true"() {
-        given: " ‌Customer can do an MTA (change of vehicle) successfully" +
+        given: " ‌Customer cannot do an MTA (change of vehicle) successfully" +
                 "when business value for eligibility rule(Policy is in the renewal cycle) says do not allow" +
                 "and TIA value is true for Policy is in the renewal cycle"
             def payload = new JsonBuilder(
