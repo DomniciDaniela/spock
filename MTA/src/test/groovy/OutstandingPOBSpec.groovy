@@ -1,13 +1,14 @@
 import groovy.json.JsonBuilder
 import org.json.JSONObject
+import org.junit.BeforeClass
 import spock.lang.Specification
 
 class OutstandingPOBSpec extends Specification {
 
     Utils utils = new Utils()
-    
-    String POLICY_NO_TIA_TRUE = "71997908"
-    String VERSION_NO_TIA_TRUE = "134841483"
+
+    String POLICY_NO_TIA_TRUE = "72081303"
+    String VERSION_NO_TIA_TRUE = "135015447"
     String POLICY_NO_TIA_FALSE = "65309936"
     String VERSION_NO_TIA_FALSE = "131092250"
 
