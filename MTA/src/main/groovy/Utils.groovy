@@ -1,6 +1,8 @@
+import groovy.util.logging.Log
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 
+@Log
 class Utils {
 
     public static String MTA_RULES_ENDPOINT = environment + TestDataUtils.Endpoint.MTA_RULES_ENDPOINT
@@ -9,12 +11,14 @@ class Utils {
     def createPOSTRequest(String endpoint, String apiKey, String body) {
         try {
             RESTClient restClient = new RESTClient(endpoint)
+            log.info "\nCreate post request " + "\nEndpoint: " + endpoint + "\nAPI key: " + apiKey + "\nPayload: "+ body +"\n"
             restClient.post(
                     requestContentType: "application/json",
                     headers: ["apiKey": apiKey],
                     body: body
             )
         } catch (HttpResponseException e) {
+            log.info "The response is\n " + e.response.data.toString()
             e.response
         }
     }
@@ -67,6 +71,4 @@ class Utils {
             e.response
         }
     }
-
-
 }
