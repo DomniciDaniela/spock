@@ -12,7 +12,7 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
     String POLICY_NO_TIA_TRUE = "11250591"
     String VERSION_NO_TIA_TRUE = "134342079"
     String POLICY_NO_TIA_FALSE = "65270337"
-    String VERSION_NO_TIA_FALSE = "x"
+    String VERSION_NO_TIA_FALSE = "LATEST"
 
     //Sql Query for outstanding balance owed on policy:
     // select policy_no,policy_seq_no,cover_start_date, payment_method from policy where newest = 'Y' and payment_method = 'DD';
