@@ -17,12 +17,12 @@ A - supports BDD style
 def "EligibilityRules Mock - all requested values"() {
     given: "User provided a motormtaeligibility/check rule using following schema"
     def payload = new JsonBuilder(
-            policyNo: TestDataUtils.Policy.POLICY_NO,
-            version: TestDataUtils.Version.IN_FORCE,
-            mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
+            policyNo: utils.utils.TestDataUtils.Policy.POLICY_NO,
+            version: utils.utils.TestDataUtils.Version.IN_FORCE,
+            mtaTransactionTypes: utils.utils.TestDataUtils.TransactionTypes.ALL_TYPES
     ).toString()
     when: "POST schema on the /check endpoint"
-    Utils utils = new Utils()
+    utils.Utils utils = new utils.Utils()
     response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
     then: "Response code validation"
     assert response.status == 200
@@ -30,18 +30,18 @@ def "EligibilityRules Mock - all requested values"() {
     assert response.data.apiVersion != null
     String motorMtaEligibility = response.data.results[0].motorMtaEligibility.toString()
     assert motorMtaEligibility != null
-    assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) != null
-    assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.ADD_TEMP_DRIVER_ALLOWED) != null
-    assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.ADD_PERM_DRIVER_ALLOWED) != null
-    assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.CHANGE_OF_REGISTRATION_ALLOWED) != null
-    assert motorMtaEligibility.contains(TestDataUtils.JSONObjects.ADD_MOTORING_CONVICTION_ALLOWED) != null
+    assert motorMtaEligibility.contains(utils.utils.TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) != null
+    assert motorMtaEligibility.contains(utils.utils.TestDataUtils.JSONObjects.ADD_TEMP_DRIVER_ALLOWED) != null
+    assert motorMtaEligibility.contains(utils.utils.TestDataUtils.JSONObjects.ADD_PERM_DRIVER_ALLOWED) != null
+    assert motorMtaEligibility.contains(utils.utils.TestDataUtils.JSONObjects.CHANGE_OF_REGISTRATION_ALLOWED) != null
+    assert motorMtaEligibility.contains(utils.utils.TestDataUtils.JSONObjects.ADD_MOTORING_CONVICTION_ALLOWED) != null
 }
 ```
 Structure & builders: 
 
-TestDataUtils -> Groovy class used to define constants 
+utils.utils.TestDataUtils -> Groovy class used to define constants 
 
-Utils -> Groovy class which contains helper methods to avoid code duplication
+utils.Utils -> Groovy class which contains helper methods to avoid code duplication
 
 JSONBuilder -> Groovy builder for creating JSON payloads.
 

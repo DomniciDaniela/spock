@@ -1,6 +1,10 @@
+package cov
+
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.TestDataUtils
+import utils.Utils
 
 class EligibilityRulesServiceSpec extends Specification {
 

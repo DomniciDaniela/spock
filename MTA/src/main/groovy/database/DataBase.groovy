@@ -1,3 +1,5 @@
+package database
+
 import groovy.sql.Sql
 
 import java.sql.SQLException

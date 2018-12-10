@@ -1,10 +1,13 @@
+package databasePOC
+
+import database.DataBase
 import spock.lang.Specification
 
 class POCDataBaseConnSpec extends Specification {
 
     def "test connection"() {
         when: "Connect to DB"
-            DataBase db = new DataBase()
+        DataBase db = new DataBase()
             String query = "SELECT POLICY_NO, POLICY_SEQ_NO from POLICY" +
                     " where EXPIRY_CODE='9'AND PAYMENT_METHOD='CARD' AND NEWEST ='Y' and CENTER_CODE='EM'"
             String[] result = db.getFirstResult(query)

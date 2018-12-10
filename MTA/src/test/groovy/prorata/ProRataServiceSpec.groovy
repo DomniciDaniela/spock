@@ -1,6 +1,11 @@
+package prorata
+
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.TestDataUtils
+import utils.Utils
+import validation.TestValidation
 
 class ProRataServiceSpec extends Specification {
 

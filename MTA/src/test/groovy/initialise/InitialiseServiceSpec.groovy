@@ -1,7 +1,11 @@
+package initialise
+
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.TestDataUtils
+import utils.Utils
 
 
 class InitialiseServiceSpec extends Specification {
@@ -120,7 +124,7 @@ class InitialiseServiceSpec extends Specification {
                     version: "47498495"
             ).toString()
         when: "POST schema on the /check endpoint"
-            Utils utils = new Utils()
+        Utils utils = new Utils()
             response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
         then: "Response code validation"
             assert response.status == 201
@@ -165,6 +169,8 @@ class InitialiseServiceSpec extends Specification {
             JSONObject errors = response.data.errors[0]
             errorsBodyValidation(errors)
     }
+
+
 
     void responseBodyValidation(results) {
         assert results != null

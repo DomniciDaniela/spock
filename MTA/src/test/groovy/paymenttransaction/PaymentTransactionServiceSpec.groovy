@@ -1,7 +1,11 @@
+package paymenttransaction
+
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONArray
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.TestDataUtils
+import utils.Utils
 
 class PaymentTransactionServiceSpec extends Specification{
 

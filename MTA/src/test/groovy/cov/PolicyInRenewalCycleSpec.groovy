@@ -1,6 +1,10 @@
+package cov
+
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.Utils
+import validation.TestValidation
 
 class PolicyInRenewalCycleSpec extends Specification {
 
@@ -83,7 +87,7 @@ class PolicyInRenewalCycleSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             JSONObject responseBody = response.data.results[0].motorMtaEligibility
-            TestValidation validation = new TestValidation()
+        TestValidation validation = new TestValidation()
             validation.responseBodyValidation_changeOfVehicleNotAllowed(responseBody)
     }
 }
