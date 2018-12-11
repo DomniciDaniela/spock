@@ -1,5 +1,7 @@
-package cov
+package eligibilityRules.changeOfVehicle
 
+import database.DataBase
+import database.PolicyType
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
@@ -9,13 +11,14 @@ import validation.TestValidation
 class PolicyNotInForceSpec extends Specification {
 
     Utils utils = new Utils()
+    TestValidation validation = new TestValidation()
+    def dataBase = new DataBase()
 
-    String POLICY_NO_TIA_TRUE = "72081303"
-    String VERSION_NO_TIA_TRUE = "135015447"
-    String POLICY_NO_TIA_FALSE = "65309936"
-    String VERSION_NO_TIA_FALSE = "131092250"
+    String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.NOT_IN_FORCE_TRUE)[0].substring(10)
+    String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.NOT_IN_FORCE_TRUE)[1].substring(14)
+    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_FALSE)[0].substring(10)
+    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_FALSE)[1].substring(14)
 
-    // Select * from policy where COVER_START_DATE >'03-DEC-2018' AND PAYMENT_METHOD='CARD' AND CENTER_CODE='EM';
     def "Policy Not InForce - allow - TIA - true"() {
         given: "Customer can do an MTA (change of vehicle) successfully" +
                 "when business value for eligibility rule(for Policy is not in force) says allow" +
@@ -26,12 +29,11 @@ class PolicyNotInForceSpec extends Specification {
             ).toString()
         when: "POST schema on the /check endpoint"
             def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
-        then: "Response code validation"
+        then: "The response code should be 200"
             assert response.status == 200
-        then: "Response body validation"
+        then: "COV value should return TRUE in order to proof that customer can do MTA"
             assert response.data.apiVersion != null
             JSONObject responseBody = response.data.results[0].motorMtaEligibility
-            TestValidation validation = new TestValidation()
             validation.responseBodyValidation_changeOfVehicleAllowed(responseBody)
     }
 
@@ -45,12 +47,11 @@ class PolicyNotInForceSpec extends Specification {
         ).toString()
         when: "POST schema on the /check endpoint"
             def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
-        then: "Response code validation"
-            assert response.status == 200
-        then: "Response body validation"
+        then: "The response code should be 200"
+        assert response.status == 200
+        then: "COV value should return TRUE in order to proof that customer can do MTA"
             assert response.data.apiVersion != null
             JSONObject responseBody = response.data.results[0].motorMtaEligibility
-            TestValidation validation = new TestValidation()
             validation.responseBodyValidation_changeOfVehicleAllowed(responseBody)
     }
 
@@ -64,12 +65,11 @@ class PolicyNotInForceSpec extends Specification {
         ).toString()
         when: "POST schema on the /check endpoint"
             def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
-        then: "Response code validation"
-            assert response.status == 200
-        then: "Response body validation"
+        then: "The response code should be 200"
+        assert response.status == 200
+        then: "COV value should return TRUE in order to proof that customer can do MTA"
             assert response.data.apiVersion != null
             JSONObject responseBody = response.data.results[0].motorMtaEligibility
-            TestValidation validation = new TestValidation()
             validation.responseBodyValidation_changeOfVehicleAllowed(responseBody)
     }
 
@@ -83,12 +83,11 @@ class PolicyNotInForceSpec extends Specification {
         ).toString()
         when: "POST schema on the /check endpoint"
             def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
-        then: "Response code validation"
-            assert response.status == 200
-        then: "Response body validation"
+        then: "The response code should be 200"
+        assert response.status == 200
+        then: "COV value should return FALSE in order to proof that customer can't do MTA"
             assert response.data.apiVersion != null
             JSONObject responseBody = response.data.results[0].motorMtaEligibility
-        TestValidation validation = new TestValidation()
             validation.responseBodyValidation_changeOfVehicleNotAllowed(responseBody)
     }
 }

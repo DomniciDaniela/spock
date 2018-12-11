@@ -1,4 +1,4 @@
-package paymenttransaction
+package paymentTransaction
 
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONArray

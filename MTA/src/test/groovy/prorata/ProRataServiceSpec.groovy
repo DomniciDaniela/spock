@@ -10,7 +10,7 @@ import validation.TestValidation
 class ProRataServiceSpec extends Specification {
 
     Utils utils = new Utils()
-    def testValidation = new TestValidation()
+    TestValidation testValidation = new TestValidation()
 
     def "Pro - Rata service sends an empty request"() {
         given: "Define the payload data using the following schema"

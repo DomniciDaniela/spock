@@ -1,4 +1,4 @@
-package cov
+package eligibilityRules.changeOfVehicle
 
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
@@ -8,7 +8,6 @@ import utils.Utils
 import validation.TestValidation
 
 class CustomerIsBarredSpec extends Specification {
-
 
     HttpResponseDecorator response
     def testValidation = new TestValidation()
@@ -27,7 +26,6 @@ class CustomerIsBarredSpec extends Specification {
     String VERSION_NO_TIA_UW_TRUE = "135015443"
     String POLICY_NO_TIA_UW_FALSE = "72080883"
     String VERSION_NO_TIA_UW_FALSE = "135015350"
-
 
     def "Customer barred (Accounts) - Business Allow - TIA Value True"() {
         given: "Customer is barred (Accounts for the given policy) is true"
@@ -61,9 +59,7 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
-
     }
-
 
     def "Customer barred (Accounts) - Business not Allow - TIA Value False"() {
         given: "Customer is barred (Accounts for the given policy) is false"
@@ -80,7 +76,6 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
-
     }
 
     def "Customer barred (Accounts) - Business not Allow - TIA Value True"() {
@@ -98,9 +93,7 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleNotAllowed(jsonResponse)
-
     }
-
 
     def "Customer barred fraud (UW-VAL) - Business Allow - TIA Value True"() {
         given: "Customer is barred fraud (UW-VAL) is true"
@@ -134,9 +127,7 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
-
     }
-
 
     def "Customer barred fraud (UW-VAL) - Business not Allow - TIA Value False"() {
         given: "Customer is barred fraud (UW-VAL) is false"
@@ -153,7 +144,6 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
-
     }
 
     def "Customer barred fraud (UW-VAL) - Business not Allow - TIA Value True"() {
@@ -171,7 +161,6 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleNotAllowed(jsonResponse)
-
     }
 
     def "Customer barred fraud (UW) - Business Allow - TIA Value True"() {
@@ -206,9 +195,7 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
-
     }
-
 
     def "Customer barred fraud (UW) - Business not Allow - TIA Value False"() {
         given: "Customer is barred fraud (UW) is false"
@@ -225,7 +212,6 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
-
     }
 
     def "Customer barred fraud (UW) - Business not Allow - TIA Value True"() {
@@ -243,6 +229,5 @@ class CustomerIsBarredSpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleNotAllowed(jsonResponse)
-
     }
 }
