@@ -1,5 +1,7 @@
-package cov
+package eligibilityRules.changeOfVehicle
 
+import database.DataBase
+import database.PolicyType
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
@@ -12,16 +14,13 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
 
     HttpResponseDecorator response
     def testValidation = new TestValidation()
+    def dataBase = new DataBase()
 
-    String POLICY_NO_TIA_TRUE = "11250591"
-    String VERSION_NO_TIA_TRUE = "134342079"
-    String POLICY_NO_TIA_FALSE = "65270337"
-    String VERSION_NO_TIA_FALSE = "LATEST"
+    String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_TRUE)[0].substring(10)
+    String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_TRUE)[1].substring(14)
+    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_FALSE)[0].substring(10)
+    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_FALSE)[1].substring(14)
 
-    //Sql Query for outstanding balance owed on policy:
-    // select policy_no,policy_seq_no,cover_start_date, payment_method from policy where newest = 'Y' and payment_method = 'DD';
-
-    //Business rule for outstanding balance owed on policy is allow
     def "OutstandingBalanceOwedOnPolicy - Business Allow - TIA Value True"(){
         given: "Policy has an outstanding balance owed on the policy(true)"
         def PAYLOAD = new JsonBuilder(
@@ -36,7 +35,6 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
 
         JSONObject jsonResponse = response.data.results[0].motorMtaEligibility
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
-
     }
 
     def "OutstandingBalanceOwedOnPolicy - Business Allow - TIA Value False"(){
@@ -55,8 +53,7 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
     }
 
-    //Business rule for outstanding balance owed on policy is not allow
-    def "NoOutstandingBalanceOwedOnPolicy - Business not Allow - TIA Value False"(){
+    def "OutstandingBalanceOwedOnPolicy - Business not Allow - TIA Value False"(){
         given: "Policy has an outstanding balance owed on the policy(false)"
         def PAYLOAD = new JsonBuilder(
             policyNo : POLICY_NO_TIA_FALSE,
@@ -72,7 +69,7 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
         testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)
     }
 
-    def "NoOutstandingBalanceOwedOnPolicy - Business not Allow - TIA Value true"(){
+    def "OutstandingBalanceOwedOnPolicy - Business not Allow - TIA Value true"(){
         given: "Policy has an outstanding balance owed on the policy(true)"
         def PAYLOAD = new JsonBuilder(
             policyNo : POLICY_NO_TIA_TRUE,

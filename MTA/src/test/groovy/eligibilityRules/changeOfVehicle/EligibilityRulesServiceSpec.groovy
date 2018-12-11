@@ -1,4 +1,4 @@
-package cov
+package eligibilityRules.changeOfVehicle
 
 import groovy.json.JsonBuilder
 import org.json.JSONObject

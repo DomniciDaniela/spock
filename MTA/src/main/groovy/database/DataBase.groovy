@@ -1,6 +1,7 @@
 package database
 
 import groovy.sql.Sql
+import utils.Date
 
 import java.sql.SQLException
 
@@ -52,5 +53,26 @@ class DataBase {
         Sql sql = setupDataBaseConnection()
         def row = sql.rows(query)
         return row
+    }
+
+    String[] getPolicyAndVersion(query) {
+        switch (query) {
+            case PolicyType.NOT_IN_FORCE_TRUE:
+                return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '1'" +
+                        "AND NEWEST = 'Y' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE >'" + new Date().currentDate() + "'")
+            case PolicyType.OUTSTANDING_BALANCED_TRUE:
+                return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '1'" +
+                        "AND NEWEST = 'Y' AND CENTER_CODE = 'EM' AND PAYMENT_METHOD ='DD' AND COVER_START_DATE >'"
+                        + new Date().previousMonthDayDate() + "'")
+            case PolicyType.OUTSTANDING_BALANCED_FALSE:
+                return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '1'" +
+                        "AND NEWEST = 'Y' AND CENTER_CODE = 'SW' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE >'"
+                        + new Date().previousMonthDayDate() + "'")
+            case PolicyType.IN_FORCE_LESS_THAN_A_DAY_TRUE:
+                return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '1'" +
+                        "AND NEWEST = 'Y' AND CENTER_CODE = 'EM' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE ='"
+                        + new Date().currentDate() + "'")
+        }
+
     }
 }
