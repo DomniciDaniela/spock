@@ -1,0 +1,1240 @@
+{
+   "apiVersion": "0.0.1-SNAPSHOT-248",
+   "errors": null,
+   "infos": null,
+   "results": [{"mtaQuote":    {
+     "quoteId": "10802",
+     "quoteVersion": "1",
+     "quoteExpiryFlag": "N",
+     "quoteExpiryTimestamp": "2019-01-11T12:18:29Z",
+     "mtaData": null,
+     "quoteDetails":       {
+       "policyCoverNo": 15341595,
+       "policyholderNo": 15356175,
+       "policyNo": 1000807,
+       "parentPolicyCoverNo": null,
+       "policySeqNo": 24217516,
+       "cancelCode": 0,
+       "expiryCode": 1,
+       "paymentFrequency": 1,
+       "policyStatus": "P",
+       "cancelDate": null,
+       "coverChangedDate": "2019-10-02T00:00:00Z",
+       "coverEndDate": "2019-10-02T00:00:00Z",
+       "coverKnownFromDate": "2018-10-02T00:00:00Z",
+       "coverStartDate": "2018-10-02T00:00:00Z",
+       "yearStartDate": "2018-10-02T00:00:00Z",
+       "renewalDate": "2019-10-02T00:00:00Z",
+       "currentPolicyYearStart": "2018-10-02T00:00:00Z",
+       "currentPolicyYearEnd": "2019-10-02T00:00:00Z",
+       "text1": null,
+       "text2": "IBIS Policy",
+       "text4": null,
+       "ageCalcDate": null,
+       "responseType": 1,
+       "meansPayNo": 4360557,
+       "instlPlanType": 2,
+       "policyYear": 1,
+       "firstStartDate": "2018-10-02T00:00:00Z",
+       "referToUnderwriter": null,
+       "markNo": 8201,
+       "quoteExpiryDate": "2018-10-02T23:59:59Z",
+       "transactionType": "P",
+       "installmentMethod": 1,
+       "accountNo": 1976741,
+       "paymentMethod": "CARD",
+       "centerCode": "EM",
+       "mtaAdjustmentReason": null,
+       "webReferenceNo": "1160153425",
+       "sourceClonePolicyNo": null,
+       "homeCrossSellIqFlag": null,
+       "memberGetMemberToken": null,
+       "coverStartTime": "1516",
+       "yearStartTime": "1516",
+       "coverEndTime": "1200",
+       "depositPayMethod": null,
+       "depMeansPayNo": null,
+       "esureCampaignCode": null,
+       "esureSchemeCode": null,
+       "ncdFlag": "Y",
+       "ddiFlag": "N",
+       "polFlag": "N",
+       "ncdRcvdDate": null,
+       "ddiRcvdDate": null,
+       "polRcvdDate": null,
+       "prevInsurer": null,
+       "ncdRate": null,
+       "ncdBonus": null,
+       "certStatus": null,
+       "certDate": null,
+       "verbalNcd": "N",
+       "amnestyFlag": null,
+       "amnestyDate": null,
+       "deferredReview": null,
+       "ncdUserId": null,
+       "ddiUserId": null,
+       "polUserId": null,
+       "certUserId": null,
+       "ncdUserName": null,
+       "ddiUserName": null,
+       "polUserame": null,
+       "certUserName": null,
+       "interimReferralRuleset": "ESURE",
+       "underwriterId": "ES",
+       "esPriceTestLevel": 50,
+       "faPriceTestLevel": null,
+       "callCentreOffer": null,
+       "cpaOptout": "Y",
+       "cpaOptoutUser": "IBIS",
+       "cpaOptoutTimestamp": "2018-10-02T15:16:45Z",
+       "cpaOptoutReason": "PH_NOT_CH",
+       "preferredPayMethod": 99,
+       "responseCode": "OK",
+       "unbatchNcdDate": null,
+       "unbatchUserId": null,
+       "unbatchUserName": null,
+       "renewalAcceptedInd": "X",
+       "multiPolicyGroupId": null,
+       "aggregatorId": null,
+       "liveStartDate": "2018-10-02T00:00:00Z",
+       "liveRenewalDate": "2019-10-02T00:00:00Z",
+       "poFactor": 1,
+       "nextPaymentNo": 174937681,
+       "additionalOrReturnPremiumAmount": null,
+       "bankAccountDetail": null,
+       "cardPaymentDetail":          {
+         "cardPaymentDetailNo": 5484693,
+         "policyCoverNo": 15341595,
+         "cardType": "E",
+         "nameOnCard": "ACCOUNT HOLDER",
+         "expiryMonth": 2,
+         "expiryYear": 2020,
+         "esureReference": "1000807-15716526",
+         "pspReference": "4000204521655504",
+         "authCode": "076275",
+         "cardObfuscated": "446274xxxxxx3084",
+         "cardIssuer": "Lloyds TSB Bank plc",
+         "pspCardType": "VISA Debit",
+         "countryOfIssue": "United Kingdom",
+         "accPaymentNo": 15716526,
+         "caReference": null,
+         "isPolicyholder": "Y",
+         "isCpaAgreement": "N",
+         "cardHolderHouseNo": null,
+         "cardHolderHouseName": null,
+         "cardHolderStreet": null,
+         "cardHolderTown": null,
+         "cardHolderPostalTown": null,
+         "cardHolderCounty": null,
+         "cardHolderPostArea": null,
+         "cardHolderPostStreet": null
+       },
+       "coverLines":          [
+         {
+           "coverLineNo": 39377340,
+           "policyCoverNo": 15341595,
+           "policyNo": 1000807,
+           "policySeqNo": 24217516,
+           "agrLineNo": 38359041,
+           "agrLineSeqNo": 65773950,
+           "cancelCode": 0,
+           "coverKnownFromDate": "2018-10-02T00:00:00Z",
+           "discountType": "N",
+           "productLineId": "EMMOT",
+           "productLineVerNo": 325,
+           "agrLineCreateCode": null,
+           "cancelDate": null,
+           "coverChangedDate": "2019-10-02T00:00:00Z",
+           "coverEndDate": "2019-10-02T00:00:00Z",
+           "coverStartDate": "2018-10-02T00:00:00Z",
+           "discPct": null,
+           "ncYears": null,
+           "ncdYears": 9,
+           "pricePaid": 729.2,
+           "tariffPrice": 729.2,
+           "returnPremium": null,
+           "returnIpt": null,
+           "text4": null,
+           "priceFlatPaid": null,
+           "tariffFlat": null,
+           "status": "OK",
+           "sectionNo": 1,
+           "transCode": 1,
+           "referToUnderwriter": null,
+           "proRataFactor": 1,
+           "transactionCost": null,
+           "productTax1": null,
+           "productTax2": null,
+           "currencyCode": "GBP",
+           "centerCode": "EM",
+           "shortDesc": "Driver/Vehicle Details",
+           "temporaryInsurance": "N",
+           "floorsCeilingInd": null,
+           "highestRatedDriverType": "M",
+           "highestRatedDriverNo": "68352290",
+           "discountAmount": null,
+           "riskPremium": null,
+           "ratePremium": 2155.0864,
+           "conversionEstimate": null,
+           "floorCeilingProposedChange": null,
+           "floorCeilingCappedChange": null,
+           "depositAmt": 0,
+           "premRateCode": null,
+           "comBatchNo": null,
+           "renewalDiscountRate": null,
+           "renewalDiscountIpt": null,
+           "ratesetId": 25086,
+           "priceLevel": null,
+           "addonYear": null,
+           "freeAddon": null,
+           "overrideRatesetId": null,
+           "multiway": 14,
+           "loyaltyCode": null,
+           "postcodeSegment": 16,
+           "genFactorCount": 79,
+           "genFactorKeyCount": 3,
+           "protectedNcd": 66.29,
+           "protectedNcdCredit": 0,
+           "adminFeeIpt": null,
+           "firstQuoteDate": "2018-10-02T15:14:16Z",
+           "originalPreferredPaymentMethodCode": "99",
+           "hasPreferredPayMethodAlter": "N",
+           "firstQuoteHour": 15,
+           "lastQuoteHour": 15,
+           "familyUnit": "0",
+           "frontingScore": null,
+           "policyReinstated": "false",
+           "sucSeqNo": 351012429,
+           "tempCoverFrom": null,
+           "tempCoverTo": null,
+           "previousChannel": "Y",
+           "coveredVehicle":                {
+             "coveredVehicleNo": 15242262,
+             "vehicleType": "M",
+             "vehicleObjectNo": 19030808,
+             "vehicleRegNo": "ABC123",
+             "vehicleDetailId": 29144,
+             "mileage": 8500,
+             "mileageDescription": "8001 - 9000",
+             "overnightLocation": "GRG",
+             "daytimeLocation": "NR",
+             "securityDevice": "N1",
+             "riskPostcodeIn": "1DJ",
+             "riskPostcodeOut": "RH1",
+             "carValue": 500,
+             "carValueDescription": null,
+             "carValueType": "E",
+             "dateOfPurchase": "2013-12-02T00:00:00Z",
+             "dateOfRegistration": "2002-03-15T00:00:00Z",
+             "carGroup": "15",
+             "carColour": "D",
+             "carSpecificAdXs": 150,
+             "carSpecificTheftXs": 250,
+             "colourSegment": 9,
+             "trackerYn": "N",
+             "trackerEndorsementClause": null,
+             "carType": "Saloon",
+             "abiCode": "17537602",
+             "vehicleMake": "FORD",
+             "vehicleModel": "FIESTA FREESTYLE 16V",
+             "modification1": "98",
+             "modification2": null,
+             "modification3": null,
+             "modification4": null,
+             "modification5": null,
+             "modification6": null,
+             "fuelTypeCode": "P",
+             "fuelTypeDescription": "Petrol",
+             "vehicleEngineSize": 1242,
+             "windscreenReplacementExcess": 100,
+             "windscreenRepairExcess": 15
+           },
+           "coveredDrivers": [               {
+             "coveredDriverNo": 23979502,
+             "driverType": "M",
+             "driverObjectNo": 19030809,
+             "title": "MR",
+             "forename": "Firstsepcp",
+             "surname": "Firstsep",
+             "fullName": "Firstsepcp Firstsep",
+             "gender": "M",
+             "maritalStatus": 1,
+             "relationToPolicyholder": "MAD",
+             "dateOfBirth": "1981-10-06T00:00:00Z",
+             "occupation": "688",
+             "licenceType": "UK",
+             "licenceRestriction": "8",
+             "yearsLicenceHeld": "2009-10-02T00:00:00Z",
+             "yearsInUk": "1981-10-06T00:00:00Z",
+             "driveOtherCarsInd": "Yes",
+             "driverSpecificXs": 0,
+             "occupationSegment": null,
+             "youngestDriver": "Yes",
+             "policyholderDriver": "Yes",
+             "driverScore": 1.2444,
+             "ncdLevel": 9,
+             "coverType": "COM",
+             "previousCoverType": "COM",
+             "coverTypeDescription": "Comprehensive",
+             "streetNo": "Flat 2, The Dome",
+             "street": "Dome Way",
+             "postalTown": "Redhill",
+             "city": null,
+             "county": null,
+             "postcodeIn": "1DJ",
+             "postcodeOut": "RH1",
+             "classOfUse": "SOC",
+             "classOfUseLongDescription": "Use for social, domestic and pleasure purposes only",
+             "classOfUseShortDescription": "Use for social, domestic and pleasure purposes only",
+             "classOfUseScheduleDescription": "Use for social, domestic and pleasure purposes only",
+             "drivingRestrictions": "IOD",
+             "ncdDiscount": 70,
+             "ncdProtection": "YES",
+             "staffIndicator": null,
+             "introductoryNcd": "No",
+             "proofOfNcd": "No",
+             "carOwner": "PRO",
+             "registeredKeeper": "PRO",
+             "proposerDriverInd": "Yes",
+             "numberOfCars": null,
+             "introNcdYears": null,
+             "introNcdPct": null,
+             "ibisQuoteChannel": "Y",
+             "ibisSchemeCode": null,
+             "loadDiscReason": null,
+             "marketPlus": null,
+             "ladyDriver": "N",
+             "handbagCover": null,
+             "voluntaryExcess": 250,
+             "useOfOtherCars": 0,
+             "carsInHousehold": 1,
+             "noOfChildren": 2,
+             "residentialStatus": 1,
+             "compulsoryExcess": 150,
+             "fireExcess": 100,
+             "theftExcess": 250,
+             "windscreenExcess": null,
+             "applicableExcess": 400,
+             "appXsDateTime": "2018-10-02T00:01:00Z",
+             "uwLoad": 0,
+             "uwLoadEffectiveDate": null,
+             "uwAdExcess": 0,
+             "iceEquipment": "A",
+             "previousInsuranceName": null,
+             "personalAccident": "A",
+             "personalEffects": "A",
+             "previousInsuranceExpiry": null,
+             "medicalExpenses": "C",
+             "previousInsurancePolNo": null,
+             "previousInsuranceNcd": null,
+             "drivingOtherVehExp": null,
+             "drivingOtherVehExpYrs": null,
+             "employmentStatus": "EMP",
+             "industryCode": "904",
+             "secondaryOccupationYn": "N",
+             "secondaryOccupation": null,
+             "driverClaims": null,
+             "driverConvictions": null,
+             "driverMedicalRestrictions": null,
+             "clientBarredStatus": "N"
+           }],
+           "coverLineRiskSplits":                [
+             {
+               "coverLineRiskSplitNo": 117297441,
+               "riskNo": 1,
+               "factor": 0.892855183763028
+             },
+             {
+               "coverLineRiskSplitNo": 117297442,
+               "riskNo": 19,
+               "factor": 0.107144816236972
+             },
+             {
+               "coverLineRiskSplitNo": 117297443,
+               "riskNo": 20,
+               "factor": 0
+             }
+           ],
+           "coverLinePremiumAdjustments":                [
+             {
+               "coverLinePremiumAdjNo": 78912395,
+               "transactionGroupingId": 9400361,
+               "amt": 729.2,
+               "requestStatus": "Y",
+               "transCode": 1,
+               "stampDuty": null,
+               "transactionCost": null,
+               "productTax1": null,
+               "productTax2": null,
+               "proRataAmt": null,
+               "commissionEntitledAmt": null,
+               "currencyCode": "GBP",
+               "localAmt": null
+             },
+             {
+               "coverLinePremiumAdjNo": 78912396,
+               "transactionGroupingId": 9400361,
+               "amt": -729.2,
+               "requestStatus": "Y",
+               "transCode": 1,
+               "stampDuty": null,
+               "transactionCost": null,
+               "productTax1": null,
+               "productTax2": null,
+               "proRataAmt": null,
+               "commissionEntitledAmt": null,
+               "currencyCode": "GBP",
+               "localAmt": null
+             }
+           ],
+           "coverLineSiraValues":                [
+             {
+               "coverLineSiraValueNo": 88560421,
+               "createdBy": null,
+               "createdDate": null,
+               "modifiedBy": null,
+               "modifiedDate": null,
+               "siraCode": "1",
+               "siraValue": "751"
+             },
+             {
+               "coverLineSiraValueNo": 88560422,
+               "createdBy": null,
+               "createdDate": null,
+               "modifiedBy": null,
+               "modifiedDate": null,
+               "siraCode": "2",
+               "siraValue": "10"
+             },
+             {
+               "coverLineSiraValueNo": 88560423,
+               "createdBy": null,
+               "createdDate": null,
+               "modifiedBy": null,
+               "modifiedDate": null,
+               "siraCode": "3",
+               "siraValue": "EIDC99"
+             },
+             {
+               "coverLineSiraValueNo": 88560424,
+               "createdBy": null,
+               "createdDate": null,
+               "modifiedBy": null,
+               "modifiedDate": null,
+               "siraCode": "4",
+               "siraValue": "EAGE40"
+             },
+             {
+               "coverLineSiraValueNo": 88560425,
+               "createdBy": null,
+               "createdDate": null,
+               "modifiedBy": null,
+               "modifiedDate": null,
+               "siraCode": "5",
+               "siraValue": "EADD70"
+             },
+             {
+               "coverLineSiraValueNo": 88560426,
+               "createdBy": null,
+               "createdDate": null,
+               "modifiedBy": null,
+               "modifiedDate": null,
+               "siraCode": "6",
+               "siraValue": null
+             }
+           ],
+           "coverLineGenericFactors":                [
+             {
+               "factorId": "1",
+               "factorKey1": "17",
+               "factorKey2": "3",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "2",
+               "factorKey1": "20",
+               "factorKey2": "5",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "3",
+               "factorKey1": "17",
+               "factorKey2": "1",
+               "factorKey3": "8"
+             },
+             {
+               "factorId": "4",
+               "factorKey1": "1",
+               "factorKey2": "5",
+               "factorKey3": "9"
+             },
+             {
+               "factorId": "5",
+               "factorKey1": "1",
+               "factorKey2": "1",
+               "factorKey3": "2"
+             },
+             {
+               "factorId": "6",
+               "factorKey1": "9",
+               "factorKey2": "1",
+               "factorKey3": "2"
+             },
+             {
+               "factorId": "7",
+               "factorKey1": "12",
+               "factorKey2": "1",
+               "factorKey3": "9"
+             },
+             {
+               "factorId": "8",
+               "factorKey1": "30",
+               "factorKey2": "1",
+               "factorKey3": "10"
+             },
+             {
+               "factorId": "9",
+               "factorKey1": "3",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "10",
+               "factorKey1": "3",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "11",
+               "factorKey1": "10",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "12",
+               "factorKey1": "18",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "13",
+               "factorKey1": "2",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "14",
+               "factorKey1": "2",
+               "factorKey2": "3",
+               "factorKey3": null
+             },
+             {
+               "factorId": "15",
+               "factorKey1": "39",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "16",
+               "factorKey1": "39",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "17",
+               "factorKey1": "4",
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "18",
+               "factorKey1": "75",
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "19",
+               "factorKey1": "74",
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "20",
+               "factorKey1": "2",
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "21",
+               "factorKey1": "2",
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "22",
+               "factorKey1": "98",
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "23",
+               "factorKey1": "3",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "24",
+               "factorKey1": "17",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "25",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "26",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "27",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "28",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "29",
+               "factorKey1": "17",
+               "factorKey2": "31",
+               "factorKey3": "6"
+             },
+             {
+               "factorId": "30",
+               "factorKey1": "17",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "31",
+               "factorKey1": "17",
+               "factorKey2": "37",
+               "factorKey3": "11"
+             },
+             {
+               "factorId": "32",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "33",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "34",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "35",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "36",
+               "factorKey1": "1",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "37",
+               "factorKey1": "1",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "38",
+               "factorKey1": "4",
+               "factorKey2": "36",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "39",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "40",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "41",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "42",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "43",
+               "factorKey1": "4",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "44",
+               "factorKey1": "17",
+               "factorKey2": "30",
+               "factorKey3": "21"
+             },
+             {
+               "factorId": "45",
+               "factorKey1": "17",
+               "factorKey2": "15",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "46",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "47",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "48",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "49",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "50",
+               "factorKey1": "16",
+               "factorKey2": "9",
+               "factorKey3": "9"
+             },
+             {
+               "factorId": "51",
+               "factorKey1": "10",
+               "factorKey2": "1",
+               "factorKey3": null
+             },
+             {
+               "factorId": "52",
+               "factorKey1": "10",
+               "factorKey2": "16",
+               "factorKey3": null
+             },
+             {
+               "factorId": "53",
+               "factorKey1": "16",
+               "factorKey2": "10",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "54",
+               "factorKey1": "5",
+               "factorKey2": "10",
+               "factorKey3": "22"
+             },
+             {
+               "factorId": "55",
+               "factorKey1": "1",
+               "factorKey2": "20",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "56",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "57",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "58",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "59",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "60",
+               "factorKey1": "20",
+               "factorKey2": "9",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "61",
+               "factorKey1": "18",
+               "factorKey2": "9",
+               "factorKey3": "14"
+             },
+             {
+               "factorId": "62",
+               "factorKey1": "36",
+               "factorKey2": "17",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "63",
+               "factorKey1": "9",
+               "factorKey2": "5",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "64",
+               "factorKey1": "17",
+               "factorKey2": "7",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "65",
+               "factorKey1": "1",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "66",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "67",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "68",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "69",
+               "factorKey1": null,
+               "factorKey2": null,
+               "factorKey3": null
+             },
+             {
+               "factorId": "70",
+               "factorKey1": "1",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "71",
+               "factorKey1": "10",
+               "factorKey2": "9",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "72",
+               "factorKey1": "10",
+               "factorKey2": "40",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "73",
+               "factorKey1": "10",
+               "factorKey2": "20",
+               "factorKey3": "10"
+             },
+             {
+               "factorId": "74",
+               "factorKey1": "10",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "75",
+               "factorKey1": "10",
+               "factorKey2": "42",
+               "factorKey3": "8"
+             },
+             {
+               "factorId": "76",
+               "factorKey1": "10",
+               "factorKey2": "16",
+               "factorKey3": null
+             },
+             {
+               "factorId": "77",
+               "factorKey1": "1",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "78",
+               "factorKey1": "1",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             },
+             {
+               "factorId": "79",
+               "factorKey1": "1",
+               "factorKey2": "1",
+               "factorKey3": "1"
+             }
+           ],
+           "coverLineRuleVersions":                [
+             {
+               "ruleAppName": "uweligibilityruleapp",
+               "ruleAppVersion": "58.0",
+               "variantMarker": null
+             },
+             {
+               "ruleAppName": "uwmotorfrontingruleapp",
+               "ruleAppVersion": "4.0",
+               "variantMarker": null
+             },
+             {
+               "ruleAppName": "uwmotorratinganalysisruleapp",
+               "ruleAppVersion": "39.0",
+               "variantMarker": null
+             },
+             {
+               "ruleAppName": "uwncdresponseruleapp",
+               "ruleAppVersion": "2.0",
+               "variantMarker": null
+             }
+           ]
+         },
+         {
+           "coverLineNo": 39377341,
+           "policyCoverNo": 15341595,
+           "policyNo": 1000807,
+           "policySeqNo": 24217516,
+           "agrLineNo": 38359042,
+           "agrLineSeqNo": 65773951,
+           "cancelCode": 0,
+           "coverKnownFromDate": "2018-10-02T00:00:00Z",
+           "discountType": "N",
+           "productLineId": "EMLGL",
+           "productLineVerNo": 5,
+           "agrLineCreateCode": null,
+           "cancelDate": null,
+           "coverChangedDate": "2019-10-02T00:00:00Z",
+           "coverEndDate": "2019-10-02T00:00:00Z",
+           "coverStartDate": "2018-10-02T00:00:00Z",
+           "discPct": null,
+           "ncYears": null,
+           "ncdYears": null,
+           "pricePaid": 31,
+           "tariffPrice": 31,
+           "returnPremium": null,
+           "returnIpt": null,
+           "text4": null,
+           "priceFlatPaid": null,
+           "tariffFlat": null,
+           "status": "OK",
+           "sectionNo": 2,
+           "transCode": 1,
+           "referToUnderwriter": null,
+           "proRataFactor": 1,
+           "transactionCost": null,
+           "productTax1": null,
+           "productTax2": null,
+           "currencyCode": "GBP",
+           "centerCode": "EM",
+           "shortDesc": "Legal Cover",
+           "temporaryInsurance": "N",
+           "floorsCeilingInd": null,
+           "highestRatedDriverType": "M",
+           "highestRatedDriverNo": "68352290",
+           "discountAmount": null,
+           "riskPremium": null,
+           "ratePremium": 2155.0864,
+           "conversionEstimate": null,
+           "floorCeilingProposedChange": null,
+           "floorCeilingCappedChange": null,
+           "depositAmt": 0,
+           "premRateCode": null,
+           "comBatchNo": null,
+           "renewalDiscountRate": null,
+           "renewalDiscountIpt": null,
+           "ratesetId": 21711,
+           "priceLevel": "A",
+           "addonYear": 1,
+           "freeAddon": null,
+           "overrideRatesetId": null,
+           "multiway": null,
+           "loyaltyCode": null,
+           "postcodeSegment": null,
+           "genFactorCount": 0,
+           "genFactorKeyCount": 0,
+           "protectedNcd": null,
+           "protectedNcdCredit": null,
+           "adminFeeIpt": null,
+           "firstQuoteDate": null,
+           "originalPreferredPaymentMethodCode": null,
+           "hasPreferredPayMethodAlter": null,
+           "firstQuoteHour": null,
+           "lastQuoteHour": null,
+           "familyUnit": null,
+           "frontingScore": null,
+           "policyReinstated": "false",
+           "sucSeqNo": 351012430,
+           "tempCoverFrom": null,
+           "tempCoverTo": null,
+           "previousChannel": "N",
+           "coveredVehicle": null,
+           "coveredDrivers": null,
+           "coverLineRiskSplits":                [
+             {
+               "coverLineRiskSplitNo": 117297444,
+               "riskNo": 1,
+               "factor": 0.892903225806452
+             },
+             {
+               "coverLineRiskSplitNo": 117297445,
+               "riskNo": 19,
+               "factor": 0.107096774193548
+             },
+             {
+               "coverLineRiskSplitNo": 117297446,
+               "riskNo": 20,
+               "factor": 0
+             }
+           ],
+           "coverLinePremiumAdjustments":                [
+             {
+               "coverLinePremiumAdjNo": 78912397,
+               "transactionGroupingId": 9400361,
+               "amt": 31,
+               "requestStatus": "Y",
+               "transCode": 1,
+               "stampDuty": null,
+               "transactionCost": null,
+               "productTax1": null,
+               "productTax2": null,
+               "proRataAmt": null,
+               "commissionEntitledAmt": null,
+               "currencyCode": "GBP",
+               "localAmt": null
+             },
+             {
+               "coverLinePremiumAdjNo": 78912398,
+               "transactionGroupingId": 9400361,
+               "amt": -31,
+               "requestStatus": "Y",
+               "transCode": 1,
+               "stampDuty": null,
+               "transactionCost": null,
+               "productTax1": null,
+               "productTax2": null,
+               "proRataAmt": null,
+               "commissionEntitledAmt": null,
+               "currencyCode": "GBP",
+               "localAmt": null
+             }
+           ],
+           "coverLineSiraValues": null,
+           "coverLineGenericFactors": null,
+           "coverLineRuleVersions": null
+         }
+       ],
+       "availabilityRules":          [
+         {
+           "policyAvailabilityNo": 183955382,
+           "policyCoverNo": null,
+           "ruleName": "CUSTOMER BARRED",
+           "ruleYn": "Y"
+         },
+         {
+           "policyAvailabilityNo": 183955383,
+           "policyCoverNo": null,
+           "ruleName": "POLICY IN RENEWAL CYCLE",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955384,
+           "policyCoverNo": null,
+           "ruleName": "LATE NOTIFIED CLAIM",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955385,
+           "policyCoverNo": null,
+           "ruleName": "POLICY NOT YET IN FORCE",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955386,
+           "policyCoverNo": null,
+           "ruleName": "CUSTOMER HAS MULTIPLE PRODUCTS",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955387,
+           "policyCoverNo": null,
+           "ruleName": "CUSTOMER HAS MULTIPLE MOTOR POLICIES",
+           "ruleYn": "Y"
+         },
+         {
+           "policyAvailabilityNo": 183955388,
+           "policyCoverNo": null,
+           "ruleName": "POLICY IS HOME POLICY",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955389,
+           "policyCoverNo": null,
+           "ruleName": "OVERDUE BALANCE OUTSTANDING",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955390,
+           "policyCoverNo": null,
+           "ruleName": "UNPROCESSED PRINT REQUEST",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955391,
+           "policyCoverNo": null,
+           "ruleName": "MAILING AND RISK ADDRESS ARE DIFFERENT",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955392,
+           "policyCoverNo": null,
+           "ruleName": "POLICY IN USE",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955393,
+           "policyCoverNo": null,
+           "ruleName": "CUSTOMER NOT MAIN DRIVER",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955394,
+           "policyCoverNo": null,
+           "ruleName": "LAST MTA ON POLICY FUTURE DATED",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955395,
+           "policyCoverNo": null,
+           "ruleName": "DD WITH NO ACTIVE DDI",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955396,
+           "policyCoverNo": null,
+           "ruleName": "CPA WITH NO ACTIVE CARD",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955397,
+           "policyCoverNo": null,
+           "ruleName": "POSITIVE RENEWAL OFFERED",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955398,
+           "policyCoverNo": null,
+           "ruleName": "POLICY IN REVIEW",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955399,
+           "policyCoverNo": null,
+           "ruleName": "PAYMENT METHOD DD",
+           "ruleYn": "Y"
+         },
+         {
+           "policyAvailabilityNo": 183955400,
+           "policyCoverNo": null,
+           "ruleName": "PAYMENT METHOD CPA",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955401,
+           "policyCoverNo": null,
+           "ruleName": "CUSTOMER HAS MORE THAN 2 PERM ADDITIONAL DRIVERS",
+           "ruleYn": "N"
+         },
+         {
+           "policyAvailabilityNo": 183955402,
+           "policyCoverNo": null,
+           "ruleName": "TEMPORARY SUBSTITUTE VEHICLE IN FORCE",
+           "ruleYn": "N"
+         }
+       ],
+       "policyholder":          {
+         "policyholderNo": 15356175,
+         "nameId": 68352290,
+         "title": "MR",
+         "forename": "Firstsepcp",
+         "surname": "Firstsep",
+         "streetNo": null,
+         "houseName": "Flat 2, The Dome",
+         "street": "Dome Way",
+         "postalTown": "Redhill",
+         "city": null,
+         "county": null,
+         "country": "UK",
+         "postArea": "RH1",
+         "postStreet": "1DJ",
+         "birthDate": "1981-10-06T00:00:00Z",
+         "occupationCode": "688",
+         "occupation": "Computer Manager",
+         "sex": "M",
+         "maritalState": 1,
+         "contactOptInIndicator": "Y",
+         "preferredContactMethod": 13,
+         "eveningTelNo": "01737222222",
+         "daytimeTelNo": "01737222222",
+         "mobileTelNo": null,
+         "faxNo": null,
+         "email": "cptestemails111214+CP1@gmail.com"
+       },
+       "annualPremium": null
+     },
+     "currentPaymentPlan": null,
+     "paymentPlan": null
+   }}]
+}

@@ -47,7 +47,7 @@ class TestDataUtils {
          static final String PREMIUM_VALUE = "premiumValue"
          static final String PRORATABLE = "proratable"
          static final String PRO_RATED_PREMIUM_VALUE = "proRatedPremiumValue"
-         static final String QUOTE_EXPIRY_DATE = "quoteExpiryDate"
+         static final String QUOTE_EXPIRY_TIME_STAMP = "quoteExpiryTimestamp"
          static final String QUOTE_EXPIRY_FLAG = "quoteExpiryFlag"
          static final String QUOTE_ID = "quoteId"
          static final String QUOTE_VERSION = "quoteVersion"
@@ -55,7 +55,22 @@ class TestDataUtils {
          static final String SECURITY_DEVICE = "securityDevice"
          static final String TRACKER_YN = "trackerYn"
          static final String VEHICLE_MAKE = "vehicleMake"
+         static final String VEHICLE_MODEL = "vehicleModel"
          static final String YEAR_START_DATE = "yearStartDate"
+         static final String INSTALMENT_COLLECTED = "instalmentCollected"
+         static final String INSTALMENT_AMOUNT =  "instalmentAmount"
+         static final String INSTALMENT_DATE = "instalmentDate"
+         static final String PRODUCT_LINE_ID = "productLineId"
+         static final String RULE_NAME = "ruleName"
+         static final String RULE_VALUE = "ruleYn"
+
+    }
+
+    class JSONValues{
+        static final String PRODUCT_LINE_ID = "EMMOT"
+        static final String AVAILABILITY_RULE_PAYMENT_METHOD_DD = "PAYMENT METHOD DD"
+        static final String AVAILABILITY_RULE_VALUE_Y = "Y"
+        static final String AVAILABILITY_RULE_VALUE_N = "N"
     }
 
     class Policy {
@@ -65,6 +80,9 @@ class TestDataUtils {
         static final String POLICY_NO_HOME = "33532559"
         static final String SW_POLICY_NO = "33518703"
         static final String POLICY_INVALID = "invalid"
+        static final String POLICY_PAYMENT_TYPE_DD = "1000808"
+        static final String POLICY_PAYMENT_TYPE_CPA = "1000808"
+        static final String POLICY_PAYMENT_TYPE_CARD = "1000800"
     }
 
     class Prorata {
