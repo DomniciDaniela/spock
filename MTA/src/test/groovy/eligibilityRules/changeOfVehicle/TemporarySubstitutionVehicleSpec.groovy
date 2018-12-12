@@ -1,5 +1,7 @@
 package eligibilityRules.changeOfVehicle
 
+import database.DataBase
+import database.PolicyType
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
@@ -10,11 +12,12 @@ class TemporarySubstitutionVehicleSpec extends Specification {
 
     Utils utils = new Utils()
     TestValidation validation = new TestValidation()
+    def dataBase = new DataBase()
 
-    String POLICY_NO_TIA_TRUE = "47641920"
-    String VERSION_NO_TIA_TRUE = "135015466"
-    String POLICY_NO_TIA_FALSE = "65269440"
-    String VERSION_NO_TIA_FALSE = "131886675"
+    String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.TSV_POB)[0].substring(10)
+    String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.TSV_POB)[1].substring(14)
+    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
+    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
     def "Temporary Substitution Vehicle - allow - TIA - true"() {
         given: "Customer can do an MTA (change of vehicle) successfully" +

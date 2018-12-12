@@ -16,8 +16,8 @@ class PolicyNotInForceSpec extends Specification {
 
     String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.NOT_IN_FORCE_TRUE)[0].substring(10)
     String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.NOT_IN_FORCE_TRUE)[1].substring(14)
-    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_FALSE)[0].substring(10)
-    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_FALSE)[1].substring(14)
+    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
+    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
     def "Policy Not InForce - allow - TIA - true"() {
         given: "Customer can do an MTA (change of vehicle) successfully" +

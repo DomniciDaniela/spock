@@ -76,8 +76,8 @@ class TestDataUtils {
     class TransactionTypes{
         static final String[] ALL = ["all"]
         static final String[] ALL_COV = ["all", "eligibilityRules.changeOfVehicle"]
-        static final String[] ALL_TYPES = ["eligibilityRules.changeOfVehicle", "addTempAddDriver", "addPermAddDriver", "changeOfRegistration", "addMotoringConviction"]
-        static final String[] COV = ["eligibilityRules.changeOfVehicle"]
+        static final String[] ALL_TYPES = ["changeOfVehicle", "addTempAddDriver", "addPermAddDriver", "changeOfRegistration", "addMotoringConviction"]
+        static final String[] COV = ["changeOfVehicle"]
         static final String[] NONE = ["none"]
         static final String[] NONE_ALL = ["none", "all"]
         static final String[] NONE_COV = ["none", "eligibilityRules.changeOfVehicle "]

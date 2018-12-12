@@ -18,8 +18,8 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
 
     String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_TRUE)[0].substring(10)
     String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_TRUE)[1].substring(14)
-    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_FALSE)[0].substring(10)
-    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_FALSE)[1].substring(14)
+    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
+    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
     def "OutstandingBalanceOwedOnPolicy - Business Allow - TIA Value True"(){
         given: "Policy has an outstanding balance owed on the policy(true)"
