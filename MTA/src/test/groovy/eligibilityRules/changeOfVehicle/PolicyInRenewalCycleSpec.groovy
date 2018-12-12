@@ -1,5 +1,7 @@
 package eligibilityRules.changeOfVehicle
 
+import database.DataBase
+import database.PolicyType
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
@@ -10,11 +12,12 @@ class PolicyInRenewalCycleSpec extends Specification {
 
     Utils utils = new Utils()
     TestValidation validation = new TestValidation()
+    def dataBase = new DataBase()
 
-    String POLICY_NO_TIA_TRUE = "5000885029"
-    String VERSION_NO_TIA_TRUE = "134971071"
-    String POLICY_NO_TIA_FALSE = "47641920"
-    String VERSION_NO_TIA_FALSE = "135015466"
+    String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.RENEWAL_CYCLE_TRUE)[0].substring(10)
+    String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.RENEWAL_CYCLE_TRUE)[1].substring(14)
+    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(10)
+    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
     def "Policy in renewal cycle - allow - TIA - true"() {
         given: " ‌Customer can do an MTA (change of vehicle) successfully" +

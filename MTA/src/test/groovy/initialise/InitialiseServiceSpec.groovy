@@ -26,6 +26,8 @@ class InitialiseServiceSpec extends Specification {
             assert response.status == 201
         then: "Response body validation"
             assert response.data.apiVersion != null
+        JSONObject resp1 = response.data
+        println(resp1)
             String results = response.data.results[0].toString()
             responseBodyValidation(results)
     }
