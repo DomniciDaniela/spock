@@ -251,7 +251,7 @@ div.footer {
 </div>
 <div class='summary-report'>
 <h3>Summary:</h3>
-<div class='date-test-ran'>Created on Wed Dec 12 16:51:47 GMT 2018 by B Pant</div>
+<div class='date-test-ran'>Created on Thu Dec 13 12:37:37 GMT 2018 by B Pant</div>
 <table class='summary-table'>
 <thead>
 <th>Executed features</th>
@@ -263,12 +263,12 @@ div.footer {
 </thead>
 <tbody>
 <tr>
-<td>1</td>
+<td>12</td>
+<td>3</td>
 <td>0</td>
 <td>0</td>
-<td>0</td>
-<td>100.0%</td>
-<td>3.277 seconds</td>
+<td>75.0%</td>
+<td>1 minutes, 12.660 seconds</td>
 </tr>
 </tbody>
 </table>
@@ -285,37 +285,37 @@ div.footer {
 <a href='#-46153469' class='feature-toc-pass'>Customer barred (Accounts) - Business Allow - TIA Value True</a>
 </li>
 <li>
-<a href='#-1444201394' class='feature-toc-ignored'>Customer barred (Accounts) - Business Allow - TIA Value False</a>
+<a href='#-1444201394' class='feature-toc-pass'>Customer barred (Accounts) - Business Allow - TIA Value False</a>
 </li>
 <li>
-<a href='#-1533960703' class='feature-toc-ignored'>Customer barred (Accounts) - Business not Allow - TIA Value False</a>
+<a href='#-1533960703' class='feature-toc-pass'>Customer barred (Accounts) - Business not Allow - TIA Value False</a>
 </li>
 <li>
-<a href='#-1573069584' class='feature-toc-ignored'>Customer barred (Accounts) - Business not Allow - TIA Value True</a>
+<a href='#-1573069584' class='feature-toc-failure'>Customer barred (Accounts) - Business not Allow - TIA Value True</a>
 </li>
 <li>
-<a href='#-1774775569' class='feature-toc-ignored'>Customer barred fraud (UW-VAL) - Business Allow - TIA Value True</a>
+<a href='#-1774775569' class='feature-toc-failure'>Customer barred fraud (UW-VAL) - Business Allow - TIA Value True</a>
 </li>
 <li>
-<a href='#803088354' class='feature-toc-ignored'>Customer barred fraud (UW-VAL) - Business Allow - TIA Value False</a>
+<a href='#803088354' class='feature-toc-pass'>Customer barred fraud (UW-VAL) - Business Allow - TIA Value False</a>
 </li>
 <li>
-<a href='#-650338411' class='feature-toc-ignored'>Customer barred fraud (UW-VAL) - Business not Allow - TIA Value False</a>
+<a href='#-650338411' class='feature-toc-pass'>Customer barred fraud (UW-VAL) - Business not Allow - TIA Value False</a>
 </li>
 <li>
-<a href='#1780570332' class='feature-toc-ignored'>Customer barred fraud (UW-VAL) - Business not Allow - TIA Value True</a>
+<a href='#1780570332' class='feature-toc-pass'>Customer barred fraud (UW-VAL) - Business not Allow - TIA Value True</a>
 </li>
 <li>
-<a href='#-1206843357' class='feature-toc-ignored'>Customer barred fraud (UW) - Business Allow - TIA Value True</a>
+<a href='#-1206843357' class='feature-toc-pass'>Customer barred fraud (UW) - Business Allow - TIA Value True</a>
 </li>
 <li>
-<a href='#1229117742' class='feature-toc-ignored'>Customer barred fraud (UW) - Business Allow - TIA Value False</a>
+<a href='#1229117742' class='feature-toc-pass'>Customer barred fraud (UW) - Business Allow - TIA Value False</a>
 </li>
 <li>
-<a href='#1661979361' class='feature-toc-ignored'>Customer barred fraud (UW) - Business not Allow - TIA Value False</a>
+<a href='#1661979361' class='feature-toc-pass'>Customer barred fraud (UW) - Business not Allow - TIA Value False</a>
 </li>
 <li>
-<a href='#1993708560' class='feature-toc-ignored'>Customer barred fraud (UW) - Business not Allow - TIA Value True</a>
+<a href='#1993708560' class='feature-toc-failure'>Customer barred fraud (UW) - Business not Allow - TIA Value True</a>
 </li>
 </ul>
 <tr>
@@ -354,7 +354,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='-1444201394'>
+<div class='feature-description' id='-1444201394'>
 <span>Customer barred (Accounts) - Business Allow - TIA Value False</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -388,7 +388,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='-1533960703'>
+<div class='feature-description' id='-1533960703'>
 <span>Customer barred (Accounts) - Business not Allow - TIA Value False</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -422,7 +422,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='-1573069584'>
+<div class='feature-description failure' id='-1573069584'>
 <span>Customer barred (Accounts) - Business not Allow - TIA Value True</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -456,7 +456,21 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='-1774775569'>
+<div class='problem-description'>
+<div class='problem-header'>The following problems occurred:</div>
+<div class='problem-list'>
+<ul>
+<li>
+<pre>Condition failed with Exception:<br/><br/>testValidation.responseBodyValidation_changeOfVehicleNotAllowed(jsonResponse)<br/>|              |                                                |<br/>|              |                                                {&quot;addTempAddDriverAllowed&quot;:true,&quot;changeOfRegistrationAllowed&quot;:true,&quot;addMotoringConvictionAllowed&quot;:true,&quot;changeOfVehicleAllowed&quot;:true,&quot;addPermAddDriverAllowed&quot;:true}<br/>|              Assertion failed: <br/>|               <br/>|              assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) == false<br/>|                     |            |                             |                          |<br/>|                     |            true                          changeOfVehicleAllowed     false<br/>|                     {&quot;addTempAddDriverAllowed&quot;:true,&quot;changeOfRegistrationAllowed&quot;:true,&quot;addMotoringConvictionAllowed&quot;:true,&quot;changeOfVehicleAllowed&quot;:true,&quot;addPermAddDriverAllowed&quot;:true}<br/>validation.TestValidation@40226788<br/></pre>
+</li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description failure' id='-1774775569'>
 <span>Customer barred fraud (UW-VAL) - Business Allow - TIA Value True</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -490,7 +504,21 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='803088354'>
+<div class='problem-description'>
+<div class='problem-header'>The following problems occurred:</div>
+<div class='problem-list'>
+<ul>
+<li>
+<pre>Condition failed with Exception:<br/><br/>testValidation.responseBodyValidation_changeOfVehicleAllowed(jsonResponse)<br/>|              |                                             |<br/>|              |                                             {&quot;addTempAddDriverAllowed&quot;:true,&quot;changeOfRegistrationAllowed&quot;:true,&quot;addMotoringConvictionAllowed&quot;:true,&quot;changeOfVehicleAllowed&quot;:false,&quot;addPermAddDriverAllowed&quot;:true}<br/>|              Assertion failed: <br/>|               <br/>|              assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) == true<br/>|                     |            |                             |                          |<br/>|                     |            false                         changeOfVehicleAllowed     false<br/>|                     {&quot;addTempAddDriverAllowed&quot;:true,&quot;changeOfRegistrationAllowed&quot;:true,&quot;addMotoringConvictionAllowed&quot;:true,&quot;changeOfVehicleAllowed&quot;:false,&quot;addPermAddDriverAllowed&quot;:true}<br/>validation.TestValidation@4fe01803<br/></pre>
+</li>
+</ul>
+</div>
+</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='803088354'>
 <span>Customer barred fraud (UW-VAL) - Business Allow - TIA Value False</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -524,7 +552,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='-650338411'>
+<div class='feature-description' id='-650338411'>
 <span>Customer barred fraud (UW-VAL) - Business not Allow - TIA Value False</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -558,7 +586,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='1780570332'>
+<div class='feature-description' id='1780570332'>
 <span>Customer barred fraud (UW-VAL) - Business not Allow - TIA Value True</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -592,7 +620,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='-1206843357'>
+<div class='feature-description' id='-1206843357'>
 <span>Customer barred fraud (UW) - Business Allow - TIA Value True</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -626,7 +654,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='1229117742'>
+<div class='feature-description' id='1229117742'>
 <span>Customer barred fraud (UW) - Business Allow - TIA Value False</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -660,7 +688,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='1661979361'>
+<div class='feature-description' id='1661979361'>
 <span>Customer barred fraud (UW) - Business not Allow - TIA Value False</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -694,7 +722,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='1993708560'>
+<div class='feature-description failure' id='1993708560'>
 <span>Customer barred fraud (UW) - Business not Allow - TIA Value True</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -724,6 +752,20 @@ div.footer {
 </td>
 <td>
 <div class='block-text'>Response should return 200 and COV value should return true in order to proof that customer can do MTA</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='problem-description'>
+<div class='problem-header'>The following problems occurred:</div>
+<div class='problem-list'>
+<ul>
+<li>
+<pre>Condition failed with Exception:<br/><br/>testValidation.responseBodyValidation_changeOfVehicleNotAllowed(jsonResponse)<br/>|              |                                                |<br/>|              |                                                {&quot;addTempAddDriverAllowed&quot;:true,&quot;changeOfRegistrationAllowed&quot;:true,&quot;addMotoringConvictionAllowed&quot;:true,&quot;changeOfVehicleAllowed&quot;:true,&quot;addPermAddDriverAllowed&quot;:true}<br/>|              Assertion failed: <br/>|               <br/>|              assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) == false<br/>|                     |            |                             |                          |<br/>|                     |            true                          changeOfVehicleAllowed     false<br/>|                     {&quot;addTempAddDriverAllowed&quot;:true,&quot;changeOfRegistrationAllowed&quot;:true,&quot;addMotoringConvictionAllowed&quot;:true,&quot;changeOfVehicleAllowed&quot;:true,&quot;addPermAddDriverAllowed&quot;:true}<br/>validation.TestValidation@7965a51c<br/></pre>
+</li>
+</ul>
+</div>
+</div>
 </td>
 </tr>
 </tbody>
