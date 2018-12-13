@@ -1,5 +1,7 @@
 package eligibilityRules.changeOfVehicle
 
+import database.DataBase
+import database.PolicyType
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
@@ -11,16 +13,17 @@ class CustomerIsBarredSpec extends Specification {
 
     HttpResponseDecorator response
     def testValidation = new TestValidation()
+    def dataBase = new DataBase()
 
-    String POLICY_NO_TIA_ACC_TRUE = "72080870"
-    String VERSION_NO_TIA_ACC_TRUE = "135015336"
+    String POLICY_NO_TIA_ACC_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_ACC)[0].substring(10)
+    String VERSION_NO_TIA_ACC_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_ACC)[2].substring(14)
     String POLICY_NO_TIA_ACC_FALSE = "72080883"
     String VERSION_NO_TIA_ACC_FALSE = "135015350"
 
-    String POLICY_NO_TIA_UW_VAL_TRUE = "1000814"
-    String VERSION_NO_TIA_UW_VAL_TRUE = "135015442"
-    String POLICY_NO_TIA_UW_VAL_FALSE = "72080883"
-    String VERSION_NO_TIA_UW_VAL_FALSE = "135015350"
+     String POLICY_NO_TIA_UW_VAL_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_UW_VAL)[0].substring(10)
+     String VERSION_NO_TIA_UW_VAL_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_UW_VAL)[2].substring(14)
+     String POLICY_NO_TIA_UW_VAL_FALSE = "72080883"
+     String VERSION_NO_TIA_UW_VAL_FALSE = "135015350"
 
     String POLICY_NO_TIA_UW_TRUE = "1000815"
     String VERSION_NO_TIA_UW_TRUE = "135015443"

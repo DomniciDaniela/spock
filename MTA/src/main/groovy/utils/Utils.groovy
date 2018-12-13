@@ -1,9 +1,9 @@
 package utils
 
 import groovy.util.logging.Log
-import groovyx.net.http.HttpResponseDecorator
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
+
 
 @Log
 class Utils {
