@@ -88,6 +88,13 @@ class DataBase {
                     "where BC.SOURCE_SYSTEM_CUST_ID IN(SELECT SOURCE_SYSTEM_CUST_ID FROM CIH.BARRED_CUSTOMERS " +
                     "GROUP BY SOURCE_SYSTEM_CUST_ID HAVING COUNT (BAR_TYPE) =1)AND BC.BAR_TYPE = 'UW-VAL' AND P.NEWEST = 'Y'")
                 break
+            case PolicyType.CUSTOMER_BARRED_UW:
+                return getFirstResult("SELECT PE.POLICY_NO, PE.CUST_NO,P.POLICY_SEQ_NO, " +
+                    "BC.BAR_TYPE FROM POLICY_ENTITY PE INNER JOIN CIH.BARRED_CUSTOMERS BC ON " +
+                    "PE.CUST_NO = BC.SOURCE_SYSTEM_CUST_ID INNER JOIN POLICY P ON P.POLICY_NO = PE.POLICY_NO " +
+                    "where BC.SOURCE_SYSTEM_CUST_ID IN(SELECT SOURCE_SYSTEM_CUST_ID FROM CIH.BARRED_CUSTOMERS " +
+                    "GROUP BY SOURCE_SYSTEM_CUST_ID HAVING COUNT (BAR_TYPE) =1)AND BC.BAR_TYPE = 'UW' AND P.NEWEST = 'Y'")
+                break
             case PolicyType.RENEWAL_CYCLE_TRUE:
                 return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '9' " +
                         "AND NEWEST = 'Y' AND CENTER_CODE = 'EM' AND PAYMENT_METHOD ='CARD' AND TRANSACTION_TYPE ='R'")
