@@ -26,9 +26,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.status == 201
         then: "Response body validation"
             assert response.data.apiVersion != null
-        JSONObject resp1 = response.data
-        println(resp1)
-            String results = response.data.results[0].toString()
+            JSONObject results = response.data.results[0].mtaQuote
             responseBodyValidation(results)
     }
 
@@ -44,7 +42,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.status == 201
         then: "Response body validation"
         assert response.data.apiVersion != null
-            String results = response.data.results[0].toString()
+            JSONObject results = response.data.results[0].mtaQuote
             responseBodyValidation(results)
     }
 
@@ -60,7 +58,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.status == 201
         then: "Response body validation"
             assert response.data.apiVersion != null
-            String results = response.data.results[0].toString()
+            JSONObject results = response.data.results[0].mtaQuote
             responseBodyValidation(results)
     }
 
@@ -77,7 +75,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.status == 201
         then: "Response body validation"
             assert response.data.apiVersion != null
-            String results = response.data.results[0].toString()
+            JSONObject results = response.data.results[0].mtaQuote
             responseBodyValidation(results)
     }
 
@@ -132,7 +130,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.status == 201
         then: "Response body validation"
             assert response.data.apiVersion != null
-            String results = response.data.results[0].toString()
+            JSONObject results = response.data.results[0].mtaQuote
             responseBodyValidation(results)
     }
 
@@ -148,7 +146,7 @@ class InitialiseServiceSpec extends Specification {
             assert response.status == 201
         then: "Response body validation"
             assert response.data.apiVersion != null
-            String results = response.data.results[0].toString()
+            JSONObject results = response.data.results[0].mtaQuote
             responseBodyValidation(results)
     }
 
@@ -173,26 +171,123 @@ class InitialiseServiceSpec extends Specification {
     }
 
 
+    def "Initialise Service - PolicyNo with Payment type DD"(){
+        given: "Customer has a Policy with Payment type DD"
+        def payload = new JsonBuilder(
+                policyNo: TestDataUtils.Policy.POLICY_PAYMENT_TYPE_DD,
+                version: TestDataUtils.Version.LATEST
+        ).toString()
+        when: "Initialise method is called on the Request Object"
+        Utils utils = new Utils()
+        response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+        then:   "Response Code should be 201"
+        assert response.status == 201
+        "Response should contain Current Payment Plan Details"
+        assert response.data.apiVersion !=null
+        JSONObject results = response.data.results[0].mtaQuote
+        responseBodyValidation(results)
+    }
+
+    def "Initialise Service - PolicyNo with Payment type CPA"(){
+        given: "Customer has a Policy with Payment type CPA"
+        def payload = new JsonBuilder(
+                policyNo: TestDataUtils.Policy.POLICY_PAYMENT_TYPE_CPA,
+                version: TestDataUtils.Version.LATEST
+        ).toString()
+        when: "Initialise method is called on the Request Object"
+        Utils utils = new Utils()
+        response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+        then:   "Response Code should be 201"
+        assert response.status == 201
+        "Response should not contain Current Payment Plan Details"
+        assert response.data.apiVersion !=null
+        JSONObject results = response.data.results[0].mtaQuote
+        responseBodyValidation(results)
+    }
+
+    def "Initialise Service - PolicyNo with Payment type CARD"(){
+        given: "Customer has a Policy with Payment type CARD"
+        def payload = new JsonBuilder(
+                policyNo: TestDataUtils.Policy.POLICY_PAYMENT_TYPE_CARD,
+                version: TestDataUtils.Version.LATEST
+        ).toString()
+        when: "Initialise method is called on the Request Object"
+        Utils utils = new Utils()
+        response = utils.createPOSTRequest(ENDPOINT, apiKey, payload)
+        then:   "Response Code should be 201"
+        assert response.status == 201
+        "Response should not contain Current Payment Plan Details"
+        assert response.data.apiVersion !=null
+        JSONObject results = response.data.results[0].mtaQuote
+        responseBodyValidation(results)
+    }
 
     void responseBodyValidation(results) {
         assert results != null
-        assert results.contains(TestDataUtils.JSONObjects.VEHICLE_MAKE) != null
-        assert results.contains(TestDataUtils.JSONObjects.VEHICLE_MODEL) != null
-        assert results.contains(TestDataUtils.JSONObjects.FUEL_TYPE_CODE) != null
-        assert results.contains(TestDataUtils.JSONObjects.CAR_VALUE) != null
-        assert results.contains(TestDataUtils.JSONObjects.SECURITY_DEVICE) != null
-        assert results.contains(TestDataUtils.JSONObjects.TRACKER_YN) != null
-        assert results.contains(TestDataUtils.JSONObjects.MODIFICATION) != null
-        assert results.contains(TestDataUtils.JSONObjects.MILEAGE) != null
-        assert results.contains(TestDataUtils.JSONObjects.MILEAGE_DESCRIPTION) != null
-        assert results.contains(TestDataUtils.JSONObjects.CLASS_OF_USE) != null
-        assert results.contains(TestDataUtils.JSONObjects.OVERNIGHT_LOCATION) != null
-        assert results.contains(TestDataUtils.JSONObjects.CAR_OWNER) != null
-        assert results.contains(TestDataUtils.JSONObjects.REGISTERED_KEEPER) != null
-        assert results.contains(TestDataUtils.JSONObjects.QUOTE_ID) != null
-        assert results.contains(TestDataUtils.JSONObjects.QUOTE_VERSION) != null
-        assert results.contains(TestDataUtils.JSONObjects.QUOTE_EXPIRY_FLAG) != null
-        assert results.contains(TestDataUtils.JSONObjects.QUOTE_EXPIRY_DATE) != null
+
+        assert results.get(TestDataUtils.JSONObjects.QUOTE_ID) != null
+        assert results.get(TestDataUtils.JSONObjects.QUOTE_VERSION) != null
+        assert results.get(TestDataUtils.JSONObjects.QUOTE_EXPIRY_FLAG) != null
+        assert results.get(TestDataUtils.JSONObjects.QUOTE_EXPIRY_TIME_STAMP) != null
+
+        def coverLines = results.quoteDetails.coverLines
+
+        for (int j = 0; j < (coverLines.length()); j++) {
+
+            if (coverLines.get(j).(TestDataUtils.JSONObjects.PRODUCT_LINE_ID) == TestDataUtils.JSONValues.PRODUCT_LINE_ID) {
+
+                def coveredVehicle = results.quoteDetails.coverLines.get(j).coveredVehicle
+
+                for (def i = 0; i < coveredVehicle.length(); i++) {
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.VEHICLE_MAKE) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.VEHICLE_MODEL) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.FUEL_TYPE_CODE) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.CAR_VALUE) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.SECURITY_DEVICE) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.TRACKER_YN) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.MODIFICATION) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.MILEAGE) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.MILEAGE_DESCRIPTION) != null
+                    assert coveredVehicle.get(TestDataUtils.JSONObjects.OVERNIGHT_LOCATION) != null
+                }
+
+                def coveredDriver = results.quoteDetails.coverLines.get(j).coveredDrivers.get(0)
+
+                assert coveredDriver.get(TestDataUtils.JSONObjects.CLASS_OF_USE) != null
+                assert coveredDriver.get(TestDataUtils.JSONObjects.CAR_OWNER) != null
+                assert coveredDriver.get(TestDataUtils.JSONObjects.REGISTERED_KEEPER) != null
+            }
+        }
+        def availabilityRules = results.quoteDetails.availabilityRules
+
+        for (def i = 0; i < availabilityRules.length(); i++) {
+
+            if (availabilityRules.get(i).get(TestDataUtils.JSONObjects.RULE_NAME) == TestDataUtils.JSONValues.AVAILABILITY_RULE_PAYMENT_METHOD_DD
+                    && availabilityRules.get(i).get(TestDataUtils.JSONObjects.RULE_VALUE)  == TestDataUtils.JSONValues.AVAILABILITY_RULE_VALUE_Y) {
+
+                def currentPaymentPlan = results.currentPaymentPlan.toString()
+
+                assert currentPaymentPlan != "null"
+
+                def installments = results.currentPaymentPlan.instalments
+
+                for(def j=0; j<installments.length();j++){
+
+                    assert installments.get(j).get(TestDataUtils.JSONObjects.INSTALMENT_COLLECTED) != null
+                    assert installments.get(j).get(TestDataUtils.JSONObjects.INSTALMENT_AMOUNT) != null
+                    assert installments.get(j).get(TestDataUtils.JSONObjects.INSTALMENT_DATE) != null
+                }
+                break
+            }
+            else if (availabilityRules.get(i).get(TestDataUtils.JSONObjects.RULE_NAME)  == TestDataUtils.JSONValues.AVAILABILITY_RULE_PAYMENT_METHOD_DD
+                    && availabilityRules.get(i).get(TestDataUtils.JSONObjects.RULE_VALUE)  == TestDataUtils.JSONValues.AVAILABILITY_RULE_VALUE_N) {
+
+                def currentPaymentPlan = results.currentPaymentPlan.toString()
+
+                assert currentPaymentPlan == "null"
+                break
+            }
+        }
     }
 
     void errorsBodyValidation(errors) {
