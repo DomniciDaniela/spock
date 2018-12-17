@@ -34,6 +34,7 @@ class TestDataUtils {
          static final String CAR_VALUE = "carValue"
          static final String CLASS_OF_USE = "classOfUse"
          static final String CODE = "code"
+         static final String CODES = "codes"
          static final String COVER_LINES = "coverLines"
          static final String COVER_END_DATE = "coverEndDate"
          static final String COVER_START_DATE = "coverStartDate"
@@ -43,6 +44,7 @@ class TestDataUtils {
          static final String MILEAGE = "mileage"
          static final String MILEAGE_DESCRIPTION = "mileageDescription"
          static final String MODIFICATION = "modification1"
+         static final String MTA_DATA = "mtaData"
          static final String OVERNIGHT_LOCATION = "overnightLocation"
          static final String PREMIUM_VALUE = "premiumValue"
          static final String PRORATABLE = "proratable"
@@ -68,7 +70,6 @@ class TestDataUtils {
     }
 
     class JSONValues{
-
         static final String AVAILABILITY_RULE_PAYMENT_METHOD_DD = "PAYMENT METHOD DD"
         static final String AVAILABILITY_RULE_VALUE_Y = "Y"
         static final String AVAILABILITY_RULE_VALUE_N = "N"
@@ -78,13 +79,30 @@ class TestDataUtils {
     class Policy {
         static final String POLICY_NO = "1000807"
         static final String POLICY_NO_MULTIPLE_VERSION = "26614630"
-        static final String FA_POLICY_NO = "33524912"
         static final String POLICY_NO_HOME = "33532559"
-        static final String SW_POLICY_NO = "33518703"
         static final String POLICY_INVALID = "invalid"
-        static final String POLICY_PAYMENT_TYPE_DD = "8008949"
-        static final String POLICY_PAYMENT_TYPE_CPA = "1000808"
-        static final String POLICY_PAYMENT_TYPE_CARD = "1000808"
+    }
+
+    class PolicyPaymentType{
+        static final String PAYMENT_TYPE_DD = "DD"
+        static final String PAYMENT_TYPE_CARD = "CARD"
+        static final String PAYMENT_TYPE_CPA = "CPA"
+    }
+
+    class PolicyCenterCode {
+        static final String EM_CENTER_CODE = "EM"
+        static final String EH_CENTER_CODE = "EH"
+        static final String SW_CENTER_CODE = "SW"
+        static final String SH_CENTER_CODE = "SH"
+        static final String FC_CENTER_CODE = "FC"
+    }
+
+    class PolicyTransactionType {
+        static final String NEW_BUISNESS = "P"
+        static final String RENEWAL = "R"
+        static final String CANCELLED = "C"
+        static final String MTA_IN_RENEWAL = "MR"
+        static final String QUOTE = "Q"
     }
 
     class Prorata {
@@ -95,13 +113,13 @@ class TestDataUtils {
 
     class TransactionTypes{
         static final String[] ALL = ["all"]
-        static final String[] ALL_COV = ["all", "eligibilityRules.changeOfVehicle"]
+        static final String[] ALL_COV = ["all", "changeOfVehicle"]
         static final String[] ALL_TYPES = ["changeOfVehicle", "addTempAddDriver", "addPermAddDriver", "changeOfRegistration", "addMotoringConviction"]
         static final String[] COV = ["changeOfVehicle"]
         static final String[] NONE = ["none"]
         static final String[] NONE_ALL = ["none", "all"]
-        static final String[] NONE_COV = ["none", "eligibilityRules.changeOfVehicle "]
-        static final String STRING = "string"
+        static final String[] NONE_COV = ["none", "changeOfVehicle "]
+        static final String STRING = "changeOfVehicle, addTempAddDriver"
         static final String[] TESTING = ["testing"]
     }
 
