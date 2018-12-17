@@ -1,7 +1,9 @@
 package database
 
+import com.sun.xml.internal.bind.v2.TODO
 import groovy.sql.Sql
 import utils.Date
+import utils.TestDataUtils
 
 import java.sql.SQLException
 
@@ -68,12 +70,12 @@ class DataBase {
                 break
             case PolicyType.TIA_RETURNS_FALSE:
                 return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '1'" +
-                        "AND NEWEST = 'Y' AND CENTER_CODE = 'SW' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE >'"
-                        + new Date().previousMonthDayDate() + "'")
+                        "AND NEWEST = 'Y' AND CENTER_CODE = 'EM' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE >'"
+                        + new Date().fiveMonthsAgo() + "' AND POLICY_STATUS='P'")
                 break
             case PolicyType.IN_FORCE_LESS_THAN_A_DAY_TRUE:
                 return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '1'" +
-                        "AND NEWEST = 'Y' AND CENTER_CODE = 'SW' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE ='"
+                        "AND NEWEST = 'Y' AND CENTER_CODE = 'EM' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE ='"
                         + new Date().currentDate() + "'")
             case PolicyType.CUSTOMER_BARRED_ACC:
                 return getFirstResult("SELECT PE.POLICY_NO, PE.CUST_NO,P.POLICY_SEQ_NO, " +
@@ -99,6 +101,7 @@ class DataBase {
                 return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '9' " +
                         "AND NEWEST = 'Y' AND CENTER_CODE = 'EM' AND PAYMENT_METHOD ='CARD' AND TRANSACTION_TYPE ='R'")
                 break
+            // TODO update this query TSV_POB
             case PolicyType.TSV_POB:
                 return getFirstResult("SELECT al.POLICY_NO, al.POLICY_SEQ_NO" +
                         " from AGREEMENT_LINE al " +
@@ -108,6 +111,46 @@ class DataBase {
                                 + new Date().currentDate() + "' AND al.CANCEL_CODE=0 AND al.CENTER_CODE ='EM'")
                 break
         }
+    }
 
+    String getActivePolicyBasedOnCenterCode(centerCode){
+        def row = getFirstResult("SELECT PE.POLICY_NO FROM POLICY_ENTITY PE WHERE " +
+                "PE.CENTER_CODE = '" + centerCode + "' " +
+                "AND PE.POLICY_NO IN(SELECT P.POLICY_NO FROM POLICY P WHERE " +
+                "TRANSACTION_TYPE = '" + TestDataUtils.PolicyTransactionType.NEW_BUISNESS + "' " +
+                "GROUP BY P.POLICY_NO HAVING COUNT(P.POLICY_NO)=1)")
+        return(row.POLICY_NO)
+    }
+
+    String getCancelledPolicy(centerCode){
+        def row = getFirstResult("SELECT PE.POLICY_NO FROM POLICY_ENTITY PE WHERE " +
+                "PE.CENTER_CODE = '" + centerCode + "' " +
+                "AND PE.POLICY_NO IN(SELECT P.POLICY_NO FROM POLICY P WHERE " +
+                "TRANSACTION_TYPE = '" + TestDataUtils.PolicyTransactionType.CANCELLED + "' " +
+                "GROUP BY P.POLICY_NO)")
+        return(row.POLICY_NO)
+    }
+
+    String getActivePolicyWithMultipleVersions(centerCode){
+        def row = getFirstResult("SELECT PE.POLICY_NO FROM POLICY_ENTITY PE WHERE " +
+                "PE.CENTER_CODE = '" + centerCode + "' " +
+                "AND PE.POLICY_NO IN(SELECT P.POLICY_NO FROM POLICY P GROUP BY P.POLICY_NO HAVING COUNT(P.POLICY_NO)>=2)")
+        return(row.POLICY_NO)
+    }
+
+    String getPolicyWithPaymentType(paymentType) {
+        def row
+        switch (paymentType) {
+            case TestDataUtils.PolicyPaymentType.PAYMENT_TYPE_DD :
+                row = getFirstResult ( "SELECT DISTINCT P.POLICY_NO FROM POLICY P WHERE P.INSTL_PLAN_TYPE IN('1','3','4') ORDER BY POLICY_NO ASC" )
+                break
+            case TestDataUtils.PolicyPaymentType.PAYMENT_TYPE_CPA :
+                row = getFirstResult ( "SELECT DISTINCT P.POLICY_NO FROM POLICY P WHERE P.INSTL_PLAN_TYPE IN('5') ORDER BY POLICY_NO ASC" )
+                break
+            case TestDataUtils.PolicyPaymentType.PAYMENT_TYPE_CARD :
+                row = getFirstResult ( "SELECT DISTINCT P.POLICY_NO FROM POLICY P WHERE P.INSTL_PLAN_TYPE IN('2') ORDER BY POLICY_NO ASC" )
+                break
+        }
+        return ( row.POLICY_NO)
     }
 }

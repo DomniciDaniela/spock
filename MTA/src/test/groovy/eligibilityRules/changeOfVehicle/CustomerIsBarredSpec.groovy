@@ -6,6 +6,7 @@ import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.ApiKeys
 import utils.Utils
 import validation.TestValidation
 
@@ -37,7 +38,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_ACC_TRUE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -54,7 +55,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_ACC_FALSE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -71,7 +72,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_ACC_FALSE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -88,7 +89,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_ACC_TRUE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -105,7 +106,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_UW_VAL_TRUE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -122,7 +123,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_UW_VAL_FALSE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -139,7 +140,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_UW_VAL_FALSE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -156,7 +157,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_UW_VAL_TRUE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -173,7 +174,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_UW_TRUE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -190,7 +191,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_UW_FALSE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -207,7 +208,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_UW_FALSE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
@@ -224,7 +225,7 @@ class CustomerIsBarredSpec extends Specification {
             version: VERSION_NO_TIA_UW_TRUE
         ).toString()
         when: "Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, Utils.apiKey, PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
 
         then: "Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200

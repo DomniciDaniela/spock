@@ -45,25 +45,6 @@ class Utils {
         }
     }
 
-     static String getApiKey() {
-        String environment = System.getProperty("branch")
-        try {
-            switch (environment) {
-                case "deve13":
-                    return "xcvoui5kn6kmhhs86npw3bytir4znxor"
-
-                case "tste13":
-                    return "qpkr79rwksuawcw5bqvhekvj8l3pml43"
-
-                default:
-                    System.out.println("Invalid key" + environment)
-            }
-            return environment
-        } catch (Exception e) {
-            return null
-        }
-    }
-
     def createGETRequest(String endpoint, String apiKey) {
         try {
             RESTClient restClient = new RESTClient(endpoint)

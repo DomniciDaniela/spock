@@ -6,6 +6,8 @@ import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.ApiKeys
+import utils.TestDataUtils
 import utils.Utils
 import validation.TestValidation
 
@@ -16,8 +18,8 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
     def testValidation = new TestValidation()
     def dataBase = new DataBase()
 
-    String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_TRUE)[0].substring(10)
-    String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.OUTSTANDING_BALANCED_TRUE)[1].substring(14)
+    String POLICY_NO_TIA_TRUE = getDataBase().getPolicyWithPaymentType(TestDataUtils.PolicyPaymentType.PAYMENT_TYPE_DD)
+    String VERSION_NO_TIA_TRUE = TestDataUtils.Version.LATEST
     String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
     String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
@@ -28,7 +30,7 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
             version: VERSION_NO_TIA_TRUE
         ).toString()
         when:"Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT,Utils.apiKey,PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(),PAYLOAD)
         then:"Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
         assert response.data.apiVersion != null
@@ -44,7 +46,7 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
             version: VERSION_NO_TIA_FALSE
         ).toString()
         when:"Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT,Utils.apiKey,PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(),PAYLOAD)
         then:"Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
         assert response.data.apiVersion != null
@@ -60,7 +62,7 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
             version: VERSION_NO_TIA_FALSE
         ).toString()
         when:"Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT,Utils.apiKey,PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT,ApiKeys.getMTAApiKey(),PAYLOAD)
         then:"Response should return 200 and COV value should return true in order to proof that customer can do MTA"
         assert response.status == 200
         assert response.data.apiVersion != null
@@ -76,7 +78,7 @@ class OutstandingBalanceOwedOnPolicySpec extends Specification {
             version: VERSION_NO_TIA_TRUE
         ).toString()
         when:"Request is sent to the service"
-        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT,Utils.apiKey,PAYLOAD)
+        response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT,ApiKeys.getMTAApiKey(),PAYLOAD)
         then:"Response should return 200 and COV value should return false in order to proof that customer cannot do MTA"
         assert response.status == 200
         assert response.data.apiVersion != null
