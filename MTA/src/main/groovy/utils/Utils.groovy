@@ -10,6 +10,7 @@ class Utils {
 
     public static String MTA_RULES_ENDPOINT = environment + TestDataUtils.Endpoint.MTA_RULES_ENDPOINT
     public static String PRO_RATA_ENDPOINT = environment + TestDataUtils.Endpoint.PRO_RATA_ENDPOINT
+    public static String ADMIN_FEE_ENDPOINT = environment + TestDataUtils.Endpoint.MOTOR_FEE_ENDPOINT
 
     def createPOSTRequest(String endpoint, String apiKey, String body) {
         try {

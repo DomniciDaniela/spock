@@ -1,6 +1,8 @@
 package validation
 
+import groovy.json.JsonSlurper
 import org.json.JSONArray
+import org.json.JSONObject
 import utils.TestDataUtils
 
 
@@ -57,5 +59,18 @@ class TestValidation {
             assert coverLines.getJSONObject(i).get(TestDataUtils.JSONObjects.PRO_RATED_PREMIUM_VALUE) != null
         }
 
+    }
+
+    void adminFeeSuccessInfoResponseValidation(JSONObject infos) {
+        assert infos.get(TestDataUtils.JSONObjects.CODE) == 'OK'
+       // assert infos.get(TestDataUtils.JSONObjects.DESCRIPTION) == null
+        assert infos.get(TestDataUtils.JSONObjects.MESSAGE) == 'Data Retrieved'
+    }
+
+    void adminFeeSuccessResultsResponseValidation(JSONObject results) {
+        assert results.get(TestDataUtils.JSONObjects.POLICY_NO) != null
+        assert results.get(TestDataUtils.JSONObjects.POLICY_VERSION) != null
+       // assert results.get(TestDataUtils.JSONObjects.MTA_TRANSACTION_TYPE) == null
+        assert results.get(TestDataUtils.JSONObjects.MOTOR_FEE) != null
     }
 }

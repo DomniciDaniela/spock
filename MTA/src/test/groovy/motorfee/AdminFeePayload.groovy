@@ -1,11 +1,11 @@
 package motorfee
 
-import database.Payload
+import utils.Payload
 import groovy.transform.builder.Builder
 import groovy.transform.builder.ExternalStrategy
 
 class AdminFeePayload implements Payload{
-    String policyno, channel, brandcode, effectivedate
+    String policyNo, channel, brandCode, effectiveDate
 }
 
 @Builder(builderStrategy = ExternalStrategy, forClass = AdminFeePayload)
@@ -14,10 +14,10 @@ class AdminFeePayloadBuilder {}
 class AdminFeeDefault {
     static AdminFeePayloadBuilder defaultAdminFeePayload() {
         return new AdminFeePayloadBuilder()
-            .policyno("12312")
+            .policyNo("12312")
             .channel("web")
-            .brandcode("EM")
-            .effectivedate("2018-01-04")
+            .brandCode("ESB")
+            .effectiveDate("2018-01-04")
     }
 }
 

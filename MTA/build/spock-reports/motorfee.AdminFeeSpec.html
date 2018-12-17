@@ -251,7 +251,7 @@ div.footer {
 </div>
 <div class='summary-report'>
 <h3>Summary:</h3>
-<div class='date-test-ran'>Created on Fri Dec 14 10:30:00 GMT 2018 by B Pant</div>
+<div class='date-test-ran'>Created on Fri Dec 14 16:08:33 GMT 2018 by B Pant</div>
 <table class='summary-table'>
 <thead>
 <th>Executed features</th>
@@ -264,11 +264,11 @@ div.footer {
 <tbody>
 <tr>
 <td>1</td>
-<td>0</td>
 <td>1</td>
 <td>0</td>
+<td>0</td>
 <td>0.0%</td>
-<td>1 minutes, 27.922 seconds</td>
+<td>2.122 seconds</td>
 </tr>
 </tbody>
 </table>
@@ -282,13 +282,22 @@ div.footer {
 <tbody>
 <ul id='toc'>
 <li>
-<a href='#264263337' class='feature-toc-error'>Success - All field are correct</a>
+<a href='#-109374617' class='feature-toc-ignored'>Success - All field are correct for admin fee</a>
+</li>
+<li>
+<a href='#1313447376' class='feature-toc-ignored'>Date_Validation - If date is invalid when requesting for admin fee</a>
+</li>
+<li>
+<a href='#1928687096' class='feature-toc-ignored'>Brandcode_Validation - If brandcode is invalid when requesting for admin fee</a>
+</li>
+<li>
+<a href='#922252186' class='feature-toc-failure'>Channel_Validation - If channel is invalid when requesting for admin fee</a>
 </li>
 </ul>
 <tr>
 <td colspan='10'>
-<div class='feature-description error' id='264263337'>
-<span>Success - All field are correct</span>
+<div class='feature-description ignored' id='-109374617'>
+<span>Success - All field are correct for admin fee</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
 </span>
@@ -321,12 +330,114 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
+<div class='feature-description ignored' id='1313447376'>
+<span>Date_Validation - If date is invalid when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but date is invalid</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description ignored' id='1928687096'>
+<span>Brandcode_Validation - If brandcode is invalid when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but date is invalid</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description failure' id='922252186'>
+<span>Channel_Validation - If channel is invalid when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but date is invalid</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
 <div class='problem-description'>
 <div class='problem-header'>The following problems occurred:</div>
 <div class='problem-list'>
 <ul>
 <li>
-<pre>javax.net.ssl.SSLHandshakeException: Remote host closed connection during handshake</pre>
+<pre>Condition not satisfied:<br/><br/>responseDecorator.status == 400<br/>|                 |      |<br/>|                 404    false<br/>groovyx.net.http.HttpResponseDecorator@3e34ace1<br/></pre>
 </li>
 </ul>
 </div>
