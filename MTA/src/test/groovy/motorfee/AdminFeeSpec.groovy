@@ -6,6 +6,10 @@ import spock.lang.Specification
 import utils.Utils
 import validation.TestValidation
 
+import static motorfee.AdminFeeDefault.adminFeePayloadWithBrandcodeMissing
+import static motorfee.AdminFeeDefault.adminFeePayloadWithChannelMissing
+import static motorfee.AdminFeeDefault.adminFeePayloadWithDateMissing
+import static motorfee.AdminFeeDefault.adminFeePayloadWithPolicyNoMissing
 import static motorfee.AdminFeeDefault.defaultAdminFeePayload
 
 class AdminFeeSpec extends Specification{
@@ -128,7 +132,43 @@ class AdminFeeSpec extends Specification{
 
     def "date_Validation - If date is missing when requesting for admin fee" (){
         given: "Request has all the correct field but channel is an empty string"
-        def PAYLOAD = defaultAdminFeePayload()
+        def PAYLOAD = adminFeePayloadWithDateMissing()
+            .build()
+            .asJsonString()
+
+        when: "Request is send to the service"
+        responseDecorator = new Utils().createPOSTRequest(Utils.ADMIN_FEE_ENDPOINT,apikey,PAYLOAD)
+
+        then: "Response should contain the response coe 200 and all valid values"
+        assert responseDecorator.status == 400
+    }
+    def "policyNo_Validation - If policyNo is missing when requesting for admin fee" (){
+        given: "Request has all the correct field but channel is an empty string"
+        def PAYLOAD = adminFeePayloadWithPolicyNoMissing()
+            .build()
+            .asJsonString()
+
+        when: "Request is send to the service"
+        responseDecorator = new Utils().createPOSTRequest(Utils.ADMIN_FEE_ENDPOINT,apikey,PAYLOAD)
+
+        then: "Response should contain the response coe 200 and all valid values"
+        assert responseDecorator.status == 400
+    }
+    def "channel_Validation - If channel is missing when requesting for admin fee" (){
+        given: "Request has all the correct field but channel is an empty string"
+        def PAYLOAD = adminFeePayloadWithChannelMissing()
+            .build()
+            .asJsonString()
+
+        when: "Request is send to the service"
+        responseDecorator = new Utils().createPOSTRequest(Utils.ADMIN_FEE_ENDPOINT,apikey,PAYLOAD)
+
+        then: "Response should contain the response coe 200 and all valid values"
+        assert responseDecorator.status == 400
+    }
+    def "brandcode_Validation - If brand code is missing when requesting for admin fee" (){
+        given: "Request has all the correct field but channel is an empty string"
+        def PAYLOAD = adminFeePayloadWithBrandcodeMissing()
             .build()
             .asJsonString()
 

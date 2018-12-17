@@ -19,5 +19,30 @@ class AdminFeeDefault {
             .brandCode("ESB")
             .effectiveDate("2018-01-04")
     }
+    static AdminFeePayloadBuilder adminFeePayloadWithDateMissing(){
+        return new AdminFeePayloadBuilder()
+            .policyNo("12312")
+            .channel("web")
+            .brandCode("ESB")
+    }
+    static AdminFeePayloadBuilder adminFeePayloadWithPolicyNoMissing(){
+        return new AdminFeePayloadBuilder()
+            .effectiveDate("2018-01-04")
+            .channel("web")
+            .brandCode("ESB")
+    }
+    static AdminFeePayloadBuilder adminFeePayloadWithChannelMissing() {
+        return new AdminFeePayloadBuilder()
+            .policyNo("12312")
+            .brandCode("ESB")
+            .effectiveDate("2018-01-04")
+    }
+    static AdminFeePayloadBuilder adminFeePayloadWithBrandcodeMissing() {
+        return new AdminFeePayloadBuilder()
+            .policyNo("12312")
+            .channel("web")
+            .brandCode("ESB")
+            .effectiveDate("2018-01-04")
+    }
 }
 
