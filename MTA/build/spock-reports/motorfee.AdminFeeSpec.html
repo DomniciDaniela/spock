@@ -251,7 +251,7 @@ div.footer {
 </div>
 <div class='summary-report'>
 <h3>Summary:</h3>
-<div class='date-test-ran'>Created on Fri Dec 14 16:08:33 GMT 2018 by B Pant</div>
+<div class='date-test-ran'>Created on Mon Dec 17 16:33:00 GMT 2018 by B Pant</div>
 <table class='summary-table'>
 <thead>
 <th>Executed features</th>
@@ -263,12 +263,12 @@ div.footer {
 </thead>
 <tbody>
 <tr>
-<td>1</td>
+<td>13</td>
 <td>1</td>
 <td>0</td>
 <td>0</td>
-<td>0.0%</td>
-<td>2.122 seconds</td>
+<td>92.31%</td>
+<td>4.335 seconds</td>
 </tr>
 </tbody>
 </table>
@@ -282,21 +282,48 @@ div.footer {
 <tbody>
 <ul id='toc'>
 <li>
-<a href='#-109374617' class='feature-toc-ignored'>Success - All field are correct for admin fee</a>
+<a href='#-109374617' class='feature-toc-pass'>Success - All field are correct for admin fee</a>
 </li>
 <li>
-<a href='#1313447376' class='feature-toc-ignored'>Date_Validation - If date is invalid when requesting for admin fee</a>
+<a href='#1313447376' class='feature-toc-pass'>Date_Validation - If date is invalid when requesting for admin fee</a>
 </li>
 <li>
-<a href='#1928687096' class='feature-toc-ignored'>Brandcode_Validation - If brandcode is invalid when requesting for admin fee</a>
+<a href='#1928687096' class='feature-toc-pass'>Brandcode_Validation - If brandcode is invalid when requesting for admin fee</a>
 </li>
 <li>
-<a href='#922252186' class='feature-toc-failure'>Channel_Validation - If channel is invalid when requesting for admin fee</a>
+<a href='#922252186' class='feature-toc-pass'>Channel_Validation - If channel is invalid when requesting for admin fee</a>
+</li>
+<li>
+<a href='#-1862739664' class='feature-toc-pass'>Date_Validation - If date is an empty string when requesting for admin fee</a>
+</li>
+<li>
+<a href='#1467868386' class='feature-toc-pass'>Policy no_Validation - If policy no is an empty string when requesting for admin fee</a>
+</li>
+<li>
+<a href='#-1078039170' class='feature-toc-pass'>Brandcode_Validation - If brand code is an empty string when requesting for admin fee</a>
+</li>
+<li>
+<a href='#-637385478' class='feature-toc-pass'>Channel_Validation - If channel is an empty string when requesting for admin fee</a>
+</li>
+<li>
+<a href='#594789599' class='feature-toc-pass'>date_Validation - If date is missing when requesting for admin fee</a>
+</li>
+<li>
+<a href='#-2061153729' class='feature-toc-pass'>policyNo_Validation - If policyNo is missing when requesting for admin fee</a>
+</li>
+<li>
+<a href='#260584105' class='feature-toc-pass'>channel_Validation - If channel is missing when requesting for admin fee</a>
+</li>
+<li>
+<a href='#975197037' class='feature-toc-pass'>brandcode_Validation - If brand code is missing when requesting for admin fee</a>
+</li>
+<li>
+<a href='#1189320091' class='feature-toc-failure'>Empty payload</a>
 </li>
 </ul>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='-109374617'>
+<div class='feature-description' id='-109374617'>
 <span>Success - All field are correct for admin fee</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -325,12 +352,12 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 200 and all valid values</div>
 </td>
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='1313447376'>
+<div class='feature-description' id='1313447376'>
 <span>Date_Validation - If date is invalid when requesting for admin fee</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -359,12 +386,12 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 400</div>
 </td>
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description ignored' id='1928687096'>
+<div class='feature-description' id='1928687096'>
 <span>Brandcode_Validation - If brandcode is invalid when requesting for admin fee</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -377,7 +404,7 @@ div.footer {
 <div class='block-kind'>Given:</div>
 </td>
 <td>
-<div class='block-text'>Request has all the correct field but date is invalid</div>
+<div class='block-text'>Request has all the correct field but brand code is invalid</div>
 </td>
 </tr>
 <tr>
@@ -398,7 +425,7 @@ div.footer {
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description failure' id='922252186'>
+<div class='feature-description' id='922252186'>
 <span>Channel_Validation - If channel is invalid when requesting for admin fee</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -411,7 +438,313 @@ div.footer {
 <div class='block-kind'>Given:</div>
 </td>
 <td>
-<div class='block-text'>Request has all the correct field but date is invalid</div>
+<div class='block-text'>Request has all the correct field but channel is invalid</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='-1862739664'>
+<span>Date_Validation - If date is an empty string when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but effective date is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='1467868386'>
+<span>Policy no_Validation - If policy no is an empty string when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but policy no is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='-1078039170'>
+<span>Brandcode_Validation - If brand code is an empty string when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but brand code is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='-637385478'>
+<span>Channel_Validation - If channel is an empty string when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but channel is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='594789599'>
+<span>date_Validation - If date is missing when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but channel is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='-2061153729'>
+<span>policyNo_Validation - If policyNo is missing when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but channel is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='260584105'>
+<span>channel_Validation - If channel is missing when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but channel is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description' id='975197037'>
+<span>brandcode_Validation - If brand code is missing when requesting for admin fee</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but channel is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+</td>
+</tr>
+<tr>
+<td colspan='10'>
+<div class='feature-description failure' id='1189320091'>
+<span>Empty payload</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
+</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request with empty payload</div>
 </td>
 </tr>
 <tr>
@@ -437,7 +770,7 @@ div.footer {
 <div class='problem-list'>
 <ul>
 <li>
-<pre>Condition not satisfied:<br/><br/>responseDecorator.status == 400<br/>|                 |      |<br/>|                 404    false<br/>groovyx.net.http.HttpResponseDecorator@3e34ace1<br/></pre>
+<pre>Condition failed with Exception:<br/><br/>testValidation.adminFeeEmptyErrorsResponseValidation400(responseEmptyErrors)<br/>|              |                                        |<br/>|              |                                        [{&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;brandCode: must not be null&quot;},{&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;policyNo: must not be null&quot;},{&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;channel: must not be null&quot;},{&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;effectiveDate: must not be null&quot;}]<br/>|              Assertion failed: <br/>|               <br/>|              assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == &quot;effectiveDate: must not be null&quot;<br/>|                     |          |                             |        |<br/>|                     |          brandCode: must not be null   message  false<br/>|                     {&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;brandCode: must not be null&quot;}<br/>validation.TestValidation@55caeb35<br/></pre>
 </li>
 </ul>
 </div>

@@ -63,6 +63,9 @@ class TestDataUtils {
          static final String POLICY_VERSION = "version"
          static final String MTA_TRANSACTION_TYPE = "mtaTransactionTypes"
          static final String MOTOR_FEE = "motorFee"
+         static final String EFFECTIVE_DATE = "effectiveDate"
+         static final String CHANNEL = "channel"
+         static final String BRAND_CODE = "brandCode"
 
          static final String RULE_NAME = "ruleName"
          static final String RULE_VALUE = "ruleYn"

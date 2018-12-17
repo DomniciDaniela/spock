@@ -1,12 +1,13 @@
 package validation
 
-import groovy.json.JsonSlurper
 import org.json.JSONArray
 import org.json.JSONObject
+import utils.Payload
 import utils.TestDataUtils
 
 
-class TestValidation {
+class TestValidation implements Payload {
+    JSONObject jsonObject;
 
     void responseBodyValidation_changeOfVehicleAllowed(responseBody) {
         assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) == true
@@ -63,14 +64,58 @@ class TestValidation {
 
     void adminFeeSuccessInfoResponseValidation(JSONObject infos) {
         assert infos.get(TestDataUtils.JSONObjects.CODE) == 'OK'
-       // assert infos.get(TestDataUtils.JSONObjects.DESCRIPTION) == null
+        assert infos.get(TestDataUtils.JSONObjects.DESCRIPTION).equals(null)
         assert infos.get(TestDataUtils.JSONObjects.MESSAGE) == 'Data Retrieved'
     }
 
     void adminFeeSuccessResultsResponseValidation(JSONObject results) {
         assert results.get(TestDataUtils.JSONObjects.POLICY_NO) != null
         assert results.get(TestDataUtils.JSONObjects.POLICY_VERSION) != null
-       // assert results.get(TestDataUtils.JSONObjects.MTA_TRANSACTION_TYPE) == null
+        assert results.get(TestDataUtils.JSONObjects.MTA_TRANSACTION_TYPE).equals(null)
         assert results.get(TestDataUtils.JSONObjects.MOTOR_FEE) != null
+    }
+
+    void adminFeeErrorsResponseValidation400(JSONObject errors ,String payload) {
+        jsonObject = toJSONObject(payload)
+        assert errors.get(TestDataUtils.JSONObjects.CODE) == "MOTOR-FEES-002"
+        assert errors.get(TestDataUtils.JSONObjects.DESCRIPTION).equals(null)
+        //assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "Text '"+jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE)+"' could not be parsed at index 4"
+        if (jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE) == "")
+            assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "effectiveDate: must not be null"
+        else if (jsonObject.get(TestDataUtils.JSONObjects.POLICY_NO) == "")
+            assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "policyNo: must match \"^[0-9]{1,10}\$\""
+        else if (jsonObject.isNull("brandCode"))
+            assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "brandCode: must not be null"
+        else if (jsonObject.isNull("policyNo"))
+            assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "policyNo: must not be null"
+        else if (jsonObject.isNull("effectiveDate"))
+            assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "effectiveDate: must not be null"
+        else if (jsonObject.isNull("channel"))
+            assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "channel: must not be null"
+
+    }
+
+    void adminFeeErrorsResponseValidation404(JSONObject errors ,String payload) {
+        jsonObject = toJSONObject(payload)
+        assert errors.get(TestDataUtils.JSONObjects.CODE) == "MOTOR-FEES-003"
+        assert errors.get(TestDataUtils.JSONObjects.DESCRIPTION).equals(null)
+        assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "No motor fees found for channel: "+jsonObject.get(TestDataUtils.JSONObjects.CHANNEL)+"," +
+                                                                " brand: "+jsonObject.get(TestDataUtils.JSONObjects.BRAND_CODE)+", effective on date: "+jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE)
+    }
+
+    void  adminFeeEmptyErrorsResponseValidation400(JSONArray errors) {
+        (0..errors.length()-1).each{
+            jsonObject = errors.getJSONObject(it)
+            assert jsonObject.get(TestDataUtils.JSONObjects.CODE) == "MOTOR-FEES-002"
+            assert jsonObject.get(TestDataUtils.JSONObjects.DESCRIPTION).equals(null)
+            if (it == 2)
+                assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == "policyNo: must not be null"
+            else if (it == 3)
+                assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == "channel: must not be null"
+            else if (it == 0)
+                assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == "effectiveDate: must not be null"
+            else if (it == 1)
+                assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == "brandCode: must not be null"
+        }
     }
 }

@@ -41,8 +41,10 @@ class AdminFeeDefault {
         return new AdminFeePayloadBuilder()
             .policyNo("12312")
             .channel("web")
-            .brandCode("ESB")
             .effectiveDate("2018-01-04")
+    }
+    static AdminFeePayloadBuilder getCurrentPayload(){
+        return this
     }
 }
 
