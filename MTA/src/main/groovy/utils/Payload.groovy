@@ -1,7 +1,7 @@
 package utils
-import net.minidev.json.parser.JSONParser
 
 import groovy.json.JsonOutput
+import net.minidev.json.parser.JSONParser
 import org.json.JSONObject
 
 trait Payload {

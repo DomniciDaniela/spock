@@ -251,7 +251,7 @@ div.footer {
 </div>
 <div class='summary-report'>
 <h3>Summary:</h3>
-<div class='date-test-ran'>Created on Mon Dec 17 16:33:00 GMT 2018 by B Pant</div>
+<div class='date-test-ran'>Created on Tue Dec 18 14:43:46 GMT 2018 by B Pant</div>
 <table class='summary-table'>
 <thead>
 <th>Executed features</th>
@@ -263,12 +263,12 @@ div.footer {
 </thead>
 <tbody>
 <tr>
-<td>13</td>
-<td>1</td>
+<td>14</td>
 <td>0</td>
 <td>0</td>
-<td>92.31%</td>
-<td>4.335 seconds</td>
+<td>0</td>
+<td>100.0%</td>
+<td>4.487 seconds</td>
 </tr>
 </tbody>
 </table>
@@ -318,7 +318,10 @@ div.footer {
 <a href='#975197037' class='feature-toc-pass'>brandcode_Validation - If brand code is missing when requesting for admin fee</a>
 </li>
 <li>
-<a href='#1189320091' class='feature-toc-failure'>Empty payload</a>
+<a href='#1189320091' class='feature-toc-pass'>Empty payload</a>
+</li>
+<li>
+<a href='#58916239' class='feature-toc-pass'>Service return the correct admin fees as per the effective date</a>
 </li>
 </ul>
 <tr>
@@ -420,7 +423,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 404</div>
 </td>
 </tr>
 <tr>
@@ -454,7 +457,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 404</div>
 </td>
 </tr>
 <tr>
@@ -488,7 +491,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 400</div>
 </td>
 </tr>
 <tr>
@@ -522,7 +525,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 400</div>
 </td>
 </tr>
 <tr>
@@ -556,7 +559,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 404</div>
 </td>
 </tr>
 <tr>
@@ -590,7 +593,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 404</div>
 </td>
 </tr>
 <tr>
@@ -624,7 +627,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 400</div>
 </td>
 </tr>
 <tr>
@@ -658,7 +661,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 400</div>
 </td>
 </tr>
 <tr>
@@ -692,7 +695,7 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 400</div>
 </td>
 </tr>
 <tr>
@@ -726,12 +729,12 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 400</div>
 </td>
 </tr>
 <tr>
 <td colspan='10'>
-<div class='feature-description failure' id='1189320091'>
+<div class='feature-description' id='1189320091'>
 <span>Empty payload</span>
 <span style='float: right; font-size: 60%;'>
 <a href='#toc'>Return</a>
@@ -760,21 +763,41 @@ div.footer {
 <div class='block-kind'>Then:</div>
 </td>
 <td>
-<div class='block-text'>Response should contain the response coe 200 and all valid values</div>
+<div class='block-text'>Response should contain the response code 400</div>
 </td>
 </tr>
 <tr>
 <td colspan='10'>
-<div class='problem-description'>
-<div class='problem-header'>The following problems occurred:</div>
-<div class='problem-list'>
-<ul>
-<li>
-<pre>Condition failed with Exception:<br/><br/>testValidation.adminFeeEmptyErrorsResponseValidation400(responseEmptyErrors)<br/>|              |                                        |<br/>|              |                                        [{&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;brandCode: must not be null&quot;},{&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;policyNo: must not be null&quot;},{&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;channel: must not be null&quot;},{&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;effectiveDate: must not be null&quot;}]<br/>|              Assertion failed: <br/>|               <br/>|              assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == &quot;effectiveDate: must not be null&quot;<br/>|                     |          |                             |        |<br/>|                     |          brandCode: must not be null   message  false<br/>|                     {&quot;code&quot;:&quot;MOTOR-FEES-002&quot;,&quot;description&quot;:null,&quot;href&quot;:null,&quot;message&quot;:&quot;brandCode: must not be null&quot;}<br/>validation.TestValidation@55caeb35<br/></pre>
-</li>
-</ul>
+<div class='feature-description' id='58916239'>
+<span>Service return the correct admin fees as per the effective date</span>
+<span style='float: right; font-size: 60%;'>
+<a href='#toc'>Return</a>
+</span>
 </div>
-</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Given:</div>
+</td>
+<td>
+<div class='block-text'>Request has all the correct field but channel is an empty string</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>When:</div>
+</td>
+<td>
+<div class='block-text'>Request is send to the service</div>
+</td>
+</tr>
+<tr>
+<td>
+<div class='block-kind'>Then:</div>
+</td>
+<td>
+<div class='block-text'>Response should contain the response code 200 and all valid values</div>
 </td>
 </tr>
 </tbody>

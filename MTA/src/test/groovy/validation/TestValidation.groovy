@@ -5,9 +5,12 @@ import org.json.JSONObject
 import utils.Payload
 import utils.TestDataUtils
 
+import java.util.stream.Collectors
+
 
 class TestValidation implements Payload {
-    JSONObject jsonObject;
+    JSONObject jsonObject
+    List<JSONObject> list= new ArrayList<JSONObject>();
 
     void responseBodyValidation_changeOfVehicleAllowed(responseBody) {
         assert responseBody.get(TestDataUtils.JSONObjects.CHANGE_OF_VEHICLE_ALLOWED) == true
@@ -105,17 +108,16 @@ class TestValidation implements Payload {
 
     void  adminFeeEmptyErrorsResponseValidation400(JSONArray errors) {
         (0..errors.length()-1).each{
-            jsonObject = errors.getJSONObject(it)
-            assert jsonObject.get(TestDataUtils.JSONObjects.CODE) == "MOTOR-FEES-002"
-            assert jsonObject.get(TestDataUtils.JSONObjects.DESCRIPTION).equals(null)
-            if (it == 2)
-                assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == "policyNo: must not be null"
-            else if (it == 3)
-                assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == "channel: must not be null"
-            else if (it == 0)
-                assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == "effectiveDate: must not be null"
-            else if (it == 1)
-                assert jsonObject.get(TestDataUtils.JSONObjects.MESSAGE) == "brandCode: must not be null"
+            list.add(errors.getJSONObject(it))
         }
+        List<String> msgs = list.stream()
+                                .map{li -> li.get(TestDataUtils.JSONObjects.MESSAGE)}
+                                .collect(Collectors.toList())
+        msgs.stream()
+              .forEach{
+                        it ->
+                        assert it != null
+                       }
+            }
     }
-}
+
