@@ -5,6 +5,8 @@ import database.PolicyType
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.ApiKeys
+import utils.TestDataUtils
 import utils.Utils
 import validation.TestValidation
 
@@ -28,7 +30,7 @@ class OutstandingPOBSpec extends Specification {
                     version: VERSION_NO_TIA_TRUE
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "The response code should be 200"
             assert response.status == 200
         then: "COV value should return TRUE in order to proof that customer can do MTA"
@@ -46,7 +48,7 @@ class OutstandingPOBSpec extends Specification {
                     version: VERSION_NO_TIA_FALSE
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "The response code should be 200"
             assert response.status == 200
         then: "COV value should return TRUE in order to proof that customer can do MTA"
@@ -64,7 +66,7 @@ class OutstandingPOBSpec extends Specification {
                     version: VERSION_NO_TIA_FALSE
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "The response code should be 200"
             assert response.status == 200
         then: "COV value should return TRUE in order to proof that customer can do MTA"
@@ -83,7 +85,7 @@ class OutstandingPOBSpec extends Specification {
             ).toString()
 
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "The response code should be 200"
             assert response.status == 200
         then: "COV value should return FALSE in order to proof that customer cannot do MTA"

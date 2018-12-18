@@ -3,6 +3,7 @@ package prorata
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.ApiKeys
 import utils.TestDataUtils
 import utils.Utils
 import validation.TestValidation
@@ -17,7 +18,7 @@ class ProRataServiceSpec extends Specification {
         def payload = new JsonBuilder("":"").toString()
 
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 400
         then: "Response body validation"
@@ -41,7 +42,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 400
         then: "Response body validation"
@@ -65,7 +66,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -94,7 +95,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -122,7 +123,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -158,7 +159,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -186,7 +187,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -201,7 +202,7 @@ class ProRataServiceSpec extends Specification {
             testValidation.proRata_resultsValidation_notProratable(results)
     }
 
-    def "Pro - Rata service sends an invalid apiKey"() {
+    def "Pro - Rata service sends an invalid ApiKeys.getProRataApiKey()"() {
         given: "Define the payload data using the following schema"
             def builder = new JsonBuilder()
             builder.policy {
@@ -214,7 +215,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey + 1, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey() + 1, payload)
         then: "Response code validation"
             assert response.status == 403
         then: "Response body validation"
@@ -234,7 +235,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 400
         then: "Response body validation"
@@ -258,7 +259,7 @@ class ProRataServiceSpec extends Specification {
             }
             def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+            def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
             assert response.status == 400
         then: "Response body validation"
@@ -283,7 +284,7 @@ class ProRataServiceSpec extends Specification {
         }
         def payload = builder.toString()
         when: "POST schema on the /calculate endpoint"
-        def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, apiKey, payload)
+        def response = utils.createPOSTRequest(utils.PRO_RATA_ENDPOINT, ApiKeys.getProRataApiKey(), payload)
         then: "Response code validation"
         assert response.status == 400
         then: "Response body validation"
@@ -293,24 +294,5 @@ class ProRataServiceSpec extends Specification {
         JSONObject errors = response.data.errors[0]
         assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == TestDataUtils.Description.INVALID_POLICY_TERM
         testValidation.proRata_400ResponseValidation(errors)
-    }
-
-    String getApiKey() {
-        String environment = System.getProperty("branch")
-        try {
-            switch (environment) {
-                case "deve13":
-                    return "d02szyag01w6jypo6gpiq7z5vcydijbi"
-
-                case "tste13":
-                    return "2mkhrx2lyp2bdlhzy1j10f6eubgynul2"
-
-                default:
-                    System.out.println("Invalid key" + environment)
-            }
-            return environment
-        } catch (Exception e) {
-            return null
-        }
     }
 }

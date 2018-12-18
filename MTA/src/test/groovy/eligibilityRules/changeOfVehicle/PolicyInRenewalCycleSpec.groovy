@@ -5,6 +5,7 @@ import database.PolicyType
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.ApiKeys
 import utils.Utils
 import validation.TestValidation
 
@@ -16,7 +17,7 @@ class PolicyInRenewalCycleSpec extends Specification {
 
     String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.RENEWAL_CYCLE_TRUE)[0].substring(10)
     String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.RENEWAL_CYCLE_TRUE)[1].substring(14)
-    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(10)
+    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
     String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
     def "Policy in renewal cycle - allow - TIA - true"() {
@@ -28,7 +29,7 @@ class PolicyInRenewalCycleSpec extends Specification {
                     version: VERSION_NO_TIA_TRUE
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "The response code should be 200"
             assert response.status == 200
         then: "COV value should return TRUE in order to proof that customer can do MTA"
@@ -46,7 +47,7 @@ class PolicyInRenewalCycleSpec extends Specification {
                     version: VERSION_NO_TIA_FALSE
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "The response code should be 200"
             assert response.status == 200
         then: "COV value should return TRUE in order to proof that customer can do MTA"
@@ -64,7 +65,7 @@ class PolicyInRenewalCycleSpec extends Specification {
                     version: VERSION_NO_TIA_FALSE
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "The response code should be 200"
             assert response.status == 200
         then: "COV value should return TRUE in order to proof that customer can do MTA"
@@ -82,7 +83,7 @@ class PolicyInRenewalCycleSpec extends Specification {
                     version: VERSION_NO_TIA_TRUE
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "The response code should be 200"
             assert response.status == 200
         then: "COV value should return FALSE in order to proof that customer cannot do MTA"

@@ -3,6 +3,7 @@ package eligibilityRules.changeOfVehicle
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.ApiKeys
 import utils.TestDataUtils
 import utils.Utils
 
@@ -18,7 +19,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -33,7 +34,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     policyNo: TestDataUtils.Policy.POLICY_NO.toInteger()
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -49,7 +50,7 @@ class EligibilityRulesServiceSpec extends Specification {
         ).toString()
 
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -65,7 +66,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -81,7 +82,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     version: TestDataUtils.Version.LATEST
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code validation"
             assert response.status == 200
         then: "Response body validation"
@@ -98,7 +99,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -115,7 +116,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.NONE
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -132,7 +133,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_COV
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -149,7 +150,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.NONE_COV
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -166,7 +167,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.NONE_ALL
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -179,7 +180,7 @@ class EligibilityRulesServiceSpec extends Specification {
         given: "User provided motormtaeligibility/check rule using following schema "
             def payload = new JsonBuilder("":"").toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -196,7 +197,7 @@ class EligibilityRulesServiceSpec extends Specification {
             ).toString()
 
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -213,7 +214,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.COV
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -230,7 +231,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.TESTING
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -247,7 +248,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.STRING
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -264,7 +265,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.COV
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -281,7 +282,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.COV
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 400"
             assert response.status == 400
         then: "Errors validation"
@@ -299,7 +300,7 @@ class EligibilityRulesServiceSpec extends Specification {
             ).toString()
         when: "POST schema on the /check endpoint"
             def oldEndpoint = "https://ops-kong-tste.escloud.co.uk/api-jva-motormta-eligibility/v1/rules/motormtaeligibility/check"
-            def response = utils.createPOSTRequest(oldEndpoint, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(oldEndpoint, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 503"
             assert response.status == 503
     }
@@ -312,7 +313,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 200"
             assert response.status == 200
         then: "Response body validation"
@@ -329,7 +330,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 200"
             assert response.status == 200
         then: "Response body validation"
@@ -346,7 +347,7 @@ class EligibilityRulesServiceSpec extends Specification {
                     mtaTransactionTypes: TestDataUtils.TransactionTypes.COV
             ).toString()
         when: "POST schema on the /check endpoint"
-            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, utils.apiKey, payload)
+            def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
         then: "Response code is 404"
             assert response.status == 404
         then: "Response body validation"

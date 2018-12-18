@@ -1,8 +1,10 @@
 package initialise
 
 import database.DataBase
+import database.PolicyType
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
+import org.json.JSONArray
 import org.json.JSONObject
 import spock.lang.Specification
 import utils.ApiKeys
@@ -10,27 +12,19 @@ import utils.TestDataUtils
 import utils.Utils
 
 
-class InitialiseServiceSpec extends Specification {
+class InitialiseServiceMtaTransactionsSpec extends Specification {
 
     HttpResponseDecorator response
     String ENDPOINT = Utils.environment + TestDataUtils.Endpoint.INITIALISE_ENDPOINT
-
     DataBase dataBase = new DataBase()
 
-    String EM_POLICY_NO = getDataBase().getActivePolicyBasedOnCenterCode(TestDataUtils.PolicyCenterCode.EM_CENTER_CODE)
-    String EH_POLICY_NO = getDataBase().getActivePolicyBasedOnCenterCode(TestDataUtils.PolicyCenterCode.EH_CENTER_CODE)
-    String SW_POLICY_NO = getDataBase().getActivePolicyBasedOnCenterCode(TestDataUtils.PolicyCenterCode.SW_CENTER_CODE)
-    String FC_POLICY_NO = getDataBase().getActivePolicyBasedOnCenterCode(TestDataUtils.PolicyCenterCode.FC_CENTER_CODE)
-    String EM_CANCELLED_POLICY_NO = getDataBase().getCancelledPolicy(TestDataUtils.PolicyCenterCode.EM_CENTER_CODE)
-    String POLICY_NO_MULTIPLE_VERSION = getDataBase().getActivePolicyWithMultipleVersions(TestDataUtils.PolicyCenterCode.EM_CENTER_CODE)
-    String POLICY_PAYMENT_TYPE_DD = getDataBase().getPolicyWithPaymentType(TestDataUtils.PolicyPaymentType.PAYMENT_TYPE_DD)
-    String POLICY_PAYMENT_TYPE_CARD = getDataBase().getPolicyWithPaymentType(TestDataUtils.PolicyPaymentType.PAYMENT_TYPE_CARD)
-    String POLICY_PAYMENT_TYPE_CPA = getDataBase().getPolicyWithPaymentType(TestDataUtils.PolicyPaymentType.PAYMENT_TYPE_CPA)
+    String POLICY_NO = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
+    String POLICY_VERSION = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
-    def "Initialise Service - EsureMotor policyNo"() {
+    def "Initialise Service - no mtaTransaction supplied"() {
         given: "Submit the following schema on the initialise endpoint"
             def payload = new JsonBuilder(
-                    policyNo: EM_POLICY_NO
+                    policyNo: POLICY_NO
             ).toString()
         when: "POST schema on the /check endpoint"
             Utils utils = new Utils()
@@ -40,13 +34,19 @@ class InitialiseServiceSpec extends Specification {
         then: "Response body validation"
             assert response.data.apiVersion != null
             JSONObject results = response.data.results[0].mtaQuote
+            JSONObject mtaDta = results.getJSONObject(TestDataUtils.JSONObjects.MTA_DATA)
+            // TODO update this
+            JSONArray codes = mtaDta.get(TestDataUtils.JSONObjects.CODES)
+
             responseBodyValidation(results)
     }
 
-    def "Initialise Service - SheilasWheels policyNo"() {
+    def "Initialise Service - changeOfVehicle supplied"() {
         given: "Submit the following schema on the initialise endpoint"
             def payload = new JsonBuilder(
-                    policyNo: SW_POLICY_NO
+                    policyNo: POLICY_NO,
+                    version: POLICY_VERSION,
+                    mtaTransactionTypes: TestDataUtils.TransactionTypes.COV
             ).toString()
         when: "POST schema on the /check endpoint"
             Utils utils = new Utils()
@@ -59,11 +59,13 @@ class InitialiseServiceSpec extends Specification {
             responseBodyValidation(results)
     }
 
-    def "Initialise Service - FirstAlternative policyNo"() {
+    def "Initialise Service - all transaction types supplied"() {
         given: "Submit the following schema on the initialise endpoint"
-            def payload = new JsonBuilder(
-                    policyNo: FC_POLICY_NO
-            ).toString()
+        def payload = new JsonBuilder(
+                policyNo: POLICY_NO,
+                version: POLICY_VERSION,
+                mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
+        ).toString()
         when: "POST schema on the /check endpoint"
             Utils utils = new Utils()
             response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
@@ -73,13 +75,82 @@ class InitialiseServiceSpec extends Specification {
             assert response.data.apiVersion != null
             JSONObject results = response.data.results[0].mtaQuote
             responseBodyValidation(results)
+    }
+
+    def "Initialise Service - invalid transaction type"() {
+        given: "Submit the following schema on the initialise endpoint"
+        def payload = new JsonBuilder(
+                policyNo: POLICY_NO,
+                mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL
+        ).toString()
+        when: "POST schema on the /check endpoint"
+        Utils utils = new Utils()
+        response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
+        then: "Response code is 400"
+        assert response.status == 400
+        then: "Errors validation"
+        assert response.data.apiVersion != null
+        JSONObject body = response.data.errors[0]
+        errorsBodyValidation(body)
+    }
+
+    def "Initialise Service - valid % invalid transaction type"() {
+        given: "Submit the following schema on the initialise endpoint"
+        def payload = new JsonBuilder(
+                policyNo: POLICY_NO,
+                mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_COV
+        ).toString()
+        when: "POST schema on the /check endpoint"
+        Utils utils = new Utils()
+        response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
+        then: "Response code is 400"
+        assert response.status == 400
+        then: "Errors validation"
+        assert response.data.apiVersion != null
+        JSONObject body = response.data.errors[0]
+        errorsBodyValidation(body)
+    }
+
+    def "Initialise Service - mta transaction type - string"() {
+        given: "Submit the following schema on the initialise endpoint"
+        def payload = new JsonBuilder(
+                policyNo: POLICY_NO,
+                mtaTransactionTypes: TestDataUtils.TransactionTypes.STRING
+        ).toString()
+        when: "POST schema on the /check endpoint"
+        Utils utils = new Utils()
+        response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
+        then: "Response code is 400"
+        assert response.status == 400
+        then: "Errors validation"
+        assert response.data.apiVersion != null
+        JSONObject body = response.data.errors[0]
+        errorsBodyValidation(body)
+    }
+
+    def "Initialise Service - home policy"() {
+        given: "Submit the following schema on the initialise endpoint"
+        def payload = new JsonBuilder(
+                policyNo: TestDataUtils.Policy.POLICY_NO_HOME,
+                mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
+        ).toString()
+        when: "POST schema on the /check endpoint"
+        Utils utils = new Utils()
+        response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
+        then: "Response code is 404"
+        assert response.status == 404
+        then: "Errors validation"
+        assert response.data.apiVersion != null
+        JSONObject body = response.data.errors[0]
+        errorsBodyValidation(body)
     }
 
     def "Initialise Service - EsureMotor policyNo and version - LATEST"() {
         given: "Submit the following schema on the initialise endpoint"
             def payload = new JsonBuilder(
-                    policyNo: EM_POLICY_NO,
-                    version: TestDataUtils.Version.LATEST
+                    policyNo: TestDataUtils.Policy.POLICY_NO,
+                    version: TestDataUtils.Version.LATEST,
+                    mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
             ).toString()
         when: "POST schema on the /check endpoint"
             Utils utils = new Utils()
@@ -90,25 +161,6 @@ class InitialiseServiceSpec extends Specification {
             assert response.data.apiVersion != null
             JSONObject results = response.data.results[0].mtaQuote
             responseBodyValidation(results)
-    }
-
-    def "Initialise Service - EsureHome policyNo"() {
-        given: "Submit the following schema on the initialise endpoint"
-            def payload = new JsonBuilder(
-                    policyNo: EH_POLICY_NO,
-                    version: TestDataUtils.Version.LATEST
-            ).toString()
-        when: "POST schema on the /check endpoint"
-            Utils utils = new Utils()
-            response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
-        then: "Response code validation"
-            assert response.status == 404
-        then: "Response body validation"
-            assert response.data.apiVersion != null
-            assert response.data.infos == null
-            assert response.data.results == null
-            JSONObject errors = response.data.errors[0]
-            errorsBodyValidation(errors)
     }
 
     def "Initialise Service - Invalid policyNo"() {
@@ -133,7 +185,9 @@ class InitialiseServiceSpec extends Specification {
     def "Initialise Service - Cancelled policyNo"() {
         given: "Submit the following schema on the initialise endpoint"
             def payload = new JsonBuilder(
-                    policyNo: EM_CANCELLED_POLICY_NO
+                    policyNo: "23115431",
+                    version: "47498495",
+                    mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
             ).toString()
         when: "POST schema on the /check endpoint"
         Utils utils = new Utils()
@@ -149,7 +203,8 @@ class InitialiseServiceSpec extends Specification {
     def "Initialise Service - PolicyNo with multiple versions"() {
         given: "Submit the following schema on the initialise endpoint"
             def payload = new JsonBuilder(
-                    policyNo: POLICY_NO_MULTIPLE_VERSION
+                    policyNo: TestDataUtils.Policy.POLICY_NO_MULTIPLE_VERSION,
+                    mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
             ).toString()
         when: "POST schema on the /check endpoint"
             Utils utils = new Utils()
@@ -165,8 +220,9 @@ class InitialiseServiceSpec extends Specification {
     def "Initialise Service - PolicyNo with invalid version"() {
         given: "Submit the following schema on the initialise endpoint"
             def payload = new JsonBuilder(
-                    policyNo: EM_POLICY_NO,
-                    version: TestDataUtils.Version.INVALID_SEQUENCE_NO
+                    policyNo: TestDataUtils.Policy.POLICY_NO,
+                    version: TestDataUtils.Version.INVALID_SEQUENCE_NO,
+                    mtaTransactionTypes: TestDataUtils.TransactionTypes.ALL_TYPES
             ).toString()
         when: "POST schema on the /check endpoint"
             Utils utils = new Utils()
@@ -180,58 +236,6 @@ class InitialiseServiceSpec extends Specification {
 
             JSONObject errors = response.data.errors[0]
             errorsBodyValidation(errors)
-    }
-
-
-    def "Initialise Service - PolicyNo with Payment type DD"(){
-        given: "Customer has a Policy with Payment type DD"
-        def payload = new JsonBuilder(
-                policyNo: POLICY_PAYMENT_TYPE_DD,
-                version: TestDataUtils.Version.LATEST
-        ).toString()
-        when: "Initialise method is called on the Request Object"
-        Utils utils = new Utils()
-        response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
-        then:   "Response Code should be 201"
-        assert response.status == 201
-        "Response should contain Current Payment Plan Details"
-        assert response.data.apiVersion !=null
-        JSONObject results = response.data.results[0].mtaQuote
-        responseBodyValidation(results)
-    }
-
-    def "Initialise Service - PolicyNo with Payment type CPA"(){
-        given: "Customer has a Policy with Payment type CPA"
-        def payload = new JsonBuilder(
-                policyNo: POLICY_PAYMENT_TYPE_CPA,
-                version: TestDataUtils.Version.LATEST
-        ).toString()
-        when: "Initialise method is called on the Request Object"
-        Utils utils = new Utils()
-        response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
-        then:   "Response Code should be 201"
-        assert response.status == 201
-        "Response should not contain Current Payment Plan Details"
-        assert response.data.apiVersion !=null
-        JSONObject results = response.data.results[0].mtaQuote
-        responseBodyValidation(results)
-    }
-
-    def "Initialise Service - PolicyNo with Payment type CARD"(){
-        given: "Customer has a Policy with Payment type CARD"
-        def payload = new JsonBuilder(
-                policyNo: POLICY_PAYMENT_TYPE_CARD,
-                version: TestDataUtils.Version.LATEST
-        ).toString()
-        when: "Initialise method is called on the Request Object"
-        Utils utils = new Utils()
-        response = utils.createPOSTRequest(ENDPOINT, ApiKeys.getMTAApiKey(), payload)
-        then:   "Response Code should be 201"
-        assert response.status == 201
-        "Response should not contain Current Payment Plan Details"
-        assert response.data.apiVersion !=null
-        JSONObject results = response.data.results[0].mtaQuote
-        responseBodyValidation(results)
     }
 
     void responseBodyValidation(results) {

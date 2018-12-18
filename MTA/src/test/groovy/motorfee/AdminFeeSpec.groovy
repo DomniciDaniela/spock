@@ -4,6 +4,7 @@ import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONArray
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.ApiKeys
 import utils.Utils
 import validation.TestValidation
 
@@ -16,7 +17,7 @@ class AdminFeeSpec extends Specification {
     TestValidation testValidation = new TestValidation()
     JSONObject responseDataInfos, responseDataResults, responseDataErrors
     JSONArray responseEmptyErrors
-    def apikey = "d02szyag01w6jypo6gpiq7z5vcydijbi"
+    def apikey = ApiKeys.getMotorFeeApiKey()
 
     def "Success - All field are correct for admin fee"() {
         given: "Request has all the correct field(policy number, channel, effective date, brand-code)"
