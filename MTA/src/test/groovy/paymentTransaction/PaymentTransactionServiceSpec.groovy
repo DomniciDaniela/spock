@@ -4,6 +4,7 @@ import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONArray
 import org.json.JSONObject
 import spock.lang.Specification
+import utils.ApiKeys
 import utils.TestDataUtils
 import utils.Utils
 
@@ -11,7 +12,7 @@ class PaymentTransactionServiceSpec extends Specification{
 
     String ENDPOINT = Utils.environment + TestDataUtils.Endpoint.PAYMENT_TRANSACTIONS_ENDPOINT + "23115431" +
             TestDataUtils.Endpoint.PAYMENT_TRANSACTIONS_ENDPOINT_PATH
-    String apiKey = "4n30xjtqranhcc5ef5q0rs2569is8p9f"
+    String apiKey = ApiKeys.paymentTransactionApiKey
     HttpResponseDecorator response
 
     def "Payment Transaction Service - EsureMotor policyNo"() {
