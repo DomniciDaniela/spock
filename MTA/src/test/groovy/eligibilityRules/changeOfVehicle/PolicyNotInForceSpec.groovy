@@ -1,11 +1,12 @@
 package eligibilityRules.changeOfVehicle
 
-import database.DataBase
+import database.OracleDataBase
 import database.PolicyType
 import groovy.json.JsonBuilder
 import org.json.JSONObject
 import spock.lang.Specification
 import utils.ApiKeys
+import utils.TestDataUtils
 import utils.Utils
 import validation.TestValidation
 
@@ -13,12 +14,10 @@ class PolicyNotInForceSpec extends Specification {
 
     Utils utils = new Utils()
     TestValidation validation = new TestValidation()
-    def dataBase = new DataBase()
+    def dataBase = new OracleDataBase()
 
     String POLICY_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.NOT_IN_FORCE_TRUE)[0].substring(10)
     String VERSION_NO_TIA_TRUE = dataBase.getPolicyAndVersion(PolicyType.NOT_IN_FORCE_TRUE)[1].substring(14)
-    String POLICY_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
-    String VERSION_NO_TIA_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
     def "Policy Not InForce - allow - TIA - true"() {
         given: "Customer can do an MTA (change of vehicle) successfully" +
@@ -43,8 +42,8 @@ class PolicyNotInForceSpec extends Specification {
                 "when business value for eligibility rule(for Policy is not in force) says allow" +
                 "and TIA value is FALSE for for Policy is not in force"
         def payload = new JsonBuilder(
-                policyNo: POLICY_NO_TIA_FALSE,
-                version: VERSION_NO_TIA_FALSE
+                policyNo : TestDataUtils.Policy.POLICY_NO_TIA_FALSE,
+                version: TestDataUtils.Version.VERSION_NO_TIA_FALSE
         ).toString()
         when: "POST schema on the /check endpoint"
             def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)
@@ -61,8 +60,8 @@ class PolicyNotInForceSpec extends Specification {
                 "when business value for eligibility rule(for Policy is not in force) say do not allow" +
                 "and TIA value is FALSE for for Policy is not in force"
         def payload = new JsonBuilder(
-                policyNo: POLICY_NO_TIA_FALSE,
-                version: VERSION_NO_TIA_FALSE
+                policyNo : TestDataUtils.Policy.POLICY_NO_TIA_FALSE,
+                version: TestDataUtils.Version.VERSION_NO_TIA_FALSE
         ).toString()
         when: "POST schema on the /check endpoint"
             def response = utils.createPOSTRequest(utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), payload)

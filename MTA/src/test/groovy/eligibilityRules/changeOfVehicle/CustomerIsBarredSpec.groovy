@@ -1,12 +1,13 @@
 package eligibilityRules.changeOfVehicle
 
-import database.DataBase
+import database.OracleDataBase
 import database.PolicyType
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
 import spock.lang.Specification
 import utils.ApiKeys
+import utils.TestDataUtils
 import utils.Utils
 import validation.TestValidation
 
@@ -14,22 +15,16 @@ class CustomerIsBarredSpec extends Specification {
 
     HttpResponseDecorator response
     def testValidation = new TestValidation()
-    def dataBase = new DataBase()
+    def dataBase = new OracleDataBase()
 
     String POLICY_NO_TIA_ACC_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_ACC)[0].substring(10)
     String VERSION_NO_TIA_ACC_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_ACC)[2].substring(14)
-    String POLICY_NO_TIA_ACC_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
-    String VERSION_NO_TIA_ACC_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
-     String POLICY_NO_TIA_UW_VAL_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_UW_VAL)[0].substring(10)
-     String VERSION_NO_TIA_UW_VAL_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_UW_VAL)[2].substring(14)
-     String POLICY_NO_TIA_UW_VAL_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
-     String VERSION_NO_TIA_UW_VAL_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
+    String POLICY_NO_TIA_UW_VAL_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_UW_VAL)[0].substring(10)
+    String VERSION_NO_TIA_UW_VAL_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_UW_VAL)[2].substring(14)
 
     String POLICY_NO_TIA_UW_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_UW)[0].substring(10)
     String VERSION_NO_TIA_UW_TRUE = dataBase.getPolicyAndVersion(PolicyType.CUSTOMER_BARRED_UW)[2].substring(14)
-    String POLICY_NO_TIA_UW_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
-    String VERSION_NO_TIA_UW_FALSE = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
 
     def "Customer barred (Accounts) - Business Allow - TIA Value True"() {
         given: "Customer is barred (Accounts for the given policy) is true"
@@ -51,8 +46,8 @@ class CustomerIsBarredSpec extends Specification {
     def "Customer barred (Accounts) - Business Allow - TIA Value False"() {
         given: "Customer is barred (Accounts for the given policy) is false"
         def PAYLOAD = new JsonBuilder(
-            policyNo: POLICY_NO_TIA_ACC_FALSE,
-            version: VERSION_NO_TIA_ACC_FALSE
+                policyNo : TestDataUtils.Policy.POLICY_NO_TIA_FALSE,
+                version: TestDataUtils.Version.VERSION_NO_TIA_FALSE
         ).toString()
         when: "Request is sent to the service"
         response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
@@ -68,8 +63,8 @@ class CustomerIsBarredSpec extends Specification {
     def "Customer barred (Accounts) - Business not Allow - TIA Value False"() {
         given: "Customer is barred (Accounts for the given policy) is false"
         def PAYLOAD = new JsonBuilder(
-            policyNo: POLICY_NO_TIA_ACC_FALSE,
-            version: VERSION_NO_TIA_ACC_FALSE
+                policyNo : TestDataUtils.Policy.POLICY_NO_TIA_FALSE,
+                version: TestDataUtils.Version.VERSION_NO_TIA_FALSE
         ).toString()
         when: "Request is sent to the service"
         response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
@@ -119,8 +114,8 @@ class CustomerIsBarredSpec extends Specification {
     def "Customer barred fraud (UW-VAL) - Business Allow - TIA Value False"() {
         given: "Customer is barred fraud (UW-VAL) is false"
         def PAYLOAD = new JsonBuilder(
-            policyNo: POLICY_NO_TIA_UW_VAL_FALSE,
-            version: VERSION_NO_TIA_UW_VAL_FALSE
+                policyNo : TestDataUtils.Policy.POLICY_NO_TIA_FALSE,
+                version: TestDataUtils.Version.VERSION_NO_TIA_FALSE
         ).toString()
         when: "Request is sent to the service"
         response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
@@ -136,8 +131,8 @@ class CustomerIsBarredSpec extends Specification {
     def "Customer barred fraud (UW-VAL) - Business not Allow - TIA Value False"() {
         given: "Customer is barred fraud (UW-VAL) is false"
         def PAYLOAD = new JsonBuilder(
-            policyNo: POLICY_NO_TIA_UW_VAL_FALSE,
-            version: VERSION_NO_TIA_UW_VAL_FALSE
+                policyNo : TestDataUtils.Policy.POLICY_NO_TIA_FALSE,
+                version: TestDataUtils.Version.VERSION_NO_TIA_FALSE
         ).toString()
         when: "Request is sent to the service"
         response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
@@ -187,8 +182,8 @@ class CustomerIsBarredSpec extends Specification {
     def "Customer barred fraud (UW) - Business Allow - TIA Value False"() {
         given: "Customer is barred fraud (UW) is false"
         def PAYLOAD = new JsonBuilder(
-            policyNo: POLICY_NO_TIA_UW_FALSE,
-            version: VERSION_NO_TIA_UW_FALSE
+                policyNo : TestDataUtils.Policy.POLICY_NO_TIA_FALSE,
+                version: TestDataUtils.Version.VERSION_NO_TIA_FALSE
         ).toString()
         when: "Request is sent to the service"
         response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)
@@ -204,8 +199,8 @@ class CustomerIsBarredSpec extends Specification {
     def "Customer barred fraud (UW) - Business not Allow - TIA Value False"() {
         given: "Customer is barred fraud (UW) is false"
         def PAYLOAD = new JsonBuilder(
-            policyNo: POLICY_NO_TIA_UW_FALSE,
-            version: VERSION_NO_TIA_UW_FALSE
+                policyNo : TestDataUtils.Policy.POLICY_NO_TIA_FALSE,
+                version: TestDataUtils.Version.VERSION_NO_TIA_FALSE
         ).toString()
         when: "Request is sent to the service"
         response = new Utils().createPOSTRequest(Utils.MTA_RULES_ENDPOINT, ApiKeys.getMTAApiKey(), PAYLOAD)

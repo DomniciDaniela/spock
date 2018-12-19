@@ -1,6 +1,6 @@
 package initialise
 
-import database.DataBase
+import database.OracleDataBase
 import database.PolicyType
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
@@ -16,7 +16,7 @@ class InitialiseServiceMtaTransactionsSpec extends Specification {
 
     HttpResponseDecorator response
     String ENDPOINT = Utils.environment + TestDataUtils.Endpoint.INITIALISE_ENDPOINT
-    DataBase dataBase = new DataBase()
+    OracleDataBase dataBase = new OracleDataBase()
     TestValidation validation = new TestValidation()
 
     String POLICY_NO = dataBase.getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
