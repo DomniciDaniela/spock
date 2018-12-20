@@ -1,6 +1,6 @@
 package initialise
 
-import database.DataBase
+import database.OracleDataBase
 import groovy.json.JsonBuilder
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONObject
@@ -16,7 +16,7 @@ class InitialiseServiceSpec extends Specification {
     HttpResponseDecorator response
     String ENDPOINT = Utils.environment + TestDataUtils.Endpoint.INITIALISE_ENDPOINT
 
-    DataBase dataBase = new DataBase()
+    OracleDataBase dataBase = new OracleDataBase()
     TestValidation validation = new TestValidation()
 
     String EM_POLICY_NO = getDataBase().getActivePolicyBasedOnCenterCode(TestDataUtils.PolicyCenterCode.EM_CENTER_CODE)

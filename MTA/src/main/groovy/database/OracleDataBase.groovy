@@ -7,7 +7,7 @@ import utils.TestDataUtils
 
 import java.sql.SQLException
 
-class DataBase {
+class OracleDataBase {
 
     String HOSTNAME = "jdbc:oracle:thin:" + environment + ".es-dte.co.uk:1521:TIA"
     String USERNAME = "tiasup"
