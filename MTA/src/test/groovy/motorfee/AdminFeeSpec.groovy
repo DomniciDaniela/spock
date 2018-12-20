@@ -241,6 +241,7 @@ class AdminFeeSpec extends Specification {
             "2018-01-05"        | "ESB"         | "web"         |_
             "2018-01-03"        | "ESB"         | "web"         |_
             "2018-01-05"        | "SWB"         | "internal"    |_
-
+            "2018-01-05"        | "FAB"         | "web"         |_
+            "2018-01-04"        | "ESB"         | "web"         |_
     }
 }

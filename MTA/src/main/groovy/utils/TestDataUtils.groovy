@@ -68,15 +68,11 @@ class TestDataUtils {
          static final String EFFECTIVE_DATE = "effectiveDate"
          static final String CHANNEL = "channel"
          static final String BRAND_CODE = "brandCode"
-
          static final String RULE_NAME = "ruleName"
          static final String RULE_VALUE = "ruleYn"
          static final String INSTALMENT_COLLECTED = "instalmentCollected"
          static final String INSTALMENT_AMOUNT = "instalmentAmount"
          static final String INSTALMENT_DATE = "instalmentDate"
-
-
-
     }
 
     class JSONValues{
