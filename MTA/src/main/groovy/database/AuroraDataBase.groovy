@@ -1,7 +1,7 @@
 package database
 
-import java.sql.Connection
-import java.sql.DriverManager
+import groovy.sql.Sql
+
 import java.sql.SQLException
 
 class AuroraDataBase {
@@ -17,37 +17,53 @@ class AuroraDataBase {
     String DB_NAME_TSTE = "tste"
 
     String DB_PORT = "5432"
+    String DRIVER = "org.postgresql.Driver"
 
-    Connection getAuroraRemoteConnection() {
-        Connection connection = null
-        String jdbcUrl = null
-
+    String getJdbcUrl() {
         try {
             String environment = System.getProperty("branch")
-            Class.forName("org.postgresql.Driver")
             switch (environment) {
                 case "deve13":
-                    jdbcUrl = "jdbc:postgresql://" + DB_HOSTNAME_DEV + "" + DB_PORT + "/" + DB_NAME_DEVE
-                                        + "?user=" + DB_USERNAME_DEV + "&password=" + DB_PASSWORD_DEV
+                    return  "jdbc:postgresql://" + DB_HOSTNAME_DEV + ":" + DB_PORT + "/" +  DB_NAME_DEVE
                     break
                 case "tste13":
-                    jdbcUrl = "jdbc:postgresql://" + DB_HOSTNAME_TEST + "" + DB_PORT + "/" + DB_NAME_TSTE
-                    + "?user=" + DB_USERNAME_TEST + "&password=" + DB_PASSWORD_TEST
+                    return  "jdbc:postgresql://" + DB_HOSTNAME_TEST + ":" + DB_PORT + "/" +  DB_NAME_TSTE
+                    break
+                }
+            } catch (Exception e) {
+            return null
+        }
+    }
 
+    Sql setupConnection() {
+        Sql sql = null
+        try {
+            String environment = System.getProperty("branch")
+            switch (environment) {
+                case "deve13":
+                    sql = Sql.newInstance(getJdbcUrl(), DB_USERNAME_DEV, DB_PASSWORD_DEV, DRIVER)
+                    break
+                case "tste13":
+                    sql = Sql.newInstance(getJdbcUrl(), DB_USERNAME_TEST, DB_PASSWORD_TEST, DRIVER)
                     break
             }
-
-            System.out.println("Getting remote connection with connection string from environment variables.")
-            connection = DriverManager.getConnection(jdbcUrl)
-
         } catch (ClassNotFoundException e) {
             e.printStackTrace()
-            System.exit(1)
         } catch (SQLException e) {
             e.printStackTrace()
-            System.exit(2)
         }
-        return connection
+        return sql
+    }
+
+    def getFirstResult(String query) {
+        Sql sql = setupConnection()
+        def row = sql.firstRow(query)
+        return row
+    }
+
+    String getMtaData() {
+        def row = getFirstResult("Select mta_data from motor_mta_quotes order by creation_date DESC limit 1")
+        return(row.mta_data)
     }
 
 }

@@ -7,7 +7,7 @@ import utils.TestDataUtils
 
 import java.sql.SQLException
 
-class DataBase {
+class OracleDataBase {
 
     String HOSTNAME = "jdbc:oracle:thin:" + environment + ".es-dte.co.uk:1521:TIA"
     String USERNAME = "tiasup"
@@ -75,7 +75,7 @@ class DataBase {
                 break
             case PolicyType.IN_FORCE_LESS_THAN_A_DAY_TRUE:
                 return getFirstResult("SELECT POLICY_NO, POLICY_SEQ_NO from POLICY WHERE EXPIRY_CODE = '1'" +
-                        "AND NEWEST = 'Y' AND CENTER_CODE = 'EM' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE ='"
+                        "AND NEWEST = 'Y' AND CENTER_CODE = 'SW' AND PAYMENT_METHOD ='CARD' AND COVER_START_DATE ='"
                         + new Date().currentDate() + "'")
             case PolicyType.CUSTOMER_BARRED_ACC:
                 return getFirstResult("SELECT PE.POLICY_NO, PE.CUST_NO,P.POLICY_SEQ_NO, " +

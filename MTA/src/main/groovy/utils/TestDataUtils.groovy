@@ -1,5 +1,8 @@
 package utils
 
+import database.OracleDataBase
+import database.PolicyType
+
 class TestDataUtils {
 
     class Code {
@@ -87,6 +90,7 @@ class TestDataUtils {
         static final String POLICY_NO_MULTIPLE_VERSION = "26614630"
         static final String POLICY_NO_HOME = "33532559"
         static final String POLICY_INVALID = "invalid"
+        static final String POLICY_NO_TIA_FALSE =  new OracleDataBase().getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[0].substring(10)
     }
 
     class PolicyPaymentType{
@@ -134,6 +138,7 @@ class TestDataUtils {
         static final LATEST = "LATEST"
         static final String INVALID_SEQUENCE_NO = "1111"
         static final String SEQUENCE_NO = "122136567"
+        static final String VERSION_NO_TIA_FALSE =  new OracleDataBase().getPolicyAndVersion(PolicyType.TIA_RETURNS_FALSE)[1].substring(14)
     }
 }
 
