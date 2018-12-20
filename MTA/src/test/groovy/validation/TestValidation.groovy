@@ -83,7 +83,7 @@ class TestValidation implements Payload {
         jsonObject = toJSONObject(payload)
         assert errors.get(TestDataUtils.JSONObjects.CODE) == "MOTOR-FEES-002"
         assert errors.get(TestDataUtils.JSONObjects.DESCRIPTION).equals(null)
-        //assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "Text '"+jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE)+"' could not be parsed at index 4"
+        assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "Text '"+jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE)+"' could not be parsed at index 4"
         if (jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE) == "")
             assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "effectiveDate: must not be null"
         else if (jsonObject.get(TestDataUtils.JSONObjects.POLICY_NO) == "")
