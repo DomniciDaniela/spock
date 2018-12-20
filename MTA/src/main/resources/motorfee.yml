@@ -1,0 +1,38 @@
+motor-fees:
+  fees:
+  - effectiveDate: "1900-01-01"
+    channel: "web"
+    brandCode: "ESB"
+    fee: 2600
+  - effectiveDate: "2018-01-04"
+    channel: "web"
+    brandCode: "ESB"
+    fee: 1000
+  - effectiveDate: "2018-01-04"
+    channel: "internal"
+    brandCode: "ESB"
+    fee: 3000
+  - effectiveDate: "1900-01-01"
+    channel: "web"
+    brandCode: "SWB"
+    fee: 2600
+  - effectiveDate: "2018-01-04"
+    channel: "web"
+    brandCode: "SWB"
+    fee: 1000
+  - effectiveDate: "2018-01-04"
+    channel: "internal"
+    brandCode: "SWB"
+    fee: 3000
+  - effectiveDate: "1900-01-01"
+    channel: "web"
+    brandCode: "FAB"
+    fee: 2600
+  - effectiveDate: "2018-01-04"
+    channel: "web"
+    brandCode: "FAB"
+    fee: 1000
+  - effectiveDate: "2018-01-04"
+    channel: "internal"
+    brandCode: "FAB"
+    fee: 3000

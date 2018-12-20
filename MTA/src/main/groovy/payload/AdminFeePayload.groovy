@@ -1,4 +1,4 @@
-package motorfee
+package payload
 
 import utils.Payload
 import groovy.transform.builder.Builder

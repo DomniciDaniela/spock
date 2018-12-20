@@ -1,9 +1,12 @@
 package utils
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import groovy.util.logging.Log
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
-import org.json.JSONObject
+import org.yaml.snakeyaml.Yaml
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
+
 
 
 @Log
@@ -56,5 +59,13 @@ class Utils {
         } catch (HttpResponseException e) {
             e.response
         }
+    }
+
+    static String readMotorFeeYML(){
+//        ObjectMapper mapper = new ObjectMapper(new YAMLFactory())
+//        InputStream input = new FileInputStream(new File("src/main/resources/motorfee.yml"))
+//
+//        MotorFee motorFee = mapper.readValue(input.toString(), MotorFee.class)
+
     }
 }

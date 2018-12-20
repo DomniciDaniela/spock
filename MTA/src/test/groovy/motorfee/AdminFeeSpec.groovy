@@ -3,12 +3,15 @@ package motorfee
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONArray
 import org.json.JSONObject
+import org.yaml.snakeyaml.Yaml
 import spock.lang.Specification
 import utils.ApiKeys
 import utils.Utils
 import validation.TestValidation
 
-import static motorfee.AdminFeeDefault.*
+import java.util.stream.Collectors
+
+import static payload.AdminFeeDefault.*
 
 class AdminFeeSpec extends Specification {
 
@@ -235,6 +238,8 @@ class AdminFeeSpec extends Specification {
             .asJsonString()
 
         when: "Request is send to the service"
+
+
         responseDecorator = new Utils().createPOSTRequest(Utils.ADMIN_FEE_ENDPOINT, apikey, PAYLOAD)
         responseDataInfos = responseDecorator.getData().infos[0]
         responseDataResults = responseDecorator.getData().results[0]
@@ -244,5 +249,35 @@ class AdminFeeSpec extends Specification {
         assert responseDecorator.data.apiVersion != null
         testValidation.adminFeeSuccessInfoResponseValidation(responseDataInfos)
         testValidation.adminFeeSuccessResultsResponseValidation(responseDataResults)
+    }
+
+    def "Read yaml file"(){
+
+        given: ""
+        List<JSONObject> list= new ArrayList<JSONObject>()
+        List<String> admin = new ArrayList<String>()
+        Yaml yaml = new Yaml()
+        InputStream document = new FileInputStream(new File("C:\\Repos\\api-spock-framework\\MTA\\src\\main\\resources\\motorfee.yml"))
+        Object data = yaml.load(document)
+        JSONObject jsonObject = new JSONObject(data)
+        JSONObject motorFee = jsonObject.get("motor-fees")
+        JSONArray adminFee = motorFee.get("fees")
+        (0..adminFee.length()-1).each{
+            list.add(adminFee.getJSONObject(it))
+        }
+        admin = list.stream()
+                                .filter{f->f.get("effectiveDate")<="2018-01-05" && f.get("brandCode")=='ESB' && f.get("channel")=='web'}
+                                .map{f->f.get("fee")}
+                                .collect(Collectors.toList())
+
+        println(admin.get(admin.size()-1))
+
+
+        when: ""
+        println(admin.get(admin.size()-1))
+
+        then:""
+
+
     }
 }
