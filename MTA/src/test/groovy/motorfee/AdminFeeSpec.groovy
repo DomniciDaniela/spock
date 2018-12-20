@@ -7,8 +7,6 @@ import spock.lang.Specification
 import utils.ApiKeys
 import utils.Utils
 import validation.TestValidation
-
-
 import static payload.AdminFeeDefault.*
 import static utils.Utils.readMotorFeeYML
 

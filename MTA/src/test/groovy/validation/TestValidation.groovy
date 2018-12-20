@@ -163,7 +163,6 @@ class TestValidation implements Payload {
         jsonObject = toJSONObject(payload)
         assert errors.get(TestDataUtils.JSONObjects.CODE) == "MOTOR-FEES-002"
         assert errors.get(TestDataUtils.JSONObjects.DESCRIPTION).equals(null)
-        assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "Text '"+jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE)+"' could not be parsed at index 4"
         if (jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE) == "")
             assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "effectiveDate: must not be null"
         else if (jsonObject.get(TestDataUtils.JSONObjects.POLICY_NO) == "")
@@ -176,7 +175,8 @@ class TestValidation implements Payload {
             assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "effectiveDate: must not be null"
         else if (jsonObject.isNull("channel"))
             assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "channel: must not be null"
-
+        else if(jsonObject.get(TestDataUtils.JSONObjects.POLICY_NO) != null)
+            assert errors.get(TestDataUtils.JSONObjects.MESSAGE) == "Text '"+jsonObject.get(TestDataUtils.JSONObjects.EFFECTIVE_DATE)+"' could not be parsed at index 4"
     }
 
     void adminFeeErrorsResponseValidation404(JSONObject errors ,String payload) {

@@ -1,0 +1,9 @@
+---
+spring:
+  application:
+    name: api-spock-framework
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL:https://api-jva-springbootconfig-dev.escloud.co.uk}
+      failFast: ${CONFIG_FAIL_FAST_FLAG:true}
+      label: ${CONFIG_GIT_BRANCH:master}
