@@ -3,15 +3,14 @@ package motorfee
 import groovyx.net.http.HttpResponseDecorator
 import org.json.JSONArray
 import org.json.JSONObject
-import org.yaml.snakeyaml.Yaml
 import spock.lang.Specification
 import utils.ApiKeys
 import utils.Utils
 import validation.TestValidation
 
-import java.util.stream.Collectors
 
 import static payload.AdminFeeDefault.*
+import static utils.Utils.readMotorFeeYML
 
 class AdminFeeSpec extends Specification {
 
@@ -20,23 +19,8 @@ class AdminFeeSpec extends Specification {
     TestValidation testValidation = new TestValidation()
     JSONObject responseDataInfos, responseDataResults, responseDataErrors
     JSONArray responseEmptyErrors
+    def adminFeeVal
     def apikey = ApiKeys.getMotorFeeApiKey()
-
-    def "Success - All field are correct for admin fee"() {
-        given: "Request has all the correct field(policy number, channel, effective date, brand-code)"
-        PAYLOAD = defaultAdminFeePayload().build().asJsonString()
-
-        when: "Request is send to the service"
-        responseDecorator = new Utils().createPOSTRequest(Utils.ADMIN_FEE_ENDPOINT, apikey, PAYLOAD)
-        responseDataInfos = responseDecorator.getData().infos[0]
-        responseDataResults = responseDecorator.getData().results[0]
-
-        then: "Response should contain the response code 200 and all valid values"
-        assert responseDecorator.status == 200
-        assert responseDecorator.data.apiVersion != null
-        testValidation.adminFeeSuccessInfoResponseValidation(responseDataInfos)
-        testValidation.adminFeeSuccessResultsResponseValidation(responseDataResults)
-    }
 
     def "Date_Validation - If date is invalid when requesting for admin fee"() {
         given: "Request has all the correct field but date is invalid"
@@ -231,15 +215,17 @@ class AdminFeeSpec extends Specification {
         testValidation.adminFeeEmptyErrorsResponseValidation400(responseEmptyErrors)
     }
 
-    def "Service return the correct admin fees as per the effective date"() {
+    def "Service return the correct admin fees as per the effective date,brand code and channel "(String effective_date, String brand_code, String channel) {
         given: "Request has all the correct field but channel is an empty string"
         def PAYLOAD = defaultAdminFeePayload()
+            .channel(channel)
+            .effectiveDate(effective_date)
+            .brandCode(brand_code)
             .build()
             .asJsonString()
 
         when: "Request is send to the service"
-
-
+        adminFeeVal = readMotorFeeYML(effective_date,brand_code,channel)
         responseDecorator = new Utils().createPOSTRequest(Utils.ADMIN_FEE_ENDPOINT, apikey, PAYLOAD)
         responseDataInfos = responseDecorator.getData().infos[0]
         responseDataResults = responseDecorator.getData().results[0]
@@ -248,36 +234,13 @@ class AdminFeeSpec extends Specification {
         assert responseDecorator.status == 200
         assert responseDecorator.data.apiVersion != null
         testValidation.adminFeeSuccessInfoResponseValidation(responseDataInfos)
-        testValidation.adminFeeSuccessResultsResponseValidation(responseDataResults)
-    }
+        testValidation.adminFeeSuccessResultsResponseValidation(responseDataResults,adminFeeVal)
 
-    def "Read yaml file"(){
-
-        given: ""
-        List<JSONObject> list= new ArrayList<JSONObject>()
-        List<String> admin = new ArrayList<String>()
-        Yaml yaml = new Yaml()
-        InputStream document = new FileInputStream(new File("C:\\Repos\\api-spock-framework\\MTA\\src\\main\\resources\\motorfee.yml"))
-        Object data = yaml.load(document)
-        JSONObject jsonObject = new JSONObject(data)
-        JSONObject motorFee = jsonObject.get("motor-fees")
-        JSONArray adminFee = motorFee.get("fees")
-        (0..adminFee.length()-1).each{
-            list.add(adminFee.getJSONObject(it))
-        }
-        admin = list.stream()
-                                .filter{f->f.get("effectiveDate")<="2018-01-05" && f.get("brandCode")=='ESB' && f.get("channel")=='web'}
-                                .map{f->f.get("fee")}
-                                .collect(Collectors.toList())
-
-        println(admin.get(admin.size()-1))
-
-
-        when: ""
-        println(admin.get(admin.size()-1))
-
-        then:""
-
+        where:
+            effective_date      | brand_code    | channel       |_
+            "2018-01-05"        | "ESB"         | "web"         |_
+            "2018-01-03"        | "ESB"         | "web"         |_
+            "2018-01-05"        | "SWB"         | "internal"    |_
 
     }
 }

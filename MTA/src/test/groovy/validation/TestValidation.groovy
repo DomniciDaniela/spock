@@ -71,11 +71,12 @@ class TestValidation implements Payload {
         assert infos.get(TestDataUtils.JSONObjects.MESSAGE) == 'Data Retrieved'
     }
 
-    void adminFeeSuccessResultsResponseValidation(JSONObject results) {
+    void adminFeeSuccessResultsResponseValidation(JSONObject results , String fee) {
         assert results.get(TestDataUtils.JSONObjects.POLICY_NO) != null
         assert results.get(TestDataUtils.JSONObjects.POLICY_VERSION) != null
         assert results.get(TestDataUtils.JSONObjects.MTA_TRANSACTION_TYPE).equals(null)
-        assert results.get(TestDataUtils.JSONObjects.MOTOR_FEE) != null
+        assert results.get(TestDataUtils.JSONObjects.MOTOR_FEE).toString() == fee
+
     }
 
     void adminFeeErrorsResponseValidation400(JSONObject errors ,String payload) {
