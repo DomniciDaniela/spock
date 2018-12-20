@@ -40,15 +40,15 @@ class ApiKeys {
         }
     }
 
-    static String getPaymentTransactionApiKey() {
+    static String getMotorFeeApiKey() {
         String environment = System.getProperty("branch")
         try {
             switch (environment) {
                 case "deve13":
-                    return "4n30xjtqranhcc5ef5q0rs2569is8p9f"
+                    return "d02szyag01w6jypo6gpiq7z5vcydijbi"
 
                 case "tste13":
-                    return "qpkr79rwksuawcw5bqvhekvj8l3pml43"
+                    return "2mkhrx2lyp2bdlhzy1j10f6eubgynul2"
 
                 default:
                     System.out.println("Invalid key" + environment)

@@ -25,6 +25,7 @@ class TestDataUtils {
         static final String PAYMENT_TRANSACTIONS_ENDPOINT = "api-jva-payment-transactions/v1/policies/"
         static final String PAYMENT_TRANSACTIONS_ENDPOINT_PATH = "/paymentTransactions/detail?policyVersionNumber="
         static final String PRO_RATA_ENDPOINT = "api-jva-prorata/v1/prorata/calculate"
+        static final String MOTOR_FEE_ENDPOINT = "api-jva-motor-fees/v1/fees/admin/calculate"
     }
 
     class JSONObjects {
@@ -63,13 +64,18 @@ class TestDataUtils {
          static final String YEAR_START_DATE = "yearStartDate"
          static final String PRODUCT_LINE_ID = "productLineId"
          static final String VEHICLE_MODEL = "vehicleModel"
-
+         static final String POLICY_NO = "policyNo"
+         static final String POLICY_VERSION = "version"
+         static final String MTA_TRANSACTION_TYPE = "mtaTransactionTypes"
+         static final String MOTOR_FEE = "motorFee"
+         static final String EFFECTIVE_DATE = "effectiveDate"
+         static final String CHANNEL = "channel"
+         static final String BRAND_CODE = "brandCode"
          static final String RULE_NAME = "ruleName"
          static final String RULE_VALUE = "ruleYn"
          static final String INSTALMENT_COLLECTED = "instalmentCollected"
          static final String INSTALMENT_AMOUNT = "instalmentAmount"
          static final String INSTALMENT_DATE = "instalmentDate"
-
     }
 
     class JSONValues{
