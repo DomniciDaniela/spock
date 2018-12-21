@@ -1,27 +1,23 @@
 package utils
 
-import org.codehaus.groovy.runtime.DateGroovyMethods
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 
 class Date {
 
+    DateTime date = new DateTime()
+    DateTimeFormatter dateFormatter = DateTimeFormat.forPattern('dd-MMM-yyyy')
+
     String currentDate() {
-        def date = new java.util.Date()
-        return DateGroovyMethods.format(date, 'dd-MMM-yyyy')
+        return dateFormatter.print(date)
     }
 
     String previousMonthDayDate() {
-        Calendar originalDate = Calendar.getInstance()
-        Calendar previousMonthDay = (Calendar) originalDate.clone()
-        previousMonthDay.add(Calendar.MONTH, - 1)
-
-        return DateGroovyMethods.format(previousMonthDay.getTime(), 'dd-MMM-yyyy')
+        return dateFormatter.print(date.minusMonths(1))
     }
 
     String fiveMonthsAgo() {
-        Calendar originalDate = Calendar.getInstance()
-        Calendar previousMonthDay = (Calendar) originalDate.clone()
-        previousMonthDay.add(Calendar.MONTH, - 5)
-
-        return DateGroovyMethods.format(previousMonthDay.getTime(), 'dd-MMM-yyyy')
+        return dateFormatter.print(date.minusMonths(5))
     }
 }
