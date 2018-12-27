@@ -10,6 +10,7 @@ import validation.TestValidation
 import static payload.AdminFeeDefault.*
 import static utils.Utils.readMotorFeeYML
 
+
 class AdminFeeSpec extends Specification {
 
     def PAYLOAD
