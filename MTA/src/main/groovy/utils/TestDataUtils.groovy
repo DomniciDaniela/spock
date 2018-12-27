@@ -5,6 +5,21 @@ import database.PolicyType
 
 class TestDataUtils {
 
+    class AuroraDatabase {
+        static final String DB_HOSTNAME_DEV = "awie-rdspg-dev-motor-01.cjjj0qqeowok.eu-west-1.rds.amazonaws.com"
+        static final String DB_USERNAME_DEV = "api_jva_motor_mta_deve"
+        static final String DB_PASSWORD_DEV = "UQfGo34dwEK85dvf"
+        static final String DB_NAME_DEVE = "deve"
+
+        static final String DB_HOSTNAME_TEST = "awie-rdspg-test-motor-01.c9jas8kzsysw.eu-west-1.rds.amazonaws.com"
+        static final String DB_USERNAME_TEST = "api_jva_motor_mta_tste"
+        static final String DB_PASSWORD_TEST = "wKIpnLKNfdBGc47d"
+        static final String DB_NAME_TSTE = "tste"
+
+        static final String DB_PORT = "5432"
+        static final String DRIVER = "org.postgresql.Driver"
+    }
+
     class Code {
         static final String MMTAE_002 = "MMTAE-002"
         static final String MMTAE_004 = "MMTAE-004"
@@ -83,6 +98,13 @@ class TestDataUtils {
         static final String AVAILABILITY_RULE_VALUE_Y = "Y"
         static final String AVAILABILITY_RULE_VALUE_N = "N"
         static final String PRODUCT_LINE_ID = "EMMOT"
+    }
+
+    class OracleDatabase {
+        static final String HOSTNAME = "jdbc:oracle:thin:" + OracleDataBase.environment + ".es-dte.co.uk:1521:TIA"
+        static final String USERNAME = "tiasup"
+        static final String PASSWORD = "tiasup"
+        static final String DRIVER = "oracle.jdbc.driver.OracleDriver"
     }
 
     class Policy {
