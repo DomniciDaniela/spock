@@ -8,7 +8,7 @@ import utils.ApiKeys
 import utils.Utils
 import validation.TestValidation
 import static payload.AdminFeeDefault.*
-import static utils.Utils.readMotorFeeYML
+import static utils.Utils.readMotorFeeFromResponse
 
 
 class AdminFeeSpec extends Specification {
@@ -17,9 +17,10 @@ class AdminFeeSpec extends Specification {
     HttpResponseDecorator responseDecorator
     TestValidation testValidation = new TestValidation()
     JSONObject responseDataInfos, responseDataResults, responseDataErrors
-    JSONArray responseEmptyErrors
+    JSONArray responseEmptyErrors, configAdminFees
     def adminFeeVal
     def apikey = ApiKeys.getMotorFeeApiKey()
+
 
     def "Date_Validation - If date is invalid when requesting for admin fee"() {
         given: "Request has all the correct field but date is invalid"
@@ -223,8 +224,11 @@ class AdminFeeSpec extends Specification {
             .build()
             .asJsonString()
 
+        HttpResponseDecorator httpResponseDecorator = new Utils().createGETRequest(Utils.FEE_ENDPOINT,apikey)
+        configAdminFees = new Utils().readByteArrayFromResponse(httpResponseDecorator.getData().buf)
+
         when: "Request is send to the service"
-        adminFeeVal = readMotorFeeYML(effective_date,brand_code,channel)
+        adminFeeVal = readMotorFeeFromResponse(effective_date,brand_code,channel,configAdminFees)
         responseDecorator = new Utils().createPOSTRequest(Utils.ADMIN_FEE_ENDPOINT, apikey, PAYLOAD)
         responseDataInfos = responseDecorator.getData().infos[0]
         responseDataResults = responseDecorator.getData().results[0]

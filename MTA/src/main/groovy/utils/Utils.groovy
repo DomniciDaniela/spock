@@ -1,12 +1,16 @@
 package utils
 
+import groovy.json.JsonOutput
+import groovy.json.JsonSlurper
 import groovy.util.logging.Log
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import org.json.JSONArray
 import org.json.JSONObject
 import org.yaml.snakeyaml.Yaml
+import sun.nio.ch.IOUtil
 
+import java.nio.charset.StandardCharsets
 import java.util.stream.Collectors
 
 
@@ -16,6 +20,7 @@ class Utils {
     public static String MTA_RULES_ENDPOINT = environment + TestDataUtils.Endpoint.MTA_RULES_ENDPOINT
     public static String PRO_RATA_ENDPOINT = environment + TestDataUtils.Endpoint.PRO_RATA_ENDPOINT
     public static String ADMIN_FEE_ENDPOINT = environment + TestDataUtils.Endpoint.MOTOR_FEE_ENDPOINT
+    public static String FEE_ENDPOINT = environment + TestDataUtils.Endpoint.CONFIG_FEE_ENDPOINT
 
     def createPOSTRequest(String endpoint, String apiKey, String body) {
         try {
@@ -65,15 +70,17 @@ class Utils {
         }
     }
 
-    static String readMotorFeeYML(String effDate , String bCode , String channel){
+    JSONArray readByteArrayFromResponse(byte[] buf){
+        JSONObject data = new JsonSlurper().parse(buf)
+        JSONObject object = data.getJSONObject("contexts").getJSONObject("api-jva-motor-fees-1")
+        JSONObject motorFees = object.getJSONObject("beans").getJSONObject("motorFees")
+        JSONArray fee = motorFees.getJSONObject("properties").getJSONArray("fees")
+        return fee
+    }
+
+    static String readMotorFeeFromResponse(String effDate , String bCode , String channel , JSONArray adminFee){
         List<JSONObject> list= new ArrayList<JSONObject>()
         List<String> admin = new ArrayList<String>()
-        Yaml yaml = new Yaml()
-        InputStream document = new FileInputStream(new File(System.getProperty("user.dir")+"/src/main/resources/motorfee.yml"))
-        Object data = yaml.load(document)
-        JSONObject jsonObject = new JSONObject(data)
-        JSONObject motorFee = jsonObject.get("motor-fees")
-        JSONArray adminFee = motorFee.get("fees")
         (0..adminFee.length()-1).each{
             list.add(adminFee.getJSONObject(it))
         }

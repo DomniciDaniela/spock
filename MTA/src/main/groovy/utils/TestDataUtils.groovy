@@ -41,6 +41,7 @@ class TestDataUtils {
         static final String PAYMENT_TRANSACTIONS_ENDPOINT_PATH = "/paymentTransactions/detail?policyVersionNumber="
         static final String PRO_RATA_ENDPOINT = "api-jva-prorata/v1/prorata/calculate"
         static final String MOTOR_FEE_ENDPOINT = "api-jva-motor-fees/v1/fees/admin/calculate"
+        static final String CONFIG_FEE_ENDPOINT = "api-jva-motor-fees/v1/actuator/configprops"
     }
 
     class JSONObjects {
