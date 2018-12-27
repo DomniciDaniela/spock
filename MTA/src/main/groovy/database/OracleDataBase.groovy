@@ -1,23 +1,15 @@
 package database
 
-import com.sun.xml.internal.bind.v2.TODO
 import groovy.sql.Sql
 import utils.Date
 import utils.TestDataUtils
+import utils.Utils
 
-import java.sql.SQLException
+class OracleDataBase extends DataBase {
 
-class OracleDataBase {
-
-    String HOSTNAME = "jdbc:oracle:thin:" + environment + ".es-dte.co.uk:1521:TIA"
-    String USERNAME = "tiasup"
-    String PASSWORD = "tiasup"
-    def DRIVER = "oracle.jdbc.driver.OracleDriver"
-
-    String getEnvironment() {
-        String environment = System.getProperty("branch")
+    static String getEnvironment() {
         try {
-            switch (environment) {
+            switch (Utils.getSystemEnvironment()) {
                 case "deve13":
                     return "@e1a-esodb-deve-01"
 
@@ -25,7 +17,7 @@ class OracleDataBase {
                     return "@e1b-esodb-tste-01"
 
                 default:
-                    System.out.println("Invalid environment" + environment)
+                    throw new Exception ("Invalid environment" + Utils.getSystemEnvironment())
             }
             return environment
         } catch (Exception e) {
@@ -33,28 +25,10 @@ class OracleDataBase {
         }
     }
 
+    @Override
     Sql setupDataBaseConnection() {
-        Sql sql = null
-        try {
-            sql = Sql.newInstance(HOSTNAME, USERNAME, PASSWORD, DRIVER)
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace()
-        } catch (SQLException e) {
-            e.printStackTrace()
-        }
-        return sql
-    }
-
-    def getFirstResult(String query) {
-        Sql sql = setupDataBaseConnection()
-        def row = sql.firstRow(query)
-        return row
-    }
-
-    def executeSqlQuery(String query) {
-        Sql sql = setupDataBaseConnection()
-        def row = sql.rows(query)
-        return row
+        return  Sql.newInstance(TestDataUtils.OracleDatabase.HOSTNAME, TestDataUtils.OracleDatabase.USERNAME,
+                    TestDataUtils.OracleDatabase.PASSWORD, TestDataUtils.OracleDatabase.DRIVER)
     }
 
     String[] getPolicyAndVersion(query) {

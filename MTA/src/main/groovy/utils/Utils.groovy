@@ -33,9 +33,8 @@ class Utils {
     }
 
      static String getEnvironment() {
-        String environment = System.getProperty("branch")
         try {
-            switch (environment) {
+            switch (getSystemEnvironment()) {
                 case "deve13":
                     return "https://ops-kong-deve13.escloud.co.uk/"
 
@@ -49,6 +48,10 @@ class Utils {
         } catch (Exception e) {
             return null
         }
+    }
+
+    static String getSystemEnvironment() {
+        return System.getProperty("branch")
     }
 
     def createGETRequest(String endpoint, String apiKey) {
