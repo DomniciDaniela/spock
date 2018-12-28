@@ -1,16 +1,13 @@
 package utils
 
-import groovy.json.JsonOutput
 import groovy.json.JsonSlurper
 import groovy.util.logging.Log
 import groovyx.net.http.HttpResponseException
 import groovyx.net.http.RESTClient
 import org.json.JSONArray
 import org.json.JSONObject
-import org.yaml.snakeyaml.Yaml
-import sun.nio.ch.IOUtil
-
-import java.nio.charset.StandardCharsets
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
 
 
@@ -79,6 +76,13 @@ class Utils {
     }
 
     static String readMotorFeeFromResponse(String effDate , String bCode , String channel , JSONArray adminFee){
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd")
+        LocalDate localDate = LocalDate.parse(effDate, formatter)
+        def month = localDate.getDayOfMonth()
+        def day =  localDate.getDayOfYear()
+        def year = localDate.getYear()
+
         List<JSONObject> list= new ArrayList<JSONObject>()
         List<String> admin = new ArrayList<String>()
         (0..adminFee.length()-1).each{
